@@ -5,14 +5,13 @@ define(function(require) {
     require('OBJLoader');
     require('MTLLoader');
 	
-    var objLoader = new THREE.MTLLoader();
-    var mtlLoader = new THREE.OBJLoader();
+    var mtlLoader = new THREE.MTLLoader();
+    var objLoader = new THREE.OBJLoader();
+	var resourcePath = 'media/game/models/';
     
 	var modelLoader = {
-		resourcePath: 'media/game/models/',
-		
 		getModel: function(pkg, model) {
-			var model;
+			var result;
 			
 			var emptyFunc = function () {};
 			mtlLoader.setBaseUrl( resourcePath + pkg + '/' );
@@ -23,14 +22,13 @@ define(function(require) {
 					materials.preload();
 					objLoader.setMaterials( materials );
 					objLoader.setPath( resourcePath + pkg + '/' );
-					objLoader.load( + '.obj', function ( object ) {
-						console.log(object);
-						model = object;
+					objLoader.load( model + '.obj', function ( object ) {
+						result = object;
 					}, emptyFunc, emptyFunc );
 				})
-			return model;
+			return result;
 		},
 	};
 	
-    return wsApi;
+    return modelLoader;
 });
