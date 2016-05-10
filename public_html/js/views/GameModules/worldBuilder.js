@@ -1,6 +1,8 @@
 define(function (require) {
     var THREE = require('three');
     var gameObjects = require('views/GameModules/gameObjects');
+    var modelLoader = require('utils/modelLoader');
+
 
 
     var World = {
@@ -58,6 +60,7 @@ define(function (require) {
             gameObjects.addObjectToWorld(this.worldObjects.destructible_crate, new THREE.CubeGeometry(64, 64, 64), 3, 2, 2);
             gameObjects.addObjectToWorld(this.worldObjects.destructible_crate, new THREE.CubeGeometry(64, 64, 64), 4, 29, 31);
             gameObjects.addObjectToWorld(this.worldObjects.destructible_crate, new THREE.CubeGeometry(64, 64, 64), 5, 0, 2);
+			modelLoader.getModel('example_pkg', 'sizes', function(object) {object.rotation.y =  Math.PI; gameObjects.addPrefabToWorld(object, 5, 5, 5)});
             
         },
         getObstacles: function () {
