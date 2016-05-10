@@ -1,5 +1,5 @@
 // I expect use this as low-levelfunction.
-// example model lies in `pkg = 'example_pkg', model = 'sizes'`
+// example model lies in `pkg = 'example_pkg', name = 'sizes'`
 define(function(require) {
 	var THREE = require('three');
     require('OBJLoader');
@@ -10,24 +10,30 @@ define(function(require) {
 	var resourcePath = 'media/game/models/';
     
 	var modelLoader = {
-		getModel: function(pkg, model) {
+		
+		getModel: function(pkg, name, callback) {
 			var result;
+			var isLoaded = false;
+			var timeoutStarted = new Date().getTime();
+			var timeout = 3000; // ms
 			
 			var emptyFunc = function () {};
+			
 			mtlLoader.setBaseUrl( resourcePath + pkg + '/' );
 			mtlLoader.setPath( resourcePath + pkg + '/' );
-			mtlLoader.load( model + '.mtl', 
+			mtlLoader.load( name + '.mtl', 
 				function( materials ) 
 				{
 					materials.preload();
 					objLoader.setMaterials( materials );
 					objLoader.setPath( resourcePath + pkg + '/' );
-					objLoader.load( model + '.obj', function ( object ) {
+					objLoader.load( name + '.obj', function ( object ) {
 						result = object;
+						callback(object);
 					}, emptyFunc, emptyFunc );
 				})
-			return result;
 		},
+		
 	};
 	
     return modelLoader;
