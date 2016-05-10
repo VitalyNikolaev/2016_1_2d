@@ -35,6 +35,15 @@ define(function (require) {
             };
             this.scene.add(realObj);
         },
+		addPrefabToWorld: function (model, id, x, z) { // needed to place objects by x, y and its id
+            var coordinates = this.getRealCoordinates(x, z);
+            model.position.set(coordinates.x, 32, coordinates.z);
+            this.obstacles.push(model);
+            this.objects[id] = {
+                index: this.obstacles.indexOf(model)
+            };
+            this.scene.add(model);
+        },
         addBombToWorld: function (object, id, x, z) {
             var coordinates = this.getRealCoordinates(x, z);
             object.position.set(coordinates.x, 2, coordinates.z);
