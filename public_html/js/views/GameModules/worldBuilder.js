@@ -1,6 +1,7 @@
 define(function (require) {
     var THREE = require('three');
     var gameObjects = require('views/GameModules/gameObjects');
+	//var modelLoader = require('utils/modelLoader');
 
 
     var World = {

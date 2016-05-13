@@ -5,6 +5,7 @@ define(function (require) {
     var World = require('views/GameModules/worldBuilder');
     var Bomb = require('views/GameModules/bomb');
     var app = require('app');
+	var orbitControls = require('OrbitControls');
     
     var BasicScene = {
         init: function () {
@@ -33,6 +34,7 @@ define(function (require) {
             this.container = $('#game-canvas');
             this.container.prepend(gameObjects.renderer.domElement);
             this.setAspect();
+			gameObjects.cameraControls = new THREE.OrbitControls(gameObjects.camera, renderer.domElement);
         },
         setAspect: function () {
             this.container = $('#game-canvas');
@@ -47,10 +49,12 @@ define(function (require) {
             gameObjects.playersCharacter.motion();
             gameObjects.playersCharacter.setFocus(gameObjects.playersCharacter.mesh , 950);
             gameObjects.renderer.render(gameObjects.scene, gameObjects.camera);
+			gameObjects.cameraControls.update();
         },
         dealloc: function () {
             gameObjects.scene = undefined;
             gameObjects.camera = undefined;
+            gameObjects.cameraControls = undefined;
             gameObjects.light = undefined;
             gameObjects.renderer = undefined;
             gameObjects.playersCharacter = undefined;
