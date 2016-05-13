@@ -63,7 +63,7 @@ define(function (require) {
             var coordinates = this.getRealCoordinates(x, z);
             realObj.position.set(coordinates.x, 32, coordinates.z);
             this.objects[id] = {
-                index: id
+                index: realObj
             };
             this.scene.add(realObj);
         },
@@ -83,13 +83,14 @@ define(function (require) {
             };
         },
         deleteObjectFromWorld: function (id) {
+            debugger;
             if (this.objects[id]) {
-                if(this.obstacles[this.objects[id].index]) {
-                    this.scene.remove(this.obstacles[this.objects[id].index]);
-                    this.obstacles.splice(this.objects[id].index, 1);
-                    delete this.objects[id];
+                if (this.obstacles[this.objects[id].index]) {
+                        this.scene.remove(this.obstacles[this.objects[id].index]);
+                        this.obstacles.splice(this.objects[id].index, 1);
+                        delete this.objects[id];
                 } else {
-                    this.scene.remove(this.objects[id].index);
+                    this.scene.remove(this.objects[id]);
                     delete this.objects[id];
                 }
             } 
