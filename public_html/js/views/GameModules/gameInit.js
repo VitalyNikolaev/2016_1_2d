@@ -5,12 +5,14 @@ define(function (require) {
     var Character = require('views/GameModules/character');
     var World = require('views/GameModules/worldBuilder');
     var Bomb = require('views/GameModules/bomb');
+	var orbitControls = require('OrbitControls');
 
     var BasicScene = {
         init: function () {
                 gameObjects.scene = new THREE.Scene();
                 gameObjects.camera = new THREE.PerspectiveCamera(55, 1, 0.1, 10000);
                 gameObjects.scene.add(gameObjects.camera);
+				//gameObjects.cameraControls = new THREE.OrbitControls(gameObjects.camera, renderer.domElement);
 
                 gameObjects.light = new THREE.DirectionalLight(0xffffff, 1);
                 gameObjects.light.position.set(-600, 0, -600);
@@ -44,6 +46,7 @@ define(function (require) {
         addToDOM: function () {
             this.container.prepend(gameObjects.renderer.domElement);
             this.setAspect();
+			gameObjects.cameraControls = new THREE.OrbitControls(gameObjects.camera, renderer.domElement);
         },
         addPlayer: function (color, x, z) {
             gameObjects.firstCharacter = new Character.init({color: color}, {x: x, z: z});
@@ -65,6 +68,7 @@ define(function (require) {
         dealloc: function () {
             gameObjects.scene = undefined;
             gameObjects.camera = undefined;
+            gameObjects.cameraControls = undefined;
             gameObjects.light = undefined;
             gameObjects.renderer = undefined;
             gameObjects.firstCharacter = undefined;

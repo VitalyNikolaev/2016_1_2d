@@ -6,6 +6,7 @@ define(function (require) {
     var objects = {
         scene: null,
         camera: null,
+		cameraControls: null,
         light: null,
         renderer: null,
         firstCharacter: null,
