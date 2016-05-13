@@ -5,7 +5,7 @@ define(function(require) {
         WS_URL: 'ws://' + app.host + '/game',
         socket: null,
         startConnection: function() {
-            this.socket = new WebSocket(this.WS_URL);
+            this.socket  = new WebSocket(this.WS_URL);
             this.socket.onopen = this.onOpen;
             this.socket.onclose = this.onClose;
             this.socket.onerror = this.onError;

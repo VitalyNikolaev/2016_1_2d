@@ -57,8 +57,9 @@ define(function (require) {
             if (data.user_id === app.user.get('id')) {
                 gameObjects.playersCharacter = new Character.init({
                         color: Math.random() * 0xffffff}, {x: data.x, z: data.y});
+                
                 gameObjects.objects[data.id] = gameObjects.playersCharacter;
-                gameObjects.scene.add(gameObjects.playersCharacter.mesh);
+                gameObjects.scene.add(gameObjects.objects[data.id].mesh);
                 if ( data.y > 15 ) {
                     gameObjects.playersCharacter.setControls('top');
                 } else {

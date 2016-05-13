@@ -22,7 +22,7 @@ define(function (require) {
                 } else {
                     if (this.currentPlayer.get('isReady') == true && ws.socket.readyState != 3) {
                         this.currentPlayer.set('isReady', false);
-                        ws.sendReady(false, app.contentLoaded);
+                        ws.sendReady(false, app.user.get('contentLoaded'));
                         $('.room__wrapper__user-ready-btn')
                             .html('Set Ready')
                             .css('background-color', '#039BE5');
@@ -75,7 +75,7 @@ define(function (require) {
 
             if(userModel.get('id') === app.user.get('id')) {
                 this.currentPlayer = userModel;
-                this.listenTo(app.user, "change:contentLoaded", this.checkContentLoadedStatus);
+                this.listenToOnce(app.user, "change:contentLoaded", this.checkContentLoadedStatus);
             }
             this.listenToOnce(playerView, "removeMe", this.removeUser);
         },
