@@ -121,10 +121,13 @@ define(function (require) {
                 }
                 // this.mesh.rotation.y = angle; // if we dont want to animate rotation
             };
-
+            this.getRealSpeed = function() {
+                var constSpeed = 2; // tiles per second
+                return constSpeed * 64 / gameObjects.fps;
+            };
             this.move = function () {
-                this.mesh.position.x += this.direction.x * ((this.direction.z === 0) ? 4 : Math.sqrt(8));
-                this.mesh.position.z += this.direction.z * ((this.direction.x === 0) ? 4 : Math.sqrt(8));
+                this.mesh.position.x += this.direction.x * ((this.direction.z === 0) ? this.getRealSpeed() : Math.sqrt(2 * this.getRealSpeed()));
+                this.mesh.position.z += this.direction.z * ((this.direction.x === 0) ? this.getRealSpeed() : Math.sqrt(2 * this.getRealSpeed()));
                 this.step += 1 / 4;
                 this.feet.left.position.setZ(Math.sin(this.step) * 16);
                 this.feet.right.position.setZ(Math.cos(this.step + (Math.PI / 2)) * 16);

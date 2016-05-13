@@ -33,9 +33,13 @@ define(function (require) {
         },
         startGame: function () {
             var self = this;
+            var lastLoop = new Date;
             gameInit.addToDOM();
             function animate() {
-               self.gameStartedId = requestAnimationFrame(animate);
+                self.gameStartedId = requestAnimationFrame(animate);
+                var thisLoop = new Date;
+                gameObjects.fps = 1000 / (thisLoop - lastLoop);
+                lastLoop = thisLoop;
                 gameInit.frame();
             }
             animate();  
@@ -50,6 +54,7 @@ define(function (require) {
                 this.gameStartedId = null;
                 gameInit.dealloc();
                 $('canvas').remove();
+                app.user.set('contentLoaded', false);
                 gameInit.init();
             }
         },

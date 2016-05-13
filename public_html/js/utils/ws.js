@@ -15,7 +15,6 @@ define(function(require) {
         closeConnection: function() {
             this.socket.close();
         },
-
         onOpen: function() {
 
         },
@@ -37,6 +36,7 @@ define(function(require) {
                 "isReady": readyStatus,
                 "contentLoaded": contentStatus
             };
+            console.log(JSON.stringify((data)));
             this.socket.send(JSON.stringify(data));
         },
         sendPing: function () {
@@ -50,9 +50,7 @@ define(function(require) {
         sendMessage: function (data) {
             this.socket.send(JSON.stringify(data));
         }
-
     };
-
     return wsApi;
 
 });

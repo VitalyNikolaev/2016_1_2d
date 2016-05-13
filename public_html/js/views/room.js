@@ -75,7 +75,7 @@ define(function (require) {
 
             if(userModel.get('id') === app.user.get('id')) {
                 this.currentPlayer = userModel;
-                this.listenToOnce(app.user, "change:contentLoaded", this.checkContentLoadedStatus);
+                this.listenTo(app.user, "change:contentLoaded", this.checkContentLoadedStatus);
             }
             this.listenToOnce(playerView, "removeMe", this.removeUser);
         },

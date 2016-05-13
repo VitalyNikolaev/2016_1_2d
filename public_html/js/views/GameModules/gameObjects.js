@@ -8,6 +8,7 @@ define(function (require) {
         light: null,
         renderer: null,
         playersCharacter: null,
+        fps: 0,
         objects: {}, // here we dump all links to obstacle index by id of object
         obstacles: [], // here we dump all our obstacles for raycaster
         bombObj: null,
@@ -18,7 +19,6 @@ define(function (require) {
         },
         getRandomColor: function () {
             return Math.random() * 255;
-
         },
         getRealCoordinates: function (x, z) {
             return {
@@ -73,7 +73,6 @@ define(function (require) {
             };
         },
         deleteObjectFromWorld: function (id) {
-            debugger;
             if (this.objects[id]) {
                 if (this.obstacles[this.objects[id].index]) {
                         this.scene.remove(this.obstacles[this.objects[id].index]);
