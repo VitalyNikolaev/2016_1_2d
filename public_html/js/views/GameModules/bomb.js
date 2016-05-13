@@ -1,9 +1,8 @@
 define(function (require) {
     var THREE = require('three');
     var OBJLoader = require('OBJLoader');
-    var gameObjects = require('views/GameModules/gameObjects');
     var loader = new THREE.OBJLoader();
-
+    var gameObjects = require('views/GameModules/gameObjects');
     var bomb = {
         init: function () {
             loader.load('../media/game/models/bomb/Bomb.obj', function (object) {

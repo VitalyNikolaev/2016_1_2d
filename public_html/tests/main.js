@@ -2,9 +2,10 @@ require.config({
     urlArgs: "_=" + (new Date()).getTime(),
     baseUrl: "../js",
     paths: {
+        
         jquery: "lib/jquery",
         underscore: "lib/underscore",
-        backbone: "lib/backbone"
+        backbone: "lib/backbone",
     },
     shim: {
         'backbone': {
@@ -18,8 +19,8 @@ require.config({
 });
 
 var tests = [
+    'views/viewManager.test',
     'collections/scoreboard.test',
-    'views/viewManager.test'
 ];
 
 require(tests, function () {

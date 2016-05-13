@@ -1,8 +1,6 @@
 define(function (require) {
     var THREE = require('three');
     var gameObjects = require('views/GameModules/gameObjects');
-    var modelLoader = require('utils/modelLoader');
-
 
 
     var World = {
@@ -23,12 +21,6 @@ define(function (require) {
             texture_wall.repeat.set(24, 1);
             texture_wall.minFilter = THREE.LinearFilter;
             var wallMaterial = new THREE.MeshPhongMaterial({map: texture_wall});
-
-
-            this.worldObjects = { 
-                indestructible_crate: new THREE.MeshPhongMaterial({map: new THREE.TextureLoader().load('media/game/textures/grey_bricks2.jpg')}),
-                destructible_crate: new THREE.MeshPhongMaterial({map: new THREE.TextureLoader().load('media/game/textures/destruct_crate.gif')})
-            };
 
             this.addSkybox(); // create a box with panorama
 
@@ -53,15 +45,6 @@ define(function (require) {
             this.walls[2].position.x = -1056;
 
             this.walls[3].position.z = -1056;
-
-
-            gameObjects.addObjectToWorld(this.worldObjects.destructible_crate, new THREE.CubeGeometry(64, 64, 64), 1, 12, 17);
-            gameObjects.addObjectToWorld(this.worldObjects.indestructible_crate, new THREE.CubeGeometry(64, 64, 64),2, 2, 1);
-            gameObjects.addObjectToWorld(this.worldObjects.destructible_crate, new THREE.CubeGeometry(64, 64, 64), 3, 2, 2);
-            gameObjects.addObjectToWorld(this.worldObjects.destructible_crate, new THREE.CubeGeometry(64, 64, 64), 4, 29, 31);
-            gameObjects.addObjectToWorld(this.worldObjects.destructible_crate, new THREE.CubeGeometry(64, 64, 64), 5, 0, 2);
-			modelLoader.getModel('example_pkg', 'sizes', function(object) {object.rotation.y =  Math.PI; gameObjects.addPrefabToWorld(object, 5, 5, 5)});
-            
         },
         getObstacles: function () {
 

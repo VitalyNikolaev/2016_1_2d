@@ -11,7 +11,6 @@ define(function(require){
                 this.listenTo(this.views[view], 'show', this.hideViews);
             }
         },
-
         hideViews: function () {
             for (var view in this.views) {
                 this.views[view].hide();

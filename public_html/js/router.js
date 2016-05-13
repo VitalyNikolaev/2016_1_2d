@@ -12,7 +12,6 @@ define(
             room: require('views/room'),
             main: require('views/main'),
             settings: require('views/settings'),
-            singleplay: require('views/singleplay')
         };
 
         var Router = Backbone.Router.extend({
@@ -32,6 +31,11 @@ define(
                 if (view.requireAuth && !app.session.get('authed') ) {
                     this.navigate('#login', {trigger: true});
                     views.login.trigger('error','Need login to perform this action');
+                }
+                if (Backbone.history.getFragment() === 'game') {
+                    if (app.gameReady) {
+                        view.show();
+                    }
                 } else {
                     view.show();
                 }

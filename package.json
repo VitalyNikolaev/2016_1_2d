@@ -11,23 +11,28 @@
   },
   "devDependencies": {
     "backbone": "^1.2.3",
-    "body-parser": "^1.15.0",
+    "body-parser": "^1.14.2",
     "errorhandler": "^1.4.3",
     "express": "^4.13.4",
-    "grunt": "^0.4.5",
-    "grunt-concurrent": "^2.1.0",
-    "grunt-contrib-qunit": "^1.0.1",
-    "grunt-contrib-sass": "^1.0.0",
-    "grunt-contrib-watch": "^0.6.1",
-    "grunt-fest": "^0.1.6",
-    "grunt-sass": "^1.1.0",
-    "grunt-shell": "^1.1.2",
+    "graceful-fs": "^4.1.3",
+    "grunt": "~0.4.2",
+    "grunt-cli": "^0.1.13",
+    "grunt-concurrent": "^1.0.0",
+    "grunt-contrib-connect": "~0.6.0",
+    "grunt-contrib-qunit": "^0.7.0",
+    "grunt-contrib-watch": "~0.5.3",
+    "grunt-fest": "~0.1.4",
+    "grunt-sass": "^1.2.0",
+    "grunt-shell": "^1.1.1",
+    "phantomjs": "^2.1.3",
     "require": "^2.4.20",
     "underscore": "^1.8.3"
+
   },
   "scripts": {
     "start": "node server",
-    "test": "grunt test"
+
+    "test": "grunt fest && grunt test --verbose"
   },
   "dependencies": {
     "request": "^2.69.0"

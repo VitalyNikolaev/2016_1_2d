@@ -1,6 +1,0 @@
-<fest:template xmlns:fest="http://fest.mail.ru">
-    <div id="single-player">
-        <div id="game-canvas2">
-        </div>
-    </div>
-</fest:template>

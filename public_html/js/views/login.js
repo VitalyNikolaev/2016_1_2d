@@ -2,6 +2,7 @@ define(function (require) {
         var tmpl = require('tmpl/login');
         var baseView = require('views/baseView');
         var app = require('app');
+    
         var View = baseView.extend({
             template: tmpl,
             events: {

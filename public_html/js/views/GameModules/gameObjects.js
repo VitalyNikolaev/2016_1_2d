@@ -1,28 +1,40 @@
 define(function (require) {
     var THREE = require('three');
     var jQuery = require('jquery');
-    
-    
+
     var objects = {
         scene: null,
         camera: null,
-		cameraControls: null,
         light: null,
         renderer: null,
-        firstCharacter: null,
-        secondCharacter: null,
+        playersCharacter: null,
         objects: {}, // here we dump all links to obstacle index by id of object
         obstacles: [], // here we dump all our obstacles for raycaster
         bombObj: null,
+        worldObjects: {
+            indestructible_crate: new THREE.MeshPhongMaterial({map: new THREE.TextureLoader().load('media/game/textures/grey_bricks2.jpg')}),
+            destructible_crate: new THREE.MeshPhongMaterial({map: new THREE.TextureLoader().load('media/game/textures/destruct_crate.gif')}),
+            bomb_bonus_range: new THREE.MeshPhongMaterial({map: new THREE.TextureLoader().load('media/game/textures/bonus_bomb.gif')})
+        },
+        getRandomColor: function () {
+            return Math.random() * 255;
+
+        },
         getRealCoordinates: function (x, z) {
             return {
                 x: x * 64 - 992,
                 z: z * 64 - 992
             }
         },
+        getBomberManRealCoordinates: function (x, z) {
+            return {
+                x: x * 64 - 1024,
+                z: z * 64 - 1024
+            }
+        },
         getGameCoordinates: function (x, z) {
             return {
-                x: (x + 992) / 64 ,
+                x: (x + 992) / 64,
                 z: (z + 992) / 64
             }
         },
@@ -36,17 +48,17 @@ define(function (require) {
             };
             this.scene.add(realObj);
         },
-		addPrefabToWorld: function (model, id, x, z) { // needed to place objects by x, y and its id
+        addObjectToWorldWithNoCollisions: function (type, obj_geometry, id, x, z) { // needed to place objects by x, y and its id
+            var realObj = new THREE.Mesh(obj_geometry, type);
             var coordinates = this.getRealCoordinates(x, z);
-            model.position.set(coordinates.x, 32, coordinates.z);
-            this.obstacles.push(model);
+            realObj.position.set(coordinates.x, 32, coordinates.z);
             this.objects[id] = {
-                index: this.obstacles.indexOf(model)
+                index: id
             };
-            this.scene.add(model);
+            this.scene.add(realObj);
         },
         addBombToWorld: function (object, id, x, z) {
-            var coordinates = this.getRealCoordinates(x, z);
+            var coordinates = this.getBomberManRealCoordinates(x, z);
             object.position.set(coordinates.x, 2, coordinates.z);
             this.obstacles.push(object);
             this.objects[id] = {
@@ -62,15 +74,21 @@ define(function (require) {
         },
         deleteObjectFromWorld: function (id) {
             if (this.objects[id]) {
-                this.scene.remove(this.obstacles[this.objects[id].index]);
-                this.obstacles.splice(this.objects[id].index, 1);
-                delete this.objects[id];
-            }
+                if(this.obstacles[this.objects[id].index]) {
+                    this.scene.remove(this.obstacles[this.objects[id].index]);
+                    this.obstacles.splice(this.objects[id].index, 1);
+                    delete this.objects[id];
+                } else {
+                    this.scene.remove(this.objects[id].index);
+                    delete this.objects[id];
+                }
+            } 
         },
-        setBomb: function (id) {
+        setBomb: function (id, x, z) {
             var self = this;
             var bomb = this.bombObj.clone();
-            bomb.position.set(this.firstCharacter.mesh.position.x, 2, this.firstCharacter.mesh.position.z);
+            var coordinates = this.getRealCoordinates(x,z);
+            bomb.position.set(coordinates.x, 2, coordinates.z);
             var timerId = setInterval(function () {
                 bomb.scale.y *= 1.25;
                 bomb.scale.x *= 1.25;

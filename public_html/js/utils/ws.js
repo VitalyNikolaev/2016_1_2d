@@ -26,7 +26,7 @@ define(function(require) {
         onMessage: function (event) {
             var dataObj = JSON.parse(event.data);
             app.wsEvents.trigger(dataObj.type, dataObj);
-            console.log(dataObj);
+            // console.log(dataObj);
         },
         onError: function(error) {
             console.log("SOCKET ERROR: " + JSON.stringify(error));
@@ -43,6 +43,11 @@ define(function(require) {
             var data = {
                 "type": "ping"
             };
+            if(this.socket.readyState != 3) {
+                this.socket.send(JSON.stringify(data));
+            }
+        },
+        sendMessage: function (data) {
             this.socket.send(JSON.stringify(data));
         }
 
