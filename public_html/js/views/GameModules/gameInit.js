@@ -21,7 +21,6 @@ define(function (require) {
             gameObjects.light2 = new THREE.DirectionalLight(0xffffff, 1);
             gameObjects.renderer = new THREE.WebGLRenderer();
 			gameObjects.cameraControls = new THREE.OrbitControls(gameObjects.camera, gameObjects.renderer.domElement);
-			gameObjects.cameraControls.enableKeys = false;
             
             Bomb.init();
             World.init();
