@@ -51,6 +51,7 @@ define(function (require) {
 			gameObjects.cameraControls.target = gameObjects.playersCharacter.mesh.position;
 			gameObjects.cameraControls.update();
             gameObjects.renderer.render(gameObjects.scene, gameObjects.camera);
+			jQuery('#game').focus();
         },
         dealloc: function () {
             gameObjects.scene = undefined;
