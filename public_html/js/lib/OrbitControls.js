@@ -40,8 +40,8 @@ THREE.OrbitControls = function ( object, domElement ) {
 
 	// How far you can orbit horizontally, upper and lower limits.
 	// If set, must be a sub-interval of the interval [ - Math.PI, Math.PI ].
-	this.minAzimuthAngle = -0.5; // radians
-	this.maxAzimuthAngle = 0.5; // radians
+	this.minAzimuthAngle = -Infinity; // radians
+	this.maxAzimuthAngle = Infinity; // radians
 
 	// Set to true to enable damping (inertia)
 	// If damping is enabled, you must call controls.update() in your animation loop
@@ -58,7 +58,7 @@ THREE.OrbitControls = function ( object, domElement ) {
 	this.rotateSpeed = 0.2;
 
 	// Set to false to disable panning
-	this.enablePan = false;
+	this.enablePan = true;
 	this.keyPanSpeed = 7.0;	// pixels moved per arrow key push
 
 	// Set to true to automatically rotate around the target

@@ -1,7 +1,7 @@
 define(function (require) {
     var THREE = require('three');
     var gameObjects = require('views/GameModules/gameObjects');
-	//var modelLoader = require('utils/modelLoader');
+	var modelLoader = require('utils/modelLoader');
 
 
     var World = {
@@ -46,6 +46,8 @@ define(function (require) {
             this.walls[2].position.x = -1056;
 
             this.walls[3].position.z = -1056;
+			
+			modelLoader.getModel('example_pkg', '64mm2', function(object) {object.rotation.y =  Math.PI; gameObjects.addPrefabToWorld(object, 5, 5, 5)});
         },
         getObstacles: function () {
 
