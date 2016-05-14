@@ -19,6 +19,8 @@ define(function (require) {
             this.listenTo(app.wsEvents, "object_spawned", this.addObject);
             this.listenTo(app.wsEvents, "bomberman_spawned", this.spawnBomberman);
             this.listenTo(app.wsEvents, "object_destroyed", this.destroyObject);
+            this.listenTo(app.wsEvents, "game_over", this.gameOver);
+            this.listenTo(app.wsEvents, "object_changed", this.moveBomberman);
         },
         show: function () {
             baseView.prototype.show.call(this);
@@ -54,26 +56,37 @@ define(function (require) {
                 this.gameStartedId = null;
                 gameInit.dealloc();
                 $('canvas').remove();
+                app.gameReady = false;
                 app.user.set('contentLoaded', false);
                 gameInit.init();
             }
         },
+        gameOver: function () {
+            window.location.href = '#main';
+        },
         spawnBomberman: function (data) {
             if (data.user_id === app.user.get('id')) {
+                console.log(data.user_id);
                 gameObjects.playersCharacter = new Character.init({
                         color: Math.random() * 0xffffff}, {x: data.x, z: data.y});
-                
-                gameObjects.objects[data.id] = gameObjects.playersCharacter;
-                gameObjects.scene.add(gameObjects.objects[data.id].mesh);
+                gameObjects.playersCharacter.name = data.id;
+                gameObjects.objects[data.id] =  {
+                  index: gameObjects.playersCharacter.mesh
+                };
+                gameObjects.scene.add(gameObjects.objects[data.id].index);
                 if ( data.y > 15 ) {
                     gameObjects.playersCharacter.setControls('top');
                 } else {
                     gameObjects.playersCharacter.setControls('bot');
                 }
             } else {
-                gameObjects.objects[data.id] = new Character.init({
-                        color: Math.random() * 0xffffff}, {x: data.x, z: data.y});
-                gameObjects.scene.add(gameObjects.objects[data.id].mesh);
+                gameObjects.objects[data.id] = {
+                   index: new Character.init({
+                        color: Math.random() * 0xffffff}, 
+                       {x: data.x, z: data.y}).mesh
+                    };
+
+                gameObjects.scene.add(gameObjects.objects[data.id].index);
             }
 
         },
@@ -90,14 +103,28 @@ define(function (require) {
                 gameObjects.addObjectToWorldWithNoCollisions(gameObjects.worldObjects.bomb_bonus_range, new THREE.CubeGeometry(64, 64, 64), data.id, data.x, data.y);
                 return
             }
-            if (data.obect_type === 'bonus_decrease_bomb_spawn_delay') {
-
+            if (data.object_type === 'bonus_decrease_bomb_spawn_delay') {
+                gameObjects.addObjectToWorldWithNoCollisions(gameObjects.worldObjects.bomb_bonus_range, new THREE.CubeGeometry(64, 64, 64), data.id, data.x, data.y);
+                return
             }
-            if (data.obect_type === 'bonus_decrease_bomb_explosion_delay') {
-
+            if (data.object_type === 'bonus_increase_speed') {
+                gameObjects.addObjectToWorldWithNoCollisions(gameObjects.worldObjects.bomb_bonus_range, new THREE.CubeGeometry(64, 64, 64), data.id, data.x, data.y);
+                return
             }
-            if (data.obect_type === 'bomb_ray') {
-                gameObjects.addObjectToWorldWithNoCollisions(gameObjects.worldObjects.explosion_rey, new THREE.CylinderGeometry(32, 32, 20, 32), data.id, data.x, data.y);
+            if (data.object_type === 'bonus_decrease_bomb_spawn_delay') {
+                gameObjects.addObjectToWorldWithNoCollisions(gameObjects.worldObjects.bomb_bonus_range, new THREE.CubeGeometry(64, 64, 64), data.id, data.x, data.y);
+                return
+            }
+            if (data.object_type === 'bonus_increase_max_hp') {
+                gameObjects.addObjectToWorldWithNoCollisions(gameObjects.worldObjects.bomb_bonus_range, new THREE.CubeGeometry(64, 64, 64), data.id, data.x, data.y);
+                return
+            }
+            if (data.object_type === 'bonus_decrease_bomb_explosion_delay') {
+                gameObjects.addObjectToWorldWithNoCollisions(gameObjects.worldObjects.bomb_bonus_range, new THREE.CubeGeometry(64, 64, 64), data.id, data.x, data.y);
+                return
+            }
+            if (data.object_type === 'bomb_ray') {
+                gameObjects.addReyToWorldWithNoCollisions(gameObjects.worldObjects.explosion_rey, new THREE.CubeGeometry(64, 64, 64), data.id, data.x, data.y);
                 return
             }
             if (data.object_type === 'bomb') {
@@ -107,8 +134,12 @@ define(function (require) {
 
         },
         destroyObject: function (data) {
-            console.log(data);
-            // gameObjects.deleteObjectFromWorld(data.id);
+            gameObjects.deleteObjectFromWorld(data.id);
+        },
+        moveBomberman: function (data) {
+            var coordinates = gameObjects.getGameCoordinates(data.x, data.y);
+            console.log(coordinates);
+            gameObjects.objects[data.id].index.position.set(coordinates.x, 48, coordinates.z);
         }
         
     });

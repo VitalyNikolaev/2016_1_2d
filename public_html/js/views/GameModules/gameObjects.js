@@ -47,6 +47,7 @@ define(function (require) {
             this.objects[id] = {
                 index: this.obstacles.indexOf(realObj)
             };
+            realObj.name = id;
             this.scene.add(realObj);
         },
         addObjectToWorldWithNoCollisions: function (type, obj_geometry, id, x, z) { // needed to place objects by x, y and its id
@@ -56,6 +57,17 @@ define(function (require) {
             this.objects[id] = {
                 index: realObj
             };
+            realObj.name = id;
+            this.scene.add(realObj);
+        },
+        addReyToWorldWithNoCollisions: function (type, obj_geometry, id, x, z) { // needed to place objects by x, y and its id
+            var realObj = new THREE.Mesh(obj_geometry, type);
+            var coordinates = this.getRealCoordinates(x, z);
+            realObj.position.set(coordinates.x, 32, coordinates.z);
+            this.objects[id] = {
+                index: realObj
+            };
+            realObj.name = id;
             this.scene.add(realObj);
         },
         addBombToWorld: function (object, id, x, z) {
@@ -67,12 +79,6 @@ define(function (require) {
             };
             this.scene.add(object);
         },
-        addPlayerToWorld: function (id, object) { // add all players besides yours to colide
-            this.obstacles.push(object);
-            this.objects[id] = {
-                index: this.obstacles.indexOf(object)
-            };
-        },
         deleteObjectFromWorld: function (id) {
             if (this.objects[id]) {
                 if (this.obstacles[this.objects[id].index]) {
@@ -80,7 +86,7 @@ define(function (require) {
                         this.obstacles.splice(this.objects[id].index, 1);
                         delete this.objects[id];
                 } else {
-                    this.scene.remove(this.objects[id]);
+                    this.scene.remove(this.objects[id].index);
                     delete this.objects[id];
                 }
             } 
@@ -99,6 +105,8 @@ define(function (require) {
                 clearInterval(timerId);
                 self.scene.remove(bomb);
             }, 3000);
+            bomb.name = id;
+            this.objects[id] = bomb;
             this.scene.add(bomb);
         }
 };

@@ -74,19 +74,23 @@ define(function (require) {
                 this.direction.set(x, y, z);
             };
 
-            this.getDirectionForWS = function () {
+            this.sendDirectionWS = function () {
                 if (this.direction.x != this.realDirection.x || this.direction.z != this.realDirection.z) {
                     this.realDirection.x = this.direction.x;
                     this.realDirection.z = this.direction.z;
-                    ws.sendMessage({"type": "object_changed",})
+                    ws.sendMessage({
+                        "type": "object_changed",
+                        "x": this.realDirection.x,
+                        "y": this.realDirection.z
+                    })
                 }
-
             },
             this.motion = function () {
                 this.collision();
+                this.sendDirectionWS();
                 if (this.direction.x !== 0 || this.direction.z !== 0) {
                     this.rotate();
-                    this.move();
+                    // this.move();
                     return true;
                 }
             };
@@ -192,8 +196,8 @@ define(function (require) {
                 gameDiv.attr("contentEditable", "true");
                 gameDiv[0].contentEditable = true;
                 gameDiv.keydown(function (e) {
-                    if (String.fromCharCode(e.keyCode ) == ' '){
-                       ws.sendMessage({"type": "bomb_spawned"})
+                    if (String.fromCharCode(e.keyCode ) == ' ') {
+                        ws.sendMessage({"type": "bomb_spawned"})
                     }
                     makeControls(true, e.keyCode, position);
                     e.preventDefault();

@@ -36,7 +36,6 @@ define(function(require) {
                 "isReady": readyStatus,
                 "contentLoaded": contentStatus
             };
-            console.log(JSON.stringify((data)));
             this.socket.send(JSON.stringify(data));
         },
         sendPing: function () {
