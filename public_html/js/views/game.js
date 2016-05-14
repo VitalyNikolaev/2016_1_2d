@@ -96,6 +96,10 @@ define(function (require) {
             if (data.obect_type === 'bonus_decrease_bomb_explosion_delay') {
 
             }
+            if (data.obect_type === 'bomb_ray') {
+                gameObjects.addObjectToWorldWithNoCollisions(gameObjects.worldObjects.explosion_rey, new THREE.CylinderGeometry(32, 32, 20, 32), data.id, data.x, data.y);
+                return
+            }
             if (data.object_type === 'bomb') {
                 gameObjects.setBomb(data.id, data.x, data.y);
                 return
@@ -103,7 +107,8 @@ define(function (require) {
 
         },
         destroyObject: function (data) {
-            gameObjects.deleteObjectFromWorld(data.id);
+            console.log(data);
+            // gameObjects.deleteObjectFromWorld(data.id);
         }
         
     });
