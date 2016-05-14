@@ -15,6 +15,7 @@ define(
                 app.session.set('id', -1);
             }
         };
+        app.user.set('contentLoaded', false);
         app.session.fetch({
             success: function() {
                 app.session.set('authed', true);
@@ -22,7 +23,6 @@ define(
                 app.user.set('isReady', false);
                 app.user.fetch({
                     success: function () {
-                        app.user.set('contentLoaded', false);
                         app.Events.trigger('userAuthed');
                 }});
             },
