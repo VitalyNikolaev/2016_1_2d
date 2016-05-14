@@ -66,7 +66,6 @@ define(function (require) {
         },
         spawnBomberman: function (data) {
             if (data.user_id === app.user.get('id')) {
-                console.log(data.user_id);
                 gameObjects.playersCharacter = new Character.init({
                         color: Math.random() * 0xffffff}, {x: data.x, z: data.y});
                 gameObjects.playersCharacter.name = data.id;
@@ -137,8 +136,7 @@ define(function (require) {
             gameObjects.deleteObjectFromWorld(data.id);
         },
         moveBomberman: function (data) {
-            var coordinates = gameObjects.getGameCoordinates(data.x, data.y);
-            console.log(coordinates);
+            var coordinates = gameObjects.getBomberManRealCoordinates(data.x, data.y);
             gameObjects.objects[data.id].index.position.set(coordinates.x, 48, coordinates.z);
         }
         

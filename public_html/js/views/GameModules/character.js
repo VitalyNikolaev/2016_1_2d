@@ -78,6 +78,7 @@ define(function (require) {
                 if (this.direction.x != this.realDirection.x || this.direction.z != this.realDirection.z) {
                     this.realDirection.x = this.direction.x;
                     this.realDirection.z = this.direction.z;
+                    console.log(this.realDirection.x);
                     ws.sendMessage({
                         "type": "object_changed",
                         "x": this.realDirection.x,

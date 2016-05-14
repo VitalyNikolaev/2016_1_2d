@@ -24,7 +24,6 @@ define(function(require) {
         },
         onMessage: function (event) {
             var dataObj = JSON.parse(event.data);
-            console.log(dataObj);
             app.wsEvents.trigger(dataObj.type, dataObj);
         },
         onError: function(error) {
