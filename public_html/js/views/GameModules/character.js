@@ -12,7 +12,10 @@ define(function (require) {
                 foot = new THREE.SphereGeometry(16, 4, 8, 0, Math.PI * 2, 0, Math.PI / 2),
                 nose = new THREE.SphereGeometry(4, 8, 8),
                 material = new THREE.MeshLambertMaterial(color);
-
+            this.realDirection = {
+                x: 0,
+                z: 0,
+            };
             this.mesh = new THREE.Object3D();
             this.mesh.position.y = 48;
             this.head = new THREE.Mesh(head, material);
@@ -45,6 +48,7 @@ define(function (require) {
             this.nose.position.z = 24;
             this.mesh.add(this.nose);
 
+
             var playerCoordinates = gameObjects.getBomberManRealCoordinates(position.x, position.z); // where we need to place our character
             this.mesh.position.set(playerCoordinates.x, 48, playerCoordinates.z);
 
@@ -70,6 +74,14 @@ define(function (require) {
                 this.direction.set(x, y, z);
             };
 
+            this.getDirectionForWS = function () {
+                if (this.direction.x != this.realDirection.x || this.direction.z != this.realDirection.z) {
+                    this.realDirection.x = this.direction.x;
+                    this.realDirection.z = this.direction.z;
+                    ws.sendMessage({"type": "object_changed",})
+                }
+
+            },
             this.motion = function () {
                 this.collision();
                 if (this.direction.x !== 0 || this.direction.z !== 0) {
@@ -126,8 +138,8 @@ define(function (require) {
                 return constSpeed * 64 / gameObjects.fps;
             };
             this.move = function () {
-                this.mesh.position.x += this.direction.x * ((this.direction.z === 0) ? this.getRealSpeed() : Math.sqrt(2 * this.getRealSpeed()));
-                this.mesh.position.z += this.direction.z * ((this.direction.x === 0) ? this.getRealSpeed() : Math.sqrt(2 * this.getRealSpeed()));
+                this.mesh.position.x += this.direction.x * ((this.direction.z === 0) ? this.getRealSpeed() : Math.sqrt(this.getRealSpeed()));
+                this.mesh.position.z += this.direction.z * ((this.direction.x === 0) ? this.getRealSpeed() : Math.sqrt(this.getRealSpeed()));
                 this.step += 1 / 4;
                 this.feet.left.position.setZ(Math.sin(this.step) * 16);
                 this.feet.right.position.setZ(Math.cos(this.step + (Math.PI / 2)) * 16);
