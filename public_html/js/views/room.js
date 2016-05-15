@@ -72,7 +72,6 @@ define(function (require) {
         addUser: function(userModel) {
             var playerView = new roomPlayer({'model': userModel});
             this.$('.room').append(playerView.el);
-
             if(userModel.get('id') === app.user.get('id')) {
                 this.currentPlayer = userModel;
                 this.listenTo(app.user, "change:contentLoaded", this.checkContentLoadedStatus);

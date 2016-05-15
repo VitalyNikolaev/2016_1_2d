@@ -9,7 +9,7 @@ define(function (require) {
         light: null,
         renderer: null,
         playersCharacter: null,
-        fps: 0,
+        fps: 0, // needed to move bomber sync to server
         objects: {}, // here we dump all links to obstacle index by id of object
         obstacles: [], // here we dump all our obstacles for raycaster
         bombObj: null,
@@ -34,12 +34,6 @@ define(function (require) {
                 z: z * 64 - 1024
             }
         },
-        getGameCoordinates: function (x, z) {
-            return {
-                x: (x + 992) / 64,
-                z: (z + 992) / 64
-            }
-        },
         addObjectToWorld: function (type, obj_geometry, id, x, z) { // needed to place objects by x, y and its id
             var realObj = new THREE.Mesh(obj_geometry, type);
             var coordinates = this.getRealCoordinates(x, z);
@@ -48,6 +42,7 @@ define(function (require) {
             this.objects[id] = {
                 index: this.obstacles.indexOf(realObj)
             };
+            realObj.name = id;
             this.scene.add(realObj);
         },
 		addPrefabToWorld: function (model, id, x, z) { // needed to place objects by x, y and its id
@@ -66,6 +61,17 @@ define(function (require) {
             this.objects[id] = {
                 index: realObj
             };
+            realObj.name = id;
+            this.scene.add(realObj);
+        },
+        addReyToWorldWithNoCollisions: function (type, obj_geometry, id, x, z) { // needed to place objects by x, y and its id
+            var realObj = new THREE.Mesh(obj_geometry, type);
+            var coordinates = this.getRealCoordinates(x, z);
+            realObj.position.set(coordinates.x, 32, coordinates.z);
+            this.objects[id] = {
+                index: realObj
+            };
+            realObj.name = id;
             this.scene.add(realObj);
         },
         addBombToWorld: function (object, id, x, z) {
@@ -77,12 +83,6 @@ define(function (require) {
             };
             this.scene.add(object);
         },
-        addPlayerToWorld: function (id, object) { // add all players besides yours to colide
-            this.obstacles.push(object);
-            this.objects[id] = {
-                index: this.obstacles.indexOf(object)
-            };
-        },
         deleteObjectFromWorld: function (id) {
             if (this.objects[id]) {
                 if (this.obstacles[this.objects[id].index]) {
@@ -90,7 +90,7 @@ define(function (require) {
                         this.obstacles.splice(this.objects[id].index, 1);
                         delete this.objects[id];
                 } else {
-                    this.scene.remove(this.objects[id]);
+                    this.scene.remove(this.objects[id].index);
                     delete this.objects[id];
                 }
             } 
@@ -109,6 +109,8 @@ define(function (require) {
                 clearInterval(timerId);
                 self.scene.remove(bomb);
             }, 3000);
+            bomb.name = id;
+            this.objects[id] = bomb;
             this.scene.add(bomb);
         }
 };
