@@ -12,10 +12,12 @@ define(
             createNewSession : function () {
                 app.session = new session();
                 app.user = new user();
+                app.user.set('contentLoaded', false);
                 app.session.set('id', -1);
             }
         };
         app.user.set('contentLoaded', false);
+
         app.session.fetch({
             success: function() {
                 app.session.set('authed', true);
