@@ -30,18 +30,6 @@ define(function (require) {
                 z: z * 64 - 1024
             }
         },
-        addObjectToWorld: function (type, obj_geometry, id, x, z) { // needed to place objects by x, y and its id
-            var realObj = new THREE.Mesh(obj_geometry, type);
-            var coordinates = this.getRealCoordinates(x, z);
-            realObj.position.set(coordinates.x, 32, coordinates.z);
-            this.obstacles.push(realObj);
-            this.objects[id] = {
-                index: this.obstacles.indexOf(realObj),
-                coords: {x: x, z: z}
-            };
-            realObj.name = id;
-            this.scene.add(realObj);
-        },
         addObjectToWorldWithNoCollisions: function (type, obj_geometry, id, x, z) { // needed to place objects by x, y and its id
             var realObj = new THREE.Mesh(obj_geometry, type);
             var coordinates = this.getRealCoordinates(x, z);
@@ -74,15 +62,15 @@ define(function (require) {
         deleteObjectFromWorld: function (id) {
             console.log(id);
             if (this.objects[id]) {
-                if (this.obstacles[this.objects[id].index]) {
-                        console.log(this.objects[id].coords);
-                        this.scene.remove(this.obstacles[this.objects[id].index]);
-                        this.obstacles.splice(this.objects[id].index, 1);
-                        delete this.objects[id];
-                } else {
+                // if (this.obstacles[this.objects[id].index]) {
+                //         console.log(this.objects[id].coords);
+                //         this.scene.remove(this.obstacles[this.objects[id].index]);
+                //         this.obstacles.splice(this.objects[id].index, 1);
+                //         delete this.objects[id];
+                // } else {
                     this.scene.remove(this.objects[id].index);
                     delete this.objects[id];
-                }
+                // }
             } 
         },
         setBomb: function (id, x, z) {

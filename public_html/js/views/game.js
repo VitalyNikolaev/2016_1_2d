@@ -105,11 +105,11 @@ define(function (require) {
         },
         addObject: function (data) {
             if (data.object_type === 'destructible_wall') {
-                gameObjects.addObjectToWorld(gameObjects.worldObjects.destructible_crate, new THREE.CubeGeometry(64, 64, 64), data.id, data.x, data.y);
+                gameObjects.addObjectToWorldWithNoCollisions(gameObjects.worldObjects.destructible_crate, new THREE.CubeGeometry(64, 64, 64), data.id, data.x, data.y);
                 return
             }
             if (data.object_type === 'undestructible_wall') {
-                gameObjects.addObjectToWorld(gameObjects.worldObjects.indestructible_crate, new THREE.CubeGeometry(64, 64, 64), data.id, data.x, data.y);
+                gameObjects.addObjectToWorldWithNoCollisions(gameObjects.worldObjects.indestructible_crate, new THREE.CubeGeometry(64, 64, 64), data.id, data.x, data.y);
                 return
             }
             if (data.object_type === 'bonus_increase_bomb_range') {
