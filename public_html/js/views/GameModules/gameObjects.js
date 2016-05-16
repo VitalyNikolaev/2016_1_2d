@@ -18,9 +18,6 @@ define(function (require) {
             bomb_bonus_range: new THREE.MeshPhongMaterial({map: new THREE.TextureLoader().load('media/game/textures/bonus_bomb.gif')}),
             explosion_rey: new THREE.MeshPhongMaterial({map: new THREE.TextureLoader().load('media/game/textures/explosion.jpg')}),
         },
-        getRandomColor: function () {
-            return Math.random() * 255;
-        },
         getRealCoordinates: function (x, z) {
             return {
                 x: x * 64 - 992,
@@ -39,7 +36,8 @@ define(function (require) {
             realObj.position.set(coordinates.x, 32, coordinates.z);
             this.obstacles.push(realObj);
             this.objects[id] = {
-                index: this.obstacles.indexOf(realObj)
+                index: this.obstacles.indexOf(realObj),
+                coords: {x: x, z: z}
             };
             realObj.name = id;
             this.scene.add(realObj);
@@ -74,8 +72,10 @@ define(function (require) {
             this.scene.add(object);
         },
         deleteObjectFromWorld: function (id) {
+            console.log(id);
             if (this.objects[id]) {
                 if (this.obstacles[this.objects[id].index]) {
+                        console.log(this.objects[id].coords);
                         this.scene.remove(this.obstacles[this.objects[id].index]);
                         this.obstacles.splice(this.objects[id].index, 1);
                         delete this.objects[id];

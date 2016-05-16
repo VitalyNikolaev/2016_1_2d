@@ -180,8 +180,6 @@ define(function (require) {
                     gameObjects.playersCharacter.setDirection(controls);
                 }
                 var gameDiv = jQuery('#game');
-                gameDiv.attr("contentEditable", "true");
-                gameDiv[0].contentEditable = true;
                 gameDiv.keydown(function (e) {
                     if (String.fromCharCode(e.keyCode ) == ' ') {
                         ws.sendMessage({"type": "bomb_spawned"})
@@ -193,7 +191,6 @@ define(function (require) {
                     makeControls(false, e.keyCode, position);
                     e.preventDefault();
                 });
-                gameDiv.focus();
             };
             this.setFocus = function (object, z) {
                 gameObjects.camera.position.set(object.position.x, object.position.y + 750, object.position.z - z);

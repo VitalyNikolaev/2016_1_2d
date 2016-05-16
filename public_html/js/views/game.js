@@ -29,6 +29,10 @@ define(function (require) {
             this.pingTimer = setInterval(function () {
                 ws.sendPing()
             }, 10000);
+            var gameDiv = jQuery('#game');
+            gameDiv.attr("contentEditable", "true");
+            gameDiv[0].contentEditable = true;
+            gameDiv.focus();
         },
         hide: function () {
             baseView.prototype.hide.call(this);
