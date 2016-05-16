@@ -67,7 +67,9 @@ define(function (require) {
             }
         },
         gameOver: function () {
-            window.location.href = '#main';
+            setTimeout(function (){
+                window.location.href = '#main'
+            }, 2000);
         },
         spawnBomberman: function (data) {
             if (data.user_id === app.user.get('id')) {
@@ -144,7 +146,6 @@ define(function (require) {
                 gameObjects.setBomb(data.id, data.x, data.y);
                 return
             }
-
         },
         destroyObject: function (data) {
             gameObjects.deleteObjectFromWorld(data.id);
@@ -162,6 +163,7 @@ define(function (require) {
             vector.x = vector.x > 0 ? 1 : vector.x < 0 ? -1 : 0;
             vector.z = vector.z > 0 ? 1 : vector.z < 0 ? -1 : 0;
             if (vector.x != 0 || vector.z != 0) {
+                gameObjects.objects[data.id].index.rotate(vector.x, vector.z);
                 gameObjects.objects[data.id].index.move();
             }
         }

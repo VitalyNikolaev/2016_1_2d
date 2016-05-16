@@ -50,27 +50,10 @@ define(function (require) {
             realObj.name = id;
             this.scene.add(realObj);
         },
-        addBombToWorld: function (object, id, x, z) {
-            var coordinates = this.getBomberManRealCoordinates(x, z);
-            object.position.set(coordinates.x, 2, coordinates.z);
-            this.obstacles.push(object);
-            this.objects[id] = {
-                index: this.obstacles.indexOf(object)
-            };
-            this.scene.add(object);
-        },
         deleteObjectFromWorld: function (id) {
-            console.log(id);
             if (this.objects[id]) {
-                // if (this.obstacles[this.objects[id].index]) {
-                //         console.log(this.objects[id].coords);
-                //         this.scene.remove(this.obstacles[this.objects[id].index]);
-                //         this.obstacles.splice(this.objects[id].index, 1);
-                //         delete this.objects[id];
-                // } else {
-                    this.scene.remove(this.objects[id].index);
-                    delete this.objects[id];
-                // }
+                this.scene.remove(this.objects[id].index);
+                delete this.objects[id];
             } 
         },
         setBomb: function (id, x, z) {

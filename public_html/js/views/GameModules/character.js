@@ -64,8 +64,6 @@ define(function (require) {
                 new THREE.Vector3(-1, 0, 0),
                 new THREE.Vector3(-1, 0, 1)
             ];
-            this.caster = new THREE.Raycaster();
-
             this.setDirection = function (controls) {
                 var x = controls.left ? 1 : controls.right ? -1 : 0;
                 var z = controls.up ? 1 : controls.down ? -1 : 0;
@@ -82,34 +80,9 @@ define(function (require) {
                     })
                 }
             };
-            this.collision = function () {
-                var collisions;
-                var i;
-                var distance = 28; // Maximum distance from the origin before we consider collision
-                var obstacles = world.getObstacles();
-
-                for (i = 0; i < this.rays.length; i += 1) {
-                    this.caster.set(this.mesh.position, this.rays[i]);
-                    collisions = this.caster.intersectObjects(obstacles, true);
-                    if (collisions.length > 0 && collisions[0].distance <= distance) {
-                        if ((i === 0 || i === 1 || i === 7) && this.direction.z === 1) {
-                            this.direction.setZ(0);
-                        } else if ((i === 3 || i === 4 || i === 5) && this.direction.z === -1) {
-                            this.direction.setZ(0);
-                        }
-                        if ((i === 1 || i === 2 || i === 3) && this.direction.x === 1) {
-                            this.direction.setX(0);
-                        } else if ((i === 5 || i === 6 || i === 7) && this.direction.x === -1) {
-                            this.direction.setX(0);
-                        }
-                    }
-                }
-            };
-
-            this.rotate = function () {
-                var angle = Math.atan2(this.direction.x, this.direction.z);
+            this.rotate = function (x, z) {
+                var angle = Math.atan2(x, z);
                 var difference = angle - this.mesh.rotation.y;
-                // If we're doing more than a 180°
                 if (Math.abs(difference) > Math.PI) {
                     if (difference > 0) {
                         this.mesh.rotation.y += 2 * Math.PI;
@@ -121,14 +94,12 @@ define(function (require) {
                 if (difference !== 0) {
                     this.mesh.rotation.y += difference / 4;
                 }
-                // this.mesh.rotation.y = angle; // if we dont want to animate rotation
             };
             this.getRealSpeed = function() {
                 var constSpeed = 2; // tiles per second
                 return constSpeed * 64 / gameObjects.fps;
             };
             this.move = function () {
-                this.rotate();
                 this.mesh.position.x += this.realDirection.x * ((this.direction.z === 0) ? this.getRealSpeed() : Math.sqrt(this.getRealSpeed()));
                 this.mesh.position.z += this.realDirection.z * ((this.direction.x === 0) ? this.getRealSpeed() : Math.sqrt(this.getRealSpeed()));
                 this.step += 1 / 4;
