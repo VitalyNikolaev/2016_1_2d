@@ -44,7 +44,7 @@ define(function (require) {
         },
 
         frame: function () {
-            gameObjects.playersCharacter.motion();
+            gameObjects.playersCharacter.sendDirectionWS();
             gameObjects.playersCharacter.setFocus(gameObjects.playersCharacter.mesh , 950);
             gameObjects.renderer.render(gameObjects.scene, gameObjects.camera);
         },

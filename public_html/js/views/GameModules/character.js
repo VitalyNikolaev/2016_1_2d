@@ -14,7 +14,7 @@ define(function (require) {
                 material = new THREE.MeshLambertMaterial(color);
             this.realDirection = {
                 x: 0,
-                z: 0,
+                z: 0
             };
             this.mesh = new THREE.Object3D();
             this.mesh.position.y = 48;
@@ -52,7 +52,6 @@ define(function (require) {
             var playerCoordinates = gameObjects.getBomberManRealCoordinates(position.x, position.z); // where we need to place our character
             this.mesh.position.set(playerCoordinates.x, 48, playerCoordinates.z);
 
-
             this.direction = new THREE.Vector3(0, 0, 0);
             this.step = 0;
             this.rays = [
@@ -69,33 +68,20 @@ define(function (require) {
 
             this.setDirection = function (controls) {
                 var x = controls.left ? 1 : controls.right ? -1 : 0;
-                var y = 0;
                 var z = controls.up ? 1 : controls.down ? -1 : 0;
-                this.direction.set(x, y, z);
+                this.direction.set(x, 0, z);
             };
-
             this.sendDirectionWS = function () {
                 if (this.direction.x != this.realDirection.x || this.direction.z != this.realDirection.z) {
                     this.realDirection.x = this.direction.x;
                     this.realDirection.z = this.direction.z;
-                    console.log(this.realDirection.x);
                     ws.sendMessage({
                         "type": "object_changed",
                         "x": this.realDirection.x,
                         "y": this.realDirection.z
                     })
                 }
-            },
-            this.motion = function () {
-                this.collision();
-                this.sendDirectionWS();
-                if (this.direction.x !== 0 || this.direction.z !== 0) {
-                    this.rotate();
-                    // this.move();
-                    return true;
-                }
             };
-
             this.collision = function () {
                 var collisions;
                 var i;
@@ -125,7 +111,6 @@ define(function (require) {
                 var difference = angle - this.mesh.rotation.y;
                 // If we're doing more than a 180°
                 if (Math.abs(difference) > Math.PI) {
-                    // We proceed to a direct 360° rotation in the opposite way
                     if (difference > 0) {
                         this.mesh.rotation.y += 2 * Math.PI;
                     } else {
@@ -143,8 +128,9 @@ define(function (require) {
                 return constSpeed * 64 / gameObjects.fps;
             };
             this.move = function () {
-                this.mesh.position.x += this.direction.x * ((this.direction.z === 0) ? this.getRealSpeed() : Math.sqrt(this.getRealSpeed()));
-                this.mesh.position.z += this.direction.z * ((this.direction.x === 0) ? this.getRealSpeed() : Math.sqrt(this.getRealSpeed()));
+                this.rotate();
+                this.mesh.position.x += this.realDirection.x * ((this.direction.z === 0) ? this.getRealSpeed() : Math.sqrt(this.getRealSpeed()));
+                this.mesh.position.z += this.realDirection.z * ((this.direction.x === 0) ? this.getRealSpeed() : Math.sqrt(this.getRealSpeed()));
                 this.step += 1 / 4;
                 this.feet.left.position.setZ(Math.sin(this.step) * 16);
                 this.feet.right.position.setZ(Math.cos(this.step + (Math.PI / 2)) * 16);

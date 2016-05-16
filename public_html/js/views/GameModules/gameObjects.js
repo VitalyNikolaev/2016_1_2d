@@ -91,15 +91,14 @@ define(function (require) {
             var coordinates = this.getRealCoordinates(x,z);
             bomb.position.set(coordinates.x, 2, coordinates.z);
             var timerId = setInterval(function () {
-                bomb.scale.y *= 1.25;
-                bomb.scale.x *= 1.25;
-                bomb.scale.z *= 1.25;
-            }, 1000);
+                bomb.scale.y *= 1.05;
+                bomb.scale.x *= 1.05;
+                bomb.scale.z *= 1.05;
+            }, 500);
             setTimeout(function () {
                 clearInterval(timerId);
                 self.scene.remove(bomb);
-            }, 3000);
-            bomb.name = id;
+            }, 2000);
             this.objects[id] = bomb;
             this.scene.add(bomb);
         }

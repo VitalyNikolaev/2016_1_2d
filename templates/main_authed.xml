@@ -12,7 +12,7 @@
             </div>
             <div class="menu">
                 <a href="#room"><button class="menu__btn menu__btn_primary">
-                    Start
+                    Play
                 </button></a>
                 <a href="#scoreboard"><button class="menu__btn">
                     Scoreboard

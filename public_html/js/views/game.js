@@ -13,6 +13,7 @@ define(function (require) {
         pingTimer: null,
         requireAuth: true,
         gameStartedId: null,
+        previousCoordinates: {},
         initialize: function () {
             this.render();
             gameInit.init();
@@ -70,9 +71,14 @@ define(function (require) {
                         color: Math.random() * 0xffffff}, {x: data.x, z: data.y});
                 gameObjects.playersCharacter.name = data.id;
                 gameObjects.objects[data.id] =  {
-                  index: gameObjects.playersCharacter.mesh
+                  index: gameObjects.playersCharacter
                 };
-                gameObjects.scene.add(gameObjects.objects[data.id].index);
+                gameObjects.scene.add(gameObjects.objects[data.id].index.mesh);
+                this.previousCoordinates[data.id] = {
+                    x: gameObjects.objects[data.id].index.mesh.position.x,
+                    z: gameObjects.objects[data.id].index.mesh.position.z
+
+                };
                 if ( data.y > 15 ) {
                     gameObjects.playersCharacter.setControls('top');
                 } else {
@@ -82,10 +88,14 @@ define(function (require) {
                 gameObjects.objects[data.id] = {
                    index: new Character.init({
                         color: Math.random() * 0xffffff}, 
-                       {x: data.x, z: data.y}).mesh
+                       {x: data.x, z: data.y})
                     };
+                this.previousCoordinates[data.id] = {
+                    x: gameObjects.objects[data.id].index.mesh.position.x,
+                    z: gameObjects.objects[data.id].index.mesh.position.z
 
-                gameObjects.scene.add(gameObjects.objects[data.id].index);
+                };
+                gameObjects.scene.add(gameObjects.objects[data.id].index.mesh);
             }
 
         },
@@ -136,8 +146,20 @@ define(function (require) {
             gameObjects.deleteObjectFromWorld(data.id);
         },
         moveBomberman: function (data) {
-            var coordinates = gameObjects.getBomberManRealCoordinates(data.x, data.y);
-            gameObjects.objects[data.id].index.position.set(coordinates.x, 48, coordinates.z);
+            var fetchedCoordinates = gameObjects.getBomberManRealCoordinates(data.x, data.y);
+            gameObjects.objects[data.id].index.mesh.position.x = this.previousCoordinates[data.id].x;
+            gameObjects.objects[data.id].index.mesh.position.z = this.previousCoordinates[data.id].z;
+            this.previousCoordinates[data.id].x = fetchedCoordinates.x;
+            this.previousCoordinates[data.id].z = fetchedCoordinates.z;
+            var vector = {
+                x: fetchedCoordinates.x - gameObjects.objects[data.id].index.mesh.position.x,
+                z: fetchedCoordinates.z - gameObjects.objects[data.id].index.mesh.position.z
+            };
+            vector.x = vector.x > 0 ? 1 : vector.x < 0 ? -1 : 0;
+            vector.z = vector.z > 0 ? 1 : vector.z < 0 ? -1 : 0;
+            if (vector.x != 0 || vector.z != 0) {
+                gameObjects.objects[data.id].index.move();
+            }
         }
         
     });
