@@ -6,3 +6,5 @@ Install:
 1. npm i
 
 2. grunt
+
+Working version available on http://tekhno-bomberman.tk/#main
