@@ -7,10 +7,12 @@ define(function (require) {
         var View = baseView.extend({
             template: tmpl,
             requireAuth: true,
+            cameraAdded: false,
             events: {
                 'click .change-avatar': function(e) {
                     this.$('.webcam__snapshot').fadeIn(600);
                     this.addCamera();
+                    this.cameraAdded = true;
                 },
                 'click .snapshot__button': function (e) {
                     this.takeSnapshot();
@@ -19,6 +21,7 @@ define(function (require) {
                     this.$('.webcam__snapshot').fadeOut(0);
                     this.$('#webcam-monitor').height(0);
                     this.removeCamera();
+                    this.cameraAdded = false;
                 }
             },
             initialize: function () {
@@ -29,10 +32,11 @@ define(function (require) {
                 this.$el.html(this.template(app.user.toJSON()));
             },
             hide: function () {
-                if (this.$('.webcam__snapshot').css('display') != 'none') {
+                if (this.$('.webcam__snapshot').css('display') != 'none' && this.cameraAdded) {
                     this.$('.webcam__snapshot').fadeOut(0);
                     this.$('#webcam-monitor').height(0);
                     this.removeCamera();
+                    this.cameraAdded = false;
                 }
                 baseView.prototype.hide.call(this);
             },
@@ -48,7 +52,7 @@ define(function (require) {
                     force_flash: false,
                     fps: 50
                 });
-                camera.attach( this.$('#webcam-monitor')[0]);
+                camera.attach(this.$('#webcam-monitor')[0]);
             },
             takeSnapshot: function () {
                 camera.snap( function(data_uri) {
@@ -58,7 +62,6 @@ define(function (require) {
             removeCamera : function () {
                 camera.reset();
             }
-
         });
 
         return new View();

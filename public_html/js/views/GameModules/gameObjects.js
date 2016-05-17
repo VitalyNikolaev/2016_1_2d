@@ -1,7 +1,5 @@
 define(function (require) {
     var THREE = require('three');
-    var jQuery = require('jquery');
-
     var objects = {
         scene: null,
         camera: null,
@@ -52,7 +50,11 @@ define(function (require) {
         },
         deleteObjectFromWorld: function (id) {
             if (this.objects[id]) {
-                this.scene.remove(this.objects[id].index);
+                if (this.objects[id].index.mesh) {
+                    this.scene.remove(this.objects[id].index.mesh);
+                } else {
+                    this.scene.remove(this.objects[id].index);
+                }
                 delete this.objects[id];
             } 
         },
