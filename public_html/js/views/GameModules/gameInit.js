@@ -45,7 +45,7 @@ define(function (require) {
 
         frame: function () {
             gameObjects.playersCharacter.sendDirectionWS();
-            gameObjects.playersCharacter.setFocus(gameObjects.playersCharacter.mesh , 950);
+            gameObjects.playersCharacter.setFocus(gameObjects.playersCharacter.mesh , gameObjects.playersCharacterLook);
             gameObjects.renderer.render(gameObjects.scene, gameObjects.camera);
         },
         dealloc: function () {

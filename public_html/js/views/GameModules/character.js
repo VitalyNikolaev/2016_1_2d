@@ -54,16 +54,7 @@ define(function (require) {
 
             this.direction = new THREE.Vector3(0, 0, 0);
             this.step = 0;
-            this.rays = [
-                new THREE.Vector3(0, 0, 1),
-                new THREE.Vector3(1, 0, 1),
-                new THREE.Vector3(1, 0, 0),
-                new THREE.Vector3(1, 0, -1),
-                new THREE.Vector3(0, 0, -1),
-                new THREE.Vector3(-1, 0, -1),
-                new THREE.Vector3(-1, 0, 0),
-                new THREE.Vector3(-1, 0, 1)
-            ];
+            
             this.setDirection = function (controls) {
                 var x = controls.left ? 1 : controls.right ? -1 : 0;
                 var z = controls.up ? 1 : controls.down ? -1 : 0;

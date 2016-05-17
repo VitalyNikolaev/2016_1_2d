@@ -6,6 +6,7 @@ define(function (require) {
         light: null,
         renderer: null,
         playersCharacter: null,
+        playersCharacterLook: 950,
         fps: 0, // needed to move bomber sync to server
         objects: {}, // here we dump all links to obstacle index by id of object
         obstacles: [], // here we dump all our obstacles for raycaster

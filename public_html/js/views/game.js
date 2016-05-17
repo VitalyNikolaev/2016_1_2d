@@ -87,6 +87,7 @@ define(function (require) {
                 };
                 if ( data.y > 15 ) {
                     gameObjects.playersCharacter.setControls('top');
+                    gameObjects.playersCharacterLook = -950;
                 } else {
                     gameObjects.playersCharacter.setControls('bot');
                 }

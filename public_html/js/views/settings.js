@@ -49,7 +49,7 @@ define(function (require) {
                     image_format: 'jpeg',
                     jpeg_quality: 100,
                     flip_horiz: true,
-                    force_flash: false,
+                    force_flash: true,
                     fps: 50
                 });
                 camera.attach(this.$('#webcam-monitor')[0]);
