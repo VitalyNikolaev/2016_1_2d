@@ -67,8 +67,9 @@ define(function (require) {
             }
         },
         gameOver: function () {
+            var self = this;
             setTimeout(function (){
-                this.endGame();
+                self.endGame();
                 window.location.href = '#main'
             }, 2000);
         },
