@@ -68,6 +68,7 @@ define(function (require) {
         },
         gameOver: function () {
             setTimeout(function (){
+                this.endGame();
                 window.location.href = '#main'
             }, 2000);
         },
@@ -85,11 +86,12 @@ define(function (require) {
                     z: gameObjects.objects[data.id].index.mesh.position.z
 
                 };
-                if ( data.y > 15 ) {
+                if (data.y > 15) {
                     gameObjects.playersCharacter.setControls('top');
                     gameObjects.playersCharacterLook = -950;
                 } else {
                     gameObjects.playersCharacter.setControls('bot');
+                    gameObjects.playersCharacterLook = 950;
                 }
             } else {
                 gameObjects.objects[data.id] = {

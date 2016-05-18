@@ -9,7 +9,6 @@ define(function (require) {
         playersCharacterLook: 950,
         fps: 0, // needed to move bomber sync to server
         objects: {}, // here we dump all links to obstacle index by id of object
-        obstacles: [], // here we dump all our obstacles for raycaster
         bombObj: null,
         worldObjects: {
             indestructible_crate: new THREE.MeshPhongMaterial({map: new THREE.TextureLoader().load('media/game/textures/grey_bricks2.jpg')}),

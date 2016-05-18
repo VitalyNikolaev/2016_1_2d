@@ -54,8 +54,8 @@ define(function (require) {
             gameObjects.light = undefined;
             gameObjects.renderer = undefined;
             gameObjects.playersCharacter = undefined;
-            gameObjects.obstacles = [];
             gameObjects.objects = {};
+            gameObjects.playersCharacterLook = 0;
         }
     };
 
