@@ -68,7 +68,7 @@ define(function (require) {
         },
         gameOver: function () {
             var self = this;
-            setTimeout(function (){
+            setTimeout(function () {
                 self.endGame();
                 window.location.href = '#main'
             }, 2000);

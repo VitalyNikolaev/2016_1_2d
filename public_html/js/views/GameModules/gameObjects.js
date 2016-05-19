@@ -50,7 +50,7 @@ define(function (require) {
         },
         deleteObjectFromWorld: function (id) {
             if (this.objects[id]) {
-                if (this.objects[id].index.mesh) {
+                if (this.objects[id].index.mesh != undefined) {
                     this.scene.remove(this.objects[id].index.mesh);
                 } else {
                     this.scene.remove(this.objects[id].index);
@@ -64,9 +64,9 @@ define(function (require) {
             var coordinates = this.getRealCoordinates(x,z);
             bomb.position.set(coordinates.x, 2, coordinates.z);
             var timerId = setInterval(function () {
-                bomb.scale.y *= 1.05;
-                bomb.scale.x *= 1.05;
-                bomb.scale.z *= 1.05;
+                bomb.scale.y *= 1.09;
+                bomb.scale.x *= 1.09;
+                bomb.scale.z *= 1.09;
             }, 500);
             setTimeout(function () {
                 clearInterval(timerId);
