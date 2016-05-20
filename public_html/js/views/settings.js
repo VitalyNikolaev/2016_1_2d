@@ -48,7 +48,7 @@ define(function (require) {
                     dest_height: 140,
                     image_format: 'jpeg',
                     jpeg_quality: 100,
-                    flip_horiz: true,
+                    flip_horiz: false,
                     force_flash: true,
                     fps: 50
                 });

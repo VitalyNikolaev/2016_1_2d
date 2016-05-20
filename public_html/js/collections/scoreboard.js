@@ -1,28 +1,25 @@
 define(function(require) {
-        var Backbone = require('backbone');
-        var underscore = require('underscore');
-        var scores = require('models/scores');
-        return Backbone.Collection.extend({
-            model: scores,
+    var Backbone = require('backbone');
+    var scores = require('models/scores');
+    var $ = require('jquery');
 
-            initialize: function() {
-                this.initFakeScores();
-            },
-
-            comparator: function(item) {
-                return -item.get('score');
-            },
-
-            initFakeScores: function() {
-                this.set([
-                    {name: 'Pasha', score: 200},
-                    {name: 'Sasha', score: 100},
-                    {name: 'Ed', score: 100},
-                    {name: 'Dima', score: 900},
-                    {name: 'Lex', score: 300},
-                    {name: 'max', score: 100500},
-                    {name: 'player', score: 100}
-                ]);
-            }
-        });
+    return Backbone.Collection.extend({
+        model: scores,
+        url: '/api/user/top10',
+        comparator: function(item) {
+            return -item.get('score');
+        },
+        initialize: function () {
+          this.fetchNewData();
+        },
+        fetchNewData: function () {
+            var self = this;
+            $.ajax({
+                url: '/api/user/top10',
+            }).done(function(data) {
+                self.set(data);
+                self.trigger('dataFetched')
+            });  
+        }
+    });
 });

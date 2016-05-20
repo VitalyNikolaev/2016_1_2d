@@ -207,7 +207,7 @@ html, body {
   font-size: 32px;
   line-height: 40px;
   transition: all 0.3s;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.9);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.9);
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
@@ -238,7 +238,7 @@ html, body {
   font-size: 32px;
   line-height: 40px;
   transition: all 0.3s;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.9);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.9);
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
@@ -246,3 +246,10 @@ html, body {
 
 .room__wrapper__btn-back:hover {
   background-color: #B71C1C; }
+
+.room__tutorial {
+  position: absolute;
+  left: 0;
+  height: 100%;
+  background-color: beige;
+  width: 350px; }
