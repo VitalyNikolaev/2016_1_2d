@@ -7,7 +7,9 @@ var require = {
         backbone: 'lib/backbone',
         three : 'lib/three.min',
         OBJLoader: 'lib/OBJLoader',
-        webcam : 'lib/webcam.min'
+        MTLLoader: 'lib/MTLLoader',
+        webcam : 'lib/webcam.min',
+        OrbitControls : 'lib/OrbitControls'
     },
     shim: {
         'backbone': {
@@ -27,8 +29,16 @@ var require = {
             deps: ['three'],
             exports: 'OBJLoader'
         },
+		'MTLLoader': {
+            deps: ['three'],
+            exports: 'MTLLoader'
+        },
         'webcam': {
             exports: 'webcam'
+        },
+        'OrbitControls': {
+			deps: ['three'],
+            exports: 'OrbitControls'
         }
       
     }
