@@ -1,8 +1,14 @@
 <fest:template xmlns:fest="http://fest.mail.ru">
     <div class="room">
         <div class="alert-box error" style="display: none"></div>
-        <div class="room__tutorial"></div>
-        <div class="room__chat"></div>
+        <div class="room__tutorial">
+            <img class="room__tutorial__keyboard" src="media/keyboard.png"></img>
+            <p class="room__tutorial__keyboard_text">Movement - <img  align="center" class="room__tutorial__keys" src="media/controls.png"></img></p>
+            <p class="room__tutorial__keyboard_text">Place Bomb - <img  align="center" class="room__tutorial__keys" src="media/space_key.png"></img></p>
+            <img class="room__tutorial__bomberman_logo" src="media/bomberman.png"></img>
+        </div>
+        <div class="room__chat">
+        </div>
         <div class="room__wrapper">
             <button class="room__wrapper__user-ready-btn">
                 Set Ready

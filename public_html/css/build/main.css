@@ -252,4 +252,28 @@ html, body {
   left: 0;
   height: 100%;
   background-color: beige;
-  width: 350px; }
+  width: 22%; }
+
+.room__tutorial__keyboard {
+  height: 200px;
+  margin-left: 35px; }
+
+.room__tutorial__keys {
+  height: 82px;
+  margin-left: 10px; }
+
+.room__tutorial__keyboard_text {
+  margin-left: 20px;
+  font-size: 30px; }
+
+.room__tutorial__bomberman_logo {
+  height: 250px; }
+
+.room__chat {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  height: 100%;
+  background-color: beige;
+  width: 22%; }

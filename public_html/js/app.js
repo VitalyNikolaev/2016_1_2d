@@ -3,10 +3,11 @@ define(
         var Backbone = require('backbone');
         var session = require('models/session');
         var user = require('models/user');
-        var scoreBoard = require('collections/scoreboard')
+        var scoreBoard = require('collections/scoreboard');
         
         var app = {
             session: new session(),
+            scoreboard: new scoreBoard(),
             user: new user(),
             host: 'localhost',
             gameReady: false,
@@ -17,7 +18,7 @@ define(
                 app.session.set('id', -1);
             },
             fetchNewScoreboard: function () {
-             scoreBoard.fetchNewScoreboard();   
+             this.scoreboard.fetchNewData();
             }
         };
         app.user.set('contentLoaded', false);

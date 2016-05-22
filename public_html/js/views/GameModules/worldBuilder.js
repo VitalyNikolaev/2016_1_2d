@@ -47,12 +47,7 @@ define(function (require) {
 
             this.walls[3].position.z = -1056;
 			
-			modelLoader.getModel('example_pkg', '64mm2', function(object) {object.rotation.y =  Math.PI; gameObjects.addPrefabToWorld(object, 5, 5, 5)});
-        },
-        getObstacles: function () {
-
-            return gameObjects.obstacles.concat(this.walls);
-
+			// modelLoader.getModel('example_pkg', '64mm2', function(object) {object.rotation.y =  Math.PI; gameObjects.addPrefabToWorld(object, 5, 5, 5)});
         },
         addSkybox: function () {
             var imagePrefix = "media/game/skybox/panorama/";
@@ -66,13 +61,13 @@ define(function (require) {
             var materialArray = [];
             for (var i = 0; i < 6; i++)
                 materialArray.push(new THREE.MeshBasicMaterial({
-                    map: THREE.ImageUtils.loadTexture( imagePrefix + directions[i] ),
+                    map: THREE.ImageUtils.loadTexture(imagePrefix + directions[i]),
                     side: THREE.BackSide
                 }));
-            var skyMaterial = new THREE.MeshFaceMaterial( materialArray );
+            var skyMaterial = new THREE.MeshFaceMaterial(materialArray);
 
-            var skyBox = new THREE.Mesh( skyGeometry, skyMaterial );
-            gameObjects.scene.add( skyBox );
+            var skyBox = new THREE.Mesh(skyGeometry, skyMaterial);
+            gameObjects.scene.add(skyBox);
         }
     };
     return World

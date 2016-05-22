@@ -32,18 +32,8 @@ define(function (require) {
 		addPrefabToWorld: function (model, id, x, z) { // needed to place objects by x, y and its id
             var coordinates = this.getRealCoordinates(x, z);
             model.position.set(coordinates.x, 32, coordinates.z);
-            this.obstacles.push(model);
             this.objects[id] = {
-                index: this.obstacles.indexOf(model)
-            };
-            this.scene.add(model);
-        },
-		addPrefabToWorld: function (model, id, x, z) { // needed to place objects by x, y and its id
-            var coordinates = this.getRealCoordinates(x, z);
-            model.position.set(coordinates.x, 32, coordinates.z);
-            this.obstacles.push(model);
-            this.objects[id] = {
-                index: this.obstacles.indexOf(model)
+                index: model
             };
             this.scene.add(model);
         },
@@ -54,7 +44,6 @@ define(function (require) {
             this.objects[id] = {
                 index: realObj
             };
-            realObj.name = id;
             this.scene.add(realObj);
         },
         addReyToWorldWithNoCollisions: function (type, obj_geometry, id, x, z) { // needed to place objects by x, y and its id
@@ -64,7 +53,6 @@ define(function (require) {
             this.objects[id] = {
                 index: realObj
             };
-            realObj.name = id;
             this.scene.add(realObj);
         },
         deleteObjectFromWorld: function (id) {
@@ -91,10 +79,12 @@ define(function (require) {
                 clearInterval(timerId);
                 self.scene.remove(bomb);
             }, 2000);
-            this.objects[id] = bomb;
+            this.objects[id] = {
+                index: bomb
+            };
             this.scene.add(bomb);
         }
-};
+    };
     
     return objects;
 

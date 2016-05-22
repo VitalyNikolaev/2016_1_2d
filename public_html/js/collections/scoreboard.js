@@ -15,7 +15,7 @@ define(function(require) {
         fetchNewData: function () {
             var self = this;
             $.ajax({
-                url: '/api/user/top10',
+                url: '/api/user/top10'
             }).done(function(data) {
                 self.set(data);
                 self.trigger('dataFetched')

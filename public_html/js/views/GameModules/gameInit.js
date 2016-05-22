@@ -19,7 +19,6 @@ define(function (require) {
             gameObjects.scene.add(gameObjects.light1);
             gameObjects.light2 = new THREE.DirectionalLight(0xffffff, 1);
             gameObjects.renderer = new THREE.WebGLRenderer();
-			gameObjects.cameraControls = new THREE.OrbitControls(gameObjects.camera, gameObjects.renderer.domElement);
             
             Bomb.init();
             World.init();

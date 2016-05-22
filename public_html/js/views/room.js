@@ -52,12 +52,13 @@ define(function (require) {
             ws.startConnection();
             this.pingTimer = setInterval(function () {
                 ws.sendPing()
-            }, 10000);
+            }, 15000);
         },
         hide: function () {
-            if(this.pingTimer != null){
+            if(this.pingTimer != null) {
                 clearInterval(this.pingTimer)
             }
+            this.currentPlayer = null;
             $('.room__wrapper__user-ready-btn')
                 .html('Set Ready')
                 .css('background-color', '#039BE5');
@@ -82,7 +83,7 @@ define(function (require) {
             user.remove();
         },
         checkContentLoadedStatus: function (data) {
-          if (this.currentPlayer.get('isReady')) {
+          if (this.currentPlayer !== null && this.currentPlayer.get('isReady')) {
               ws.sendReady(true, app.contentLoaded);
           }
         },
