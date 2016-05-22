@@ -5,7 +5,6 @@ define(function (require) {
     var World = require('views/GameModules/worldBuilder');
     var Bomb = require('views/GameModules/bomb');
     var app = require('app');
-	var orbitControls = require('OrbitControls');
     
     var BasicScene = {
         init: function () {
@@ -47,9 +46,7 @@ define(function (require) {
 
         frame: function () {
             gameObjects.playersCharacter.motion();
-            //gameObjects.playersCharacter.setFocus(gameObjects.playersCharacter.mesh , 950);
-			gameObjects.cameraControls.target = gameObjects.playersCharacter.mesh.position;
-			gameObjects.cameraControls.update();
+            gameObjects.playersCharacter.setFocus(gameObjects.playersCharacter.mesh , 950);
             gameObjects.renderer.render(gameObjects.scene, gameObjects.camera);
 			jQuery('#game').focus();
         },
