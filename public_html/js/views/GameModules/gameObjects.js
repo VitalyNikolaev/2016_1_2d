@@ -3,6 +3,7 @@ define(function (require) {
     var objects = {
         scene: null,
         camera: null,
+		cameraControls: null,
         light: null,
         renderer: null,
         playersCharacter: null,
@@ -27,6 +28,24 @@ define(function (require) {
                 x: x * 64 - 1024,
                 z: z * 64 - 1024
             }
+        },
+		addPrefabToWorld: function (model, id, x, z) { // needed to place objects by x, y and its id
+            var coordinates = this.getRealCoordinates(x, z);
+            model.position.set(coordinates.x, 32, coordinates.z);
+            this.obstacles.push(model);
+            this.objects[id] = {
+                index: this.obstacles.indexOf(model)
+            };
+            this.scene.add(model);
+        },
+		addPrefabToWorld: function (model, id, x, z) { // needed to place objects by x, y and its id
+            var coordinates = this.getRealCoordinates(x, z);
+            model.position.set(coordinates.x, 32, coordinates.z);
+            this.obstacles.push(model);
+            this.objects[id] = {
+                index: this.obstacles.indexOf(model)
+            };
+            this.scene.add(model);
         },
         addObjectToWorldWithNoCollisions: function (type, obj_geometry, id, x, z) { // needed to place objects by x, y and its id
             var realObj = new THREE.Mesh(obj_geometry, type);

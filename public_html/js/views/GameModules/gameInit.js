@@ -19,6 +19,7 @@ define(function (require) {
             gameObjects.scene.add(gameObjects.light1);
             gameObjects.light2 = new THREE.DirectionalLight(0xffffff, 1);
             gameObjects.renderer = new THREE.WebGLRenderer();
+			gameObjects.cameraControls = new THREE.OrbitControls(gameObjects.camera, gameObjects.renderer.domElement);
             
             Bomb.init();
             World.init();
@@ -47,10 +48,12 @@ define(function (require) {
             gameObjects.playersCharacter.sendDirectionWS();
             gameObjects.playersCharacter.setFocus(gameObjects.playersCharacter.mesh , gameObjects.playersCharacterLook);
             gameObjects.renderer.render(gameObjects.scene, gameObjects.camera);
+			jQuery('#game').focus();
         },
         dealloc: function () {
             gameObjects.scene = undefined;
             gameObjects.camera = undefined;
+            gameObjects.cameraControls = undefined;
             gameObjects.light = undefined;
             gameObjects.renderer = undefined;
             gameObjects.playersCharacter = undefined;
