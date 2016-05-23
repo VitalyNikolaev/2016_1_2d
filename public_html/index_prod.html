@@ -12,12 +12,14 @@
     </div>
     <div id="page">
     </div>
-    <script src="js/config_debug.js"></script>
-    <script data-main="main" src="js/lib/require.js"></script>
+    <script src="js/build/build.min.js"></script>
+    <script>
+        require(['main']);
+    </script>
     <script>
         (function () {
             var start = new Date().getTime();
-            setTimeout(function () {
+            window.onload = function () {
                 var criticalTime = 500;
                 var fadeTime = criticalTime;
                 if (new Date().getTime() - start > criticalTime) {
@@ -25,7 +27,7 @@
                 }
                 $(".spinner").delay(fadeTime).fadeOut('fast');
                 $(".preloader").delay(fadeTime + 400).fadeOut('fast');
-            }, 800);
+            };
         })();
     </script>
 </body>
