@@ -1,4 +1,4 @@
-var require = {
+require.config({
     urlArgs: '_=' + (new Date()).getTime(),
     baseUrl: 'js',
     paths: {
@@ -42,4 +42,5 @@ var require = {
         }
       
     }
-};
+});
+require(['main']);

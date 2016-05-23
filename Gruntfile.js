@@ -55,6 +55,7 @@ module.exports = function (grunt) {
                 }
             },
             sass: {
+                style: "compressed",
                 files: 'blocks/**/*.scss',
                 tasks: ['sass']
             },
@@ -93,6 +94,7 @@ module.exports = function (grunt) {
             build: {
                 separator: ';\n',
                 src: [
+                    'public_html/js/lib/almond.js',
                     'public_html/js/build/build-requirejs.js'
                 ],
                 dest: 'public_html/js/build/build-concat.js'
@@ -102,17 +104,6 @@ module.exports = function (grunt) {
             build: {
                 files: {
                     'public_html/js/build/build.min.js': ['public_html/js/build/build-concat.js']
-                }
-            }
-        },
-        cssmin: {
-            options: {
-                shorthandCompacting: false,
-                roundingPrecision: -1
-            },
-            target: {
-                files: {
-                    'public_html/css/build/main.css': ['public_html/css/build/style.css']
                 }
             }
         }
@@ -132,6 +123,8 @@ module.exports = function (grunt) {
     grunt.registerTask('test', ['qunit:all']);
     grunt.registerTask('default', ['concurrent']);
     grunt.registerTask('compile', ['sass']);
+    grunt.registerTask('build', ['fest', 'requirejs:build', 'concat:build', 'uglify:build']
+    );
 
 
 };

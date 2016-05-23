@@ -12,8 +12,11 @@
     </div>
     <div id="page">
     </div>
-    <script src="js/config.js"></script>
-    <script data-main="index" src="js/lib/require.js"></script>
+    <script src="js/build/build.min.js"></script>
+    <script>
+        require(['main'], function(){
+        });
+    </script>
     <script>
         (function () {
             var start = new Date().getTime();
