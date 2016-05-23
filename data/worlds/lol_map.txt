@@ -1,6 +1,6 @@
 v1.0
 LoL World
-.###dddd#dddd######dddd#dddd###.
+S###dddd#dddd######dddd#dddd###S
 .............dddddd.............
 ..#.#.#.#.#.#.#dd#.#.#.#.#.#.#.#
 ..ddddddddddddd..ddddddddddddd.d
@@ -31,4 +31,4 @@ dd#.#.#.#.#.#.#dd#.#.#.#.#.#.#.#
 d.ddddddddddddd..ddddddddddddd..
 #.#.#.#.#.#.#.#dd#.#.#.#.#.#.#..
 .............dddddd.............
-.###dddd#dddd######dddd#dddd###.
+S###dddd#dddd######dddd#dddd###S
