@@ -7,9 +7,26 @@
     <link rel="stylesheet" href="/css/build/main.css" />
 </head>
 <body>
+    <div class="preloader">
+        <img class="spinner" src="/media/preloader.gif">
+    </div>
     <div id="page">
     </div>
     <script src="js/config.js"></script>
     <script data-main="index" src="js/lib/require.js"></script>
+    <script>
+        (function () {
+            var start = new Date().getTime();
+            window.onload = function () {
+                var criticalTime = 500;
+                var fadeTime = criticalTime;
+                if (new Date().getTime() - start > criticalTime) {
+                    fadeTime = 0;
+                }
+                $(".spinner").delay(fadeTime).fadeOut('fast');
+                $(".preloader").delay(fadeTime + 400).fadeOut('fast');
+            };
+        })();
+    </script>
 </body>
 </html>
