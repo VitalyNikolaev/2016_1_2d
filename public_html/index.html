@@ -17,7 +17,7 @@
     <script>
         (function () {
             var start = new Date().getTime();
-            setTimeout(function () {
+            window.onload = function () {
                 var criticalTime = 500;
                 var fadeTime = criticalTime;
                 if (new Date().getTime() - start > criticalTime) {
@@ -25,7 +25,7 @@
                 }
                 $(".spinner").delay(fadeTime).fadeOut('fast');
                 $(".preloader").delay(fadeTime + 400).fadeOut('fast');
-            }, 800);
+            };
         })();
     </script>
 </body>
