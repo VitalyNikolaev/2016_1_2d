@@ -1,5 +1,5 @@
 v1.0
-REPORT AS A BUG!
+dynamic World
 ................................
 ................................
 ................................
@@ -32,16 +32,3 @@ REPORT AS A BUG!
 ................................
 ................................
 ................................
-
-d — destructible wall
-# — undestructible wall
-S — spawn
-. — empty space
-E — BONUS_DECBOMBFUSE — unused
-P — BONUS_DECBOMBSPAWN — less delay between bombs spawn
-R — BONUS_INCMAXRANGE — increases bomb range by one
-H — BONUS_HEAL — unused
-M — BONUS_MOREBOMBS — allows to spawn one more bomb
-U — BONUS_INCMAXHP — bugged
-F — BONUS_INCSPEED — allows to move faster
-Others are treated like empty space
