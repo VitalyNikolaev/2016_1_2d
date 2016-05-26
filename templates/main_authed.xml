@@ -25,6 +25,8 @@
                 </button></a>
             </div>
         </div>
+        <div class="alert-box error" style="display: none">
+        </div>
     </div>
 
 </fest:template>

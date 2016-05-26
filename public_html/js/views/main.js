@@ -20,6 +20,7 @@ define(function (require) {
             initialize: function () {
                 this.render();
                 this.listenTo(app.Events, "userAuthed", this.reloadViewWithAuthTemplate);
+                this.listenTo(app.Events, "showError", this.showErrorMessage);
 
             },
             reloadViewWithAuthTemplate: function() {
@@ -34,6 +35,11 @@ define(function (require) {
             },
             render: function () {
                 this.$el.html(this.template(app.user.toJSON()));
+            },
+            showErrorMessage: function (msg) {
+                this.$('.alert-box.error').html('Error: ' + msg).fadeIn(800,function() {
+                }).fadeOut(2200);
+
             }
         });
 

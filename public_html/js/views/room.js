@@ -66,9 +66,7 @@ define(function (require) {
         },
         showErrorMessage: function (msg) {
             this.$('.alert-box.error').html('Error: ' + msg).fadeIn(400,function(){
-                $('#sign-in').prop("disabled", false);
             }).fadeOut(2200);
-
         },
         addUser: function(userModel) {
             var playerView = new roomPlayer({'model': userModel});
@@ -81,6 +79,10 @@ define(function (require) {
         },
         removeUser: function(user) {
             user.remove();
+            if(user.model == this.currentPlayer) {
+                window.location.href = '#main';
+                app.Events.trigger('showError','You was kicked for being afk');
+            }
         },
         checkContentLoadedStatus: function (data) {
           if (this.currentPlayer !== null && this.currentPlayer.get('isReady')) {
