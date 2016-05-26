@@ -10,6 +10,7 @@ define(
             scoreboard: new scoreBoard(),
             user: new user(),
             host: 'localhost',
+            avatarSrc: 'https://api.adorable.io/avatars/130/random',
             gameReady: false,
             createNewSession : function () {
                 app.session = new session();
@@ -17,12 +18,18 @@ define(
                 app.user.set('contentLoaded', false);
                 app.session.set('id', -1);
             },
+            fetchUserAvatarOrGetRandom: function(){
+                if (app.user.get('userpic_path') !== null) {
+                    app.avatarSrc = app.user.userpic_path
+                } else {
+                    app.avatarSrc = 'https://api.adorable.io/avatars/130/' + app.user.get('login')
+                }
+            },
             fetchNewScoreboard: function () {
              this.scoreboard.fetchNewData();
             }
         };
         app.user.set('contentLoaded', false);
-
         app.session.fetch({
             success: function() {
                 app.session.set('authed', true);
@@ -38,8 +45,10 @@ define(
             }
         });
 
+
         app.Events = new _.extend({}, Backbone.Events);
         app.wsEvents = new _.extend({}, Backbone.Events);
+        
 
         return app
 });

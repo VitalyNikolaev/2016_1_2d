@@ -30,6 +30,7 @@ define(function (require) {
             },
             render: function () {
                 this.$el.html(this.template(app.user.toJSON()));
+                this.$(".logo--avatar").attr("src", app.avatarSrc);
             },
             hide: function () {
                 if (this.$('.webcam__snapshot').css('display') != 'none' && this.cameraAdded) {

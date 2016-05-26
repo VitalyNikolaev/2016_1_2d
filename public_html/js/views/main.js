@@ -23,8 +23,10 @@ define(function (require) {
 
             },
             reloadViewWithAuthTemplate: function() {
+                app.fetchUserAvatarOrGetRandom();
                 this.template = require('tmpl/main_authed');
                 this.render();
+                this.$(".logo--avatar").attr("src", app.avatarSrc);
             },
             reloadView: function() {
                 this.template = tmpl;
