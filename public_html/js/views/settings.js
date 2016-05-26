@@ -1,3 +1,4 @@
+//DEPRECATED
 define(function (require) {
         var tmpl = require('tmpl/settings');
         var baseView = require('views/baseView');

@@ -4,7 +4,6 @@ define(function (require) {
     var gameObjects = require('views/GameModules/gameObjects');
     var World = require('views/GameModules/worldBuilder');
     var Bomb = require('views/GameModules/bomb');
-    var app = require('app');
     
     var BasicScene = {
         init: function () {
@@ -27,7 +26,6 @@ define(function (require) {
             jQuery(window).resize(function () {
                 BasicScene.setAspect();
             });
-            app.user.set('contentLoaded', true);
         },
         addToDOM: function () {
             this.container = $('#game-canvas');

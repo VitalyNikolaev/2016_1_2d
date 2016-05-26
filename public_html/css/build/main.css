@@ -89,6 +89,12 @@ html, body {
       color: #fdf5fd; }
     .menu__btn_back:hover {
       background-color: #B71C1C !important; }
+    .menu__btn_back_table {
+      margin-top: 45px;
+      background: #D32F2F;
+      color: #fdf5fd; }
+    .menu__btn_back_table:hover {
+      background-color: #B71C1C !important; }
     .menu__btn_primary {
       background-color: #FF9800; }
     .menu__btn_primary:hover {
@@ -118,7 +124,7 @@ html, body {
   .scoreboard__name {
     width: 80%; }
   .scoreboard__pole {
-    height: 55px; }
+    height: 65px; }
   .scoreboard__rating {
     width: 20%;
     text-align: center; }
@@ -298,3 +304,13 @@ html, body {
   height: 150px;
   margin: -75px 0 0 -75px;
   z-index: 10; }
+
+.about__name {
+  padding-top: 10px;
+  font-size: 25px;
+  width: 80%; }
+
+.about__status {
+  width: 20%;
+  font-size: 25px;
+  text-align: center; }

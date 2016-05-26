@@ -24,7 +24,7 @@
                             </tr>
                         </fest:for>
                     </table>
-                    <a href="#main"><button class="menu__btn  menu__btn_back">
+                    <a href="#main"><button class="menu__btn  menu__btn_back_table">
                         Back
                     </button></a>
                 </div>

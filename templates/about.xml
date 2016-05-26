@@ -1,0 +1,49 @@
+<fest:template xmlns:fest="http://fest.mail.ru">
+    <div id="about" class="wrap">
+        <div class="wrap__layout">
+            <div class="logo">
+                <img src="/media/bomb_logo.png"></img>
+            </div>
+            <div class="menu">
+                <div class="menu__title">
+                    Developers
+                </div>
+                <table class="scoreboard">
+                    <tr class="scoreboard__pole">
+                        <td class="scoreboard__name scoreboard__title" >Name</td>
+                        <td class="scoreboard__rating scoreboard__title" >Position</td>
+                    </tr>
+                        <tr>
+                            <td class="about__name">
+                               Nikolaev Vitally
+                            </td>
+                            <td class="about__status">
+                                Frontend
+                            </td>
+                        </tr>
+                    <tr>
+                        <td class="about__name">
+                            Maminov Pavel
+                        </td>
+                        <td class="about__status">
+                            Backend
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="about__name">
+                           Maminov Oleg
+                        </td>
+                        <td class="about__status">
+                            3D Modeller
+                        </td>
+                    </tr>
+                </table>
+                <a href="#main"><button class="menu__btn  menu__btn_back_table">
+                    Back
+                </button></a>
+            </div>
+        </div>
+    </div>
+</fest:template>
+
+

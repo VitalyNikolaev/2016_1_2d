@@ -26,7 +26,7 @@ define(
                 }
             },
             fetchNewScoreboard: function () {
-             this.scoreboard.fetchNewData();
+                this.scoreboard.fetchNewData();
             }
         };
         app.user.set('contentLoaded', false);

@@ -33,7 +33,7 @@ define(function(require) {
             var data = {
                 "type": "user_state_changed",
                 "isReady": readyStatus,
-                "contentLoaded": contentStatus
+                "contentLoaded": true
             };
             this.socket.send(JSON.stringify(data));
         },

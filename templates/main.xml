@@ -14,6 +14,9 @@
                 <a href="#scoreboard"><button class="menu__btn">
                     Scoreboard
                 </button></a>
+                <a href="#about"><button class="menu__btn">
+                    About
+                </button></a>
             </div>
         </div>
     </div>

@@ -62,14 +62,13 @@ define(function (require) {
                 gameInit.dealloc();
                 $('canvas').remove();
                 app.gameReady = false;
-                app.user.set('contentLoaded', false);
                 gameInit.init();
             }
         },
         gameOver: function () {
             var self = this;
+            app.fetchNewScoreboard();
             setTimeout(function () {
-                app.fetchNewScoreboard();
                 self.endGame();
                 window.location.href = '#main'
             }, 2000);
@@ -145,6 +144,10 @@ define(function (require) {
             }
             if (data.object_type === 'bomb_ray') {
                 gameObjects.addReyToWorldWithNoCollisions(gameObjects.worldObjects.explosion_rey, new THREE.CubeGeometry(64, 64, 64), data.id, data.x, data.y);
+                return
+            }
+            if (data.object_type === 'bonus_drop_bomb_on_death') {
+                gameObjects.addReyToWorldWithNoCollisions(gameObjects.worldObjects.drop_bomb_on_death, new THREE.CubeGeometry(64, 64, 64), data.id, data.x, data.y);
                 return
             }
             if (data.object_type === 'bomb') {
