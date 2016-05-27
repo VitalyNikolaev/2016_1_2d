@@ -4,6 +4,8 @@ define(function (require) {
     var gameObjects = require('views/GameModules/gameObjects');
     var World = require('views/GameModules/worldBuilder');
     var Bomb = require('views/GameModules/bomb');
+    var TileFactory = require('views/GameModules/tileFactory');
+    
     
     var BasicScene = {
         init: function () {
@@ -21,6 +23,8 @@ define(function (require) {
             
             Bomb.init();
             World.init();
+            TileFactory.init();
+            
             gameObjects.scene.add(World.mesh);
 
             jQuery(window).resize(function () {

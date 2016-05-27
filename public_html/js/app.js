@@ -50,5 +50,5 @@ define(
         app.wsEvents = new _.extend({}, Backbone.Events);
         
 
-        return app
+        return app;
 });

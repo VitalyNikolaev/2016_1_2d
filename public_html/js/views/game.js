@@ -7,7 +7,7 @@ define(function (require) {
     var THREE = require('three');
     var Character = require('views/GameModules/character');
     var ws = require('utils/ws');
-	var tileFactory = require('utils/tileFactory');
+	var tileFactory = require('views/GameModules/tileFactory');
 
     var View = baseView.extend({
         template: tmpl,

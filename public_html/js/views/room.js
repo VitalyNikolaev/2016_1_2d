@@ -5,6 +5,7 @@ define(function (require) {
     var ws = require('utils/ws');
     var roomCollection = require('collections/room');
     var roomPlayer = require('views/room-player');
+    var gameInit = require('views/GameModules/gameInit');
    
     var View = baseView.extend({
         template: tmpl,
@@ -49,6 +50,8 @@ define(function (require) {
             
         },
         show: function () {
+            // gameInit.dealloc();
+            // gameInit.init(); 
             baseView.prototype.show.call(this);
             ws.startConnection();
             this.pingTimer = setInterval(function () {

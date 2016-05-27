@@ -11,6 +11,7 @@ define(function (require) {
         fps: 0, // needed to move bomber sync to server
         objects: {}, // here we dump all links to obstacle index by id of object
         bombObj: null,
+        prefabsObjects: {},
         worldObjects: {
             indestructible_crate: new THREE.MeshPhongMaterial({map: new THREE.TextureLoader().load('media/game/textures/grey_bricks2.jpg')}),
             destructible_crate: new THREE.MeshPhongMaterial({map: new THREE.TextureLoader().load('media/game/textures/destruct_crate.gif')}),
