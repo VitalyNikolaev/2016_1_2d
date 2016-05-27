@@ -7,6 +7,7 @@ define(function (require) {
     var THREE = require('three');
     var Character = require('views/GameModules/character');
     var ws = require('utils/ws');
+	var tileFactory = require('utils/tileFactory');
 
     var View = baseView.extend({
         template: tmpl,
@@ -115,7 +116,7 @@ define(function (require) {
                 return
             }
             if (data.object_type === 'undestructible_wall') {
-                gameObjects.addObjectToWorldWithNoCollisions(gameObjects.worldObjects.indestructible_crate, new THREE.CubeGeometry(64, 64, 64), data.id, data.x, data.y);
+                tileFactory.spawnRandomUndestructibleWallAt(data.id, data.x, data.y);
                 return
             }
             if (data.object_type === 'bonus_increase_bomb_range') {

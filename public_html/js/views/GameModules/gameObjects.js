@@ -32,7 +32,7 @@ define(function (require) {
         },
 		addPrefabToWorld: function (model, id, x, z) { // needed to place objects by x, y and its id
             var coordinates = this.getRealCoordinates(x, z);
-            model.position.set(coordinates.x, 32, coordinates.z);
+            model.position.set(coordinates.x, 0, coordinates.z);
             this.objects[id] = {
                 index: model
             };
