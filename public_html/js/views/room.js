@@ -72,7 +72,7 @@ define(function (require) {
         addUser: function(userModel) {
             console.log(userModel);
             var playerView = new roomPlayer({'model': userModel});
-            this.$('.room').append(playerView.el);
+            this.$('.room__players-wrapper').append(playerView.el);
             if (userModel.get('id') === app.user.get('id')) {
                 this.currentPlayer = userModel;
                 this.listenTo(app.user, "change:contentLoaded", this.checkContentLoadedStatus);
@@ -96,7 +96,6 @@ define(function (require) {
             this.collection.destroyAllModels();
             window.location.href = '#game';
         }
-       
     });
     return new View();
 

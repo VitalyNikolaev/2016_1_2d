@@ -182,8 +182,8 @@ html, body {
 .room__profile {
   float: left;
   width: 200px;
-  margin-left: 190px;
-  margin-top: 15px; }
+  margin-left: 100px;
+  margin-top: 25px; }
 
 .room__profile_status {
   width: 130px;
@@ -230,6 +230,12 @@ html, body {
 
 .room__profile-wrapper {
   height: 140px; }
+
+.room__players-wrapper {
+  position: absolute;
+  height: 100%;
+  margin-left: 130px;
+  width: 50%; }
 
 .room__wrapper__btn-back {
   background: #D32F2F;
