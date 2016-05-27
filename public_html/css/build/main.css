@@ -177,7 +177,6 @@ html, body {
   display: none; }
 
 .room {
-  width: 1000px;
   margin-left: 15%; }
 
 .room__profile {
@@ -258,7 +257,7 @@ html, body {
   left: 0;
   height: 100%;
   background-color: beige;
-  width: 22%; }
+  width: 25%; }
 
 .room__tutorial__keyboard {
   height: 200px;
@@ -282,7 +281,7 @@ html, body {
   right: 0;
   height: 100%;
   background-color: beige;
-  width: 22%; }
+  width: 25%; }
 
 .preloader {
   height: 100%;

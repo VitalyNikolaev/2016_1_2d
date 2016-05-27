@@ -35,6 +35,8 @@ define(
                 if (Backbone.history.getFragment() === 'game') {
                     if (app.gameReady) {
                         view.show();
+                    } else {
+                        this.navigate('#main', {trigger: true});
                     }
                 } else {
                     view.show();
