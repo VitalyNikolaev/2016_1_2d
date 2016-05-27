@@ -33,6 +33,7 @@ define(function (require) {
                 }
             },
             'click .room__wrapper__btn-back': function (e) {
+                this.currentPlayer = null;
                 if(ws.socket.readyState != 3) {
                     ws.closeConnection();
                     clearInterval(this.pingTimer);
@@ -69,9 +70,10 @@ define(function (require) {
             }).fadeOut(2200);
         },
         addUser: function(userModel) {
+            console.log(userModel);
             var playerView = new roomPlayer({'model': userModel});
             this.$('.room').append(playerView.el);
-            if(userModel.get('id') === app.user.get('id')) {
+            if (userModel.get('id') === app.user.get('id')) {
                 this.currentPlayer = userModel;
                 this.listenTo(app.user, "change:contentLoaded", this.checkContentLoadedStatus);
             }
@@ -79,9 +81,9 @@ define(function (require) {
         },
         removeUser: function(user) {
             user.remove();
-            if(user.model == this.currentPlayer) {
+            if (user.model == this.currentPlayer) {
                 window.location.href = '#main';
-                app.Events.trigger('showError','You was kicked for being afk');
+                app.Events.trigger('showError','You was kicked for being AFK');
             }
         },
         checkContentLoadedStatus: function (data) {

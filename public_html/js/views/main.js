@@ -38,8 +38,7 @@ define(function (require) {
             },
             showErrorMessage: function (msg) {
                 this.$('.alert-box.error').html('Error: ' + msg).fadeIn(800,function() {
-                }).fadeOut(2200);
-
+                }).fadeOut(3200);
             }
         });
 

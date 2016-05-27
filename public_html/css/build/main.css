@@ -184,16 +184,16 @@ html, body {
   float: left;
   width: 200px;
   margin-left: 190px;
-  margin-top: 50px; }
+  margin-top: 15px; }
 
 .room__profile_status {
   width: 130px;
-  margin: 20px 30px 20px 30px; }
+  margin: 5px 30px 20px 30px; }
 
 .text {
   font-size: 30px;
   position: relative;
-  left: 30%; }
+  left: 35%; }
 
 .room__wrapper {
   width: 20%;
@@ -221,7 +221,7 @@ html, body {
 
 .room__profile_current-user-ready-button,
 .room__profile_users-ready-button {
-  top: 20px;
+  top: 5px;
   position: relative;
   font-size: 25px;
   width: 100%;

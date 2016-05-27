@@ -48,6 +48,7 @@ define(function (require) {
             this.scene.add(realObj);
         },
         addReyToWorldWithNoCollisions: function (type, obj_geometry, id, x, z) { // needed to place objects by x, y and its id
+            var self = this;
             var realObj = new THREE.Mesh(obj_geometry, type);
             var coordinates = this.getRealCoordinates(x, z);
             realObj.position.set(coordinates.x, 32, coordinates.z);
@@ -55,6 +56,9 @@ define(function (require) {
                 index: realObj
             };
             this.scene.add(realObj);
+            setTimeout(function () {
+               self.deleteObjectFromWorld(id);
+            }, 1050);
         },
         deleteObjectFromWorld: function (id) {
             if (this.objects[id]) {
@@ -78,15 +82,12 @@ define(function (require) {
             }, 500);
             setTimeout(function () {
                 clearInterval(timerId);
-                self.scene.remove(bomb);
-            }, 2000);
+            }, 2100);
             this.objects[id] = {
                 index: bomb
             };
             this.scene.add(bomb);
         }
     };
-    
     return objects;
-
 });
