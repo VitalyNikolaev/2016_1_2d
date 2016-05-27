@@ -28,20 +28,18 @@ define(function(require) {
         init: function () {
             modelLoader.getModel('example_pkg', '1m3Cube', function(object) {
                 object.scale.set(0.064, 0.064, 0.064);
-                gameObjects.prefabsObjects['1m3Cube'] = object;
+                gameObjects.prefabsObjects['indestructibleCube01'] = object;
             });
         },
         
-		spawnRandomUndestructibleWallAt: function(id, x, y) {
+		spawnRandomIndestructibleWallAt: function(id, x, y) {
 			var number = randomInt(undestructibleWallsCount);
 			if (number == 0) {
-                gameObjects.addPrefabToWorld(randomRotation(gameObjects.prefabsObjects['1m3Cube'].clone()), id, x, y);
+                gameObjects.addPrefabToWorld(randomRotation(gameObjects.prefabsObjects['indestructibleCube01'].clone()), id, x, y);
             } else {
                 gameObjects.addObjectToWorldWithNoCollisions(gameObjects.worldObjects.indestructible_crate, new THREE.CubeGeometry(64, 64, 64), id, x, y);
             }
-        },
-		
-		
+        }
 	};
 	
     return tileFactory;

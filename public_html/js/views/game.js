@@ -18,6 +18,7 @@ define(function (require) {
         initialize: function () {
             this.render();
             gameInit.init();
+            this.listenTo(app.Events, "needToReloadGame", this.deallocGame);
             this.listenTo(app.wsEvents, "object_spawned", this.addObject);
             this.listenTo(app.wsEvents, "bomberman_spawned", this.spawnBomberman);
             this.listenTo(app.wsEvents, "object_destroyed", this.destroyObject);
@@ -52,9 +53,18 @@ define(function (require) {
             }
             animate();  
         },
+        deallocGame: function () {
+            if (ws.socket.readyState != 3) {
+                ws.closeConnection();
+                clearInterval(this.pingTimer);
+            }
+            gameInit.dealloc();
+            app.gameReady = false;
+            gameInit.init();
+        },
         endGame: function () {
             if (this.gameStartedId != null) {
-                if(ws.socket.readyState != 3) {
+                if (ws.socket.readyState != 3) {
                     ws.closeConnection();
                     clearInterval(this.pingTimer);
                 }
@@ -116,7 +126,7 @@ define(function (require) {
                 return
             }
             if (data.object_type === 'undestructible_wall') {
-                tileFactory.spawnRandomUndestructibleWallAt(data.id, data.x, data.y);
+                tileFactory.spawnRandomIndestructibleWallAt(data.id, data.x, data.y);
                 return
             }
             if (data.object_type === 'bonus_increase_bomb_range') {
@@ -148,7 +158,7 @@ define(function (require) {
                 return
             }
             if (data.object_type === 'bonus_drop_bomb_on_death') {
-                gameObjects.addReyToWorldWithNoCollisions(gameObjects.worldObjects.drop_bomb_on_death, new THREE.CubeGeometry(64, 64, 64), data.id, data.x, data.y);
+                gameObjects.addObjectToWorldWithNoCollisions(gameObjects.worldObjects.drop_bomb_on_death, new THREE.CubeGeometry(64, 64, 64), data.id, data.x, data.y);
                 return
             }
             if (data.object_type === 'bomb') {
@@ -176,7 +186,6 @@ define(function (require) {
                 gameObjects.objects[data.id].index.move();
             }
         }
-        
     });
     return new View();
 

@@ -5,7 +5,6 @@ define(function (require) {
     var ws = require('utils/ws');
     var roomCollection = require('collections/room');
     var roomPlayer = require('views/room-player');
-    var gameInit = require('views/GameModules/gameInit');
    
     var View = baseView.extend({
         template: tmpl,
@@ -50,8 +49,6 @@ define(function (require) {
             
         },
         show: function () {
-            // gameInit.dealloc();
-            // gameInit.init(); 
             baseView.prototype.show.call(this);
             ws.startConnection();
             this.pingTimer = setInterval(function () {
@@ -66,6 +63,7 @@ define(function (require) {
             $('.room__wrapper__user-ready-btn')
                 .html('Set Ready')
                 .css('background-color', '#039BE5');
+            this.collection.destroyAllModels();
             baseView.prototype.hide.call(this);
         },
         showErrorMessage: function (msg) {
@@ -73,7 +71,6 @@ define(function (require) {
             }).fadeOut(2200);
         },
         addUser: function(userModel) {
-            console.log(userModel);
             var playerView = new roomPlayer({'model': userModel});
             this.$('.room__players-wrapper').append(playerView.el);
             if (userModel.get('id') === app.user.get('id')) {
@@ -84,9 +81,10 @@ define(function (require) {
         },
         removeUser: function(user) {
             user.remove();
-            if (user.model == this.currentPlayer) {
-                window.location.href = '#main';
+            if (user.model == this.currentPlayer && app.gameReady == false) {
+                app.Events.trigger('needToReloadGame');
                 app.Events.trigger('showError','You was kicked for being AFK');
+                window.location.href = '#main';
             }
         },
         checkContentLoadedStatus: function (data) {

@@ -26,10 +26,13 @@ define(
                 }
             },
             fetchNewScoreboard: function () {
+                app.user.fetch({
+                    success: function () {
+                        app.Events.trigger('userAuthed');
+                    }});
                 this.scoreboard.fetchNewData();
             }
         };
-        app.user.set('contentLoaded', false);
         app.session.fetch({
             success: function() {
                 app.session.set('authed', true);
@@ -44,8 +47,6 @@ define(
                 app.session.set('id', -1);
             }
         });
-
-
         app.Events = new _.extend({}, Backbone.Events);
         app.wsEvents = new _.extend({}, Backbone.Events);
         

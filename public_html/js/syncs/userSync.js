@@ -9,10 +9,11 @@ define(function(require) {
             },
             'read': {
                 send: function() {
-                    model.url +=  model.get('id');
+                    if (model.url.length == 10) { // GOVNO but works :(
+                        model.url += model.get('id');
+                    }
                     Backbone.sync(method, model, options);
                 },
-
             },
             
             'update': {
