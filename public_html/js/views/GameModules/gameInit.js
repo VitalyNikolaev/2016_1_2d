@@ -17,7 +17,7 @@ define(function (require) {
             gameObjects.light1.position.set(600, 1800, 600);
             gameObjects.scene.add(gameObjects.light1);
             gameObjects.light2 = new THREE.DirectionalLight(0xffffff, 1);
-            gameObjects.renderer = new THREE.WebGLRenderer();
+            gameObjects.renderer = new THREE.WebGLRenderer({ antialias: true, logarithmicDepthBuffer: true });
             
             Bomb.init();
             World.init();

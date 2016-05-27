@@ -405,6 +405,8 @@ THREE.MTLLoader.MaterialCreator.prototype = {
 
 		if ( loader.setCrossOrigin ) loader.setCrossOrigin( this.crossOrigin );
 		texture = loader.load( url, onLoad, onProgress, onError );
+		
+		texture.anisotropy = 4; 	// Now 4. // 2 is bit better than 1, but has ~same performance. 
 
 		if ( mapping !== undefined ) texture.mapping = mapping;
 
