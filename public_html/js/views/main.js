@@ -31,7 +31,7 @@ define(function (require) {
             makeGuestAccout: function () {
                 function generateRandomUser() {
                     $.ajax({
-                        url: 'http://uinames.com/api/'
+                        url: 'http://uinames.com/api/?maxlen=10&region=england'
                     }).done(function (data) {
                         app.user.save({isGuest: true, login: data.name, password: data.name}, {
                             success: function () {
