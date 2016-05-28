@@ -30,6 +30,8 @@ define(function (require) {
             },
             makeGuestAccout: function () {
                 function generateRandomUser() {
+                    $(".spinner").fadeIn('fast');
+                    $(".preloader").fadeIn('fast');
                     $.ajax({
                         url: 'http://uinames.com/api/?maxlen=10&region=england'
                     }).done(function (data) {
@@ -39,7 +41,17 @@ define(function (require) {
                                 app.user.fetch({
                                     success: function () {
                                         app.Events.trigger('userAuthed');
-                                        window.location.href = '#main'
+                                        window.location.href = '#main';
+                                        var start = new Date().getTime();
+                                        this.$(".logo--avatar").load(function() {
+                                            var criticalTime = 500;
+                                            var fadeTime = criticalTime;
+                                            if (new Date().getTime() - start > criticalTime) {
+                                                fadeTime = 0;
+                                            }
+                                            $(".spinner").delay(fadeTime).fadeOut('fast');
+                                            $(".preloader").delay(fadeTime + 400).fadeOut('fast');
+                                        });
                                     },
                                     error: function () {
                                         generateRandomUser();
