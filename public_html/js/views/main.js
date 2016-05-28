@@ -33,7 +33,7 @@ define(function (require) {
                     $.ajax({
                         url: 'http://uinames.com/api/'
                     }).done(function (data) {
-                        app.user.save({login: data.name, password: data.name}, {
+                        app.user.save({isGuest:true, login: data.name, password: data.name}, {
                             success: function () {
                                 app.session.set('authed', true);
                                 app.user.fetch({
