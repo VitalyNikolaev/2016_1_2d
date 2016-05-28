@@ -20,7 +20,7 @@
                 <a href="#about"><button class="menu__btn">
                     About
                 </button></a>
-                <a href="#logout" id="logout"><button class="menu__btn menu__btn_back">
+                <a href="#" id="logout"><button class="menu__btn menu__btn_back">
                     Logout
                 </button></a>
             </div>

@@ -5,6 +5,9 @@
                 <img src="/media/bomb_logo.png"></img>
             </div>
             <div class="menu">
+                <a href="#" id="asGuest"><button class="menu__btn menu__btn_primary">
+                    Play as Guest
+                </button></a>
                 <a href="#login"><button class="menu__btn">
                     Login
                 </button></a>
