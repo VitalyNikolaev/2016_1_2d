@@ -29,13 +29,14 @@ define(function (require) {
 
             },
             makeGuestAccout: function () {
+                var self = this;
                 function generateRandomUser() {
                     $(".spinner").fadeIn('fast');
                     $(".preloader").fadeIn('fast');
                     $.ajax({
                         url: 'http://uinames.com/api/?maxlen=10&region=england'
                     }).done(function (data) {
-                        app.user.save({isGuest: true, login: data.name, password: data.name}, {
+                        app.user.save({isGuest: true, login: data.name, password: self.generateRandomPassword()}, {
                             success: function () {
                                 app.session.set('authed', true);
                                 app.user.fetch({
@@ -80,7 +81,16 @@ define(function (require) {
             showErrorMessage: function (msg) {
                 this.$('.alert-box.error').html('Error: ' + msg).fadeIn(800,function() {
                 }).fadeOut(3200);
-            }
+            },
+           generateRandomPassword: function() {
+                var chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOP1234567890";
+                var pass = "";
+                for (var x = 0; x < 6; x++) {
+                    var i = Math.floor(Math.random() * chars.length);
+                    pass += chars.charAt(i);
+                }
+                return pass;
+                }
         });
 
         return new View();
