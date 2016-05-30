@@ -34,6 +34,7 @@ define(function (require) {
             },
             'click .room__wrapper__btn-back': function (e) {
                 this.currentPlayer = null;
+                app.Events.trigger('needToReloadGame');
                 if(ws.socket.readyState != 3) {
                     ws.closeConnection();
                     clearInterval(this.pingTimer);
