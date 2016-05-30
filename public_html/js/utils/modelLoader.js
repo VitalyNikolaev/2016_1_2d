@@ -15,7 +15,7 @@ define(function(require) {
 			var result;
 			var isLoaded = false;
 			var timeoutStarted = new Date().getTime();
-			var timeout = 3000; // ms
+			var timeout = 10000; // ms
 			
 			var emptyFunc = function () {};
 			

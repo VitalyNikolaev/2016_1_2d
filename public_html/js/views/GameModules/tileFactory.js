@@ -3,8 +3,10 @@ define(function(require) {
     var modelLoader = require('utils/modelLoader');
 	var gameObjects = require('views/GameModules/gameObjects');
 	    
-	var undestructibleWallsCount = 4;
+	var undestructibleWallsCount = 3;
     var destructibleWallsCount = 2;
+	
+	var cubeScale = 2.6;
     
     
 	var randomInt = function(max) {
@@ -26,18 +28,30 @@ define(function(require) {
    
 	var tileFactory = {
         init: function () {
-            modelLoader.getModel('example_pkg', '1m3Cube', function(object) {
-                object.scale.set(0.064, 0.064, 0.064);
-                gameObjects.prefabsObjects['indestructibleCube01'] = object;
+            modelLoader.getModel('undestructible_walls', 'rock1uvw64', function(object) {
+                object.scale.set(cubeScale, cubeScale, cubeScale);
+                gameObjects.prefabsObjects['indestructibleCube1'] = object;
+				// Nested loading... ok.
+				modelLoader.getModel('undestructible_walls', 'rock2uvw64', function(object) {
+					object.scale.set(cubeScale, cubeScale, cubeScale);
+					gameObjects.prefabsObjects['indestructibleCube2'] = object;
+				
+					modelLoader.getModel('undestructible_walls', 'rock3uvw64', function(object) {
+						object.scale.set(cubeScale, cubeScale, cubeScale);
+						gameObjects.prefabsObjects['indestructibleCube3'] = object;
+					});
+				});
             });
         },
         
 		spawnRandomIndestructibleWallAt: function(id, x, y) {
 			var number = randomInt(undestructibleWallsCount);
 			if (number == 0) {
-                gameObjects.addPrefabToWorld(randomRotation(gameObjects.prefabsObjects['indestructibleCube01'].clone()), id, x, y);
+                gameObjects.addPrefabToWorld(randomRotation(gameObjects.prefabsObjects['indestructibleCube1'].clone()), id, x, y);
+            } else if (number == 1) {
+                gameObjects.addPrefabToWorld(randomRotation(gameObjects.prefabsObjects['indestructibleCube2'].clone()), id, x, y);
             } else {
-                gameObjects.addObjectToWorldWithNoCollisions(gameObjects.worldObjects.indestructible_crate, new THREE.CubeGeometry(64, 64, 64), id, x, y);
+                gameObjects.addPrefabToWorld(randomRotation(gameObjects.prefabsObjects['indestructibleCube3'].clone()), id, x, y);
             }
         }
 	};
