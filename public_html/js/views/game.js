@@ -18,6 +18,7 @@ define(function (require) {
         initialize: function () {
             this.render();
             gameInit.init();
+            
             this.listenTo(app.Events, "needToReloadGame", this.deallocGame);
             this.listenTo(app.wsEvents, "object_spawned", this.addObject);
             this.listenTo(app.wsEvents, "bomberman_spawned", this.spawnBomberman);

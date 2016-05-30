@@ -20,13 +20,12 @@ define(function (require) {
             gameObjects.scene.add(gameObjects.light1);
             gameObjects.light2 = new THREE.DirectionalLight(0xffffff, 1);
             gameObjects.renderer = new THREE.WebGLRenderer({ antialias: true, logarithmicDepthBuffer: true });
-            
+
+            TileFactory.init();
             Bomb.init();
             World.init();
-            TileFactory.init();
             
             gameObjects.scene.add(World.mesh);
-
             jQuery(window).resize(function () {
                 BasicScene.setAspect();
             });

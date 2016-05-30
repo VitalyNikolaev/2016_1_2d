@@ -47,7 +47,6 @@ define(function (require) {
             this.collection = new roomCollection();
             this.listenTo(this.collection, "add", this.addUser);
             this.listenTo(app.wsEvents, "world_created" , this.startGame)
-            
         },
         show: function () {
             baseView.prototype.show.call(this);

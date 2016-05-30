@@ -1,18 +1,19 @@
 .room__profile{
   float: left;
-  width: 200px;
-  margin-left: 100px;
+  width: 13vw;
+  margin-left: 7vw;
   margin-top: 25px;
 }
 .room__profile_status {
-  width: 130px;
-  margin: 5px 30px 20px 30px;
+  height: 15vh;
+  width: 7vw;
+  margin: 25px 30px 20px 3vw;
 
 }
 .text {
   font-size: 30px;
   position: relative;
-  left: 35%;
+  left: 5vw;
 }
 .room__wrapper{
   width: 20%;
@@ -52,12 +53,12 @@
   background-color: #D32F2F;
 }
 .room__profile-wrapper{
-  height: 140px;
+  height: 22vh;
 }
 .room__players-wrapper{
   position: absolute;
   height: 100%;
-  margin-left: 130px;
+  margin-left: 12vw;
   width: 50%;
 
 }

@@ -181,18 +181,19 @@ html, body {
 
 .room__profile {
   float: left;
-  width: 200px;
-  margin-left: 100px;
+  width: 13vw;
+  margin-left: 7vw;
   margin-top: 25px; }
 
 .room__profile_status {
-  width: 130px;
-  margin: 5px 30px 20px 30px; }
+  height: 15vh;
+  width: 7vw;
+  margin: 25px 30px 20px 3vw; }
 
 .text {
   font-size: 30px;
   position: relative;
-  left: 35%; }
+  left: 5vw; }
 
 .room__wrapper {
   width: 20%;
@@ -229,12 +230,12 @@ html, body {
   background-color: #D32F2F; }
 
 .room__profile-wrapper {
-  height: 140px; }
+  height: 22vh; }
 
 .room__players-wrapper {
   position: absolute;
   height: 100%;
-  margin-left: 130px;
+  margin-left: 12vw;
   width: 50%; }
 
 .room__wrapper__btn-back {
@@ -263,14 +264,14 @@ html, body {
   left: 0;
   height: 100%;
   background-color: beige;
-  width: 25%; }
+  width: 25vw; }
 
 .room__tutorial__keyboard {
-  height: 200px;
+  height: 15vw;
   margin-left: 35px; }
 
 .room__tutorial__keys {
-  height: 82px;
+  height: 6vw;
   margin-left: 10px; }
 
 .room__tutorial__keyboard_text {
@@ -278,7 +279,7 @@ html, body {
   font-size: 30px; }
 
 .room__tutorial__bomberman_logo {
-  height: 250px; }
+  height: 18vw; }
 
 .room__chat {
   position: fixed;
@@ -287,7 +288,7 @@ html, body {
   right: 0;
   height: 100%;
   background-color: beige;
-  width: 25%; }
+  width: 25vw; }
 
 .preloader {
   height: 100%;
