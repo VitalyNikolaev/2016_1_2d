@@ -3,9 +3,6 @@ define(function (require) {
     var THREE = require('three');
     var gameObjects = require('views/GameModules/gameObjects');
     var World = require('views/GameModules/worldBuilder');
-    var Bomb = require('views/GameModules/bomb');
-    var TileFactory = require('views/GameModules/tileFactory');
-    
     
     var BasicScene = {
         init: function () {
@@ -21,8 +18,7 @@ define(function (require) {
             gameObjects.light2 = new THREE.DirectionalLight(0xffffff, 1);
             gameObjects.renderer = new THREE.WebGLRenderer({ antialias: true, logarithmicDepthBuffer: true });
 
-            TileFactory.init();
-            Bomb.init();
+           
             World.init();
             
             gameObjects.scene.add(World.mesh);
