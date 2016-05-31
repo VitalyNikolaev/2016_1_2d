@@ -10,9 +10,7 @@
         <div class="room__players-wrapper"></div>
         <div  class="room__chat">
             <h1 align="center" class="chat__logo">Game Chat</h1>
-            <div class="room__message-window">
-
-            </div>
+            <div class="room__message-window"></div>
             <div id="inputcontainer">
                 <form>
                 <input name="message" class="chat__message_input" type="text" autofocus="true" placeholder="Enter Message"></input>

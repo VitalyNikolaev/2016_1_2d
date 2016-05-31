@@ -45,7 +45,7 @@ define(function (require) {
                 e.preventDefault();
                 var message = this.$('.chat__message_input').val();
 
-                if (message.length > 0 ) {
+                if (message.length > 0 && message.length < 40) {
                     this.$('.chat__message_input').val('');
                     ws.sendMessage({"type": "chat_message","user_id": this.currentPlayer.get('id'), "text": message})
                 }
@@ -120,9 +120,10 @@ define(function (require) {
         addMessageToChat: function (data) {
             var model = this.collection.findWhere({id: data.user_id});
             var username = model.get('name');
-            if (username) {
+            if (username && data.text.length < 40) {
                 this.$('.room__message-window').append('<p class="chat__message_text">' + username + ': ' +
-                    this.escapeHtml(data.text) + '</p>')
+                    this.escapeHtml(data.text) + '</p>');
+                this.$('.room__message-window').animate({scrollTop: $('.room__message-window')[0].scrollHeight});
             }
         },
         escapeHtml: function(string) {
