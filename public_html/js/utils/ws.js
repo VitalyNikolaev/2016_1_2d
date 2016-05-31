@@ -1,12 +1,10 @@
 define(function(require) {
     var app = require('app');
-    
     var wsApi = {
         WS_URL: 'ws://' + app.host + '/game',
         socket: null,
         startConnection: function() {
             this.socket  = new WebSocket(this.WS_URL);
-            this.socket.onopen = this.onOpen;
             this.socket.onclose = this.onClose;
             this.socket.onerror = this.onError;
             this.socket.onmessage = this.onMessage;
@@ -14,9 +12,6 @@ define(function(require) {
         },
         closeConnection: function() {
             this.socket.close();
-        },
-        onOpen: function() {
-
         },
         onClose: function(code) {
             console.log("CLOSE SOCKET:");
@@ -35,6 +30,7 @@ define(function(require) {
                 "isReady": readyStatus,
                 "contentLoaded": true
             };
+            
             this.socket.send(JSON.stringify(data));
         },
         sendPing: function () {

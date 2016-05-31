@@ -142,15 +142,7 @@ define(function (require) {
                 gameObjects.addObjectToWorldWithNoCollisions(gameObjects.worldObjects.bomb_bonus_range, new THREE.CubeGeometry(64, 64, 64), data.id, data.x, data.y);
                 return
             }
-            if (data.object_type === 'bonus_decrease_bomb_spawn_delay') {
-                gameObjects.addObjectToWorldWithNoCollisions(gameObjects.worldObjects.bomb_bonus_range, new THREE.CubeGeometry(64, 64, 64), data.id, data.x, data.y);
-                return
-            }
             if (data.object_type === 'bonus_increase_max_hp') {
-                gameObjects.addObjectToWorldWithNoCollisions(gameObjects.worldObjects.bomb_bonus_range, new THREE.CubeGeometry(64, 64, 64), data.id, data.x, data.y);
-                return
-            }
-            if (data.object_type === 'bonus_decrease_bomb_explosion_delay') {
                 gameObjects.addObjectToWorldWithNoCollisions(gameObjects.worldObjects.bomb_bonus_range, new THREE.CubeGeometry(64, 64, 64), data.id, data.x, data.y);
                 return
             }
@@ -159,6 +151,14 @@ define(function (require) {
                 return
             }
             if (data.object_type === 'bonus_drop_bomb_on_death') {
+                gameObjects.addObjectToWorldWithNoCollisions(gameObjects.worldObjects.drop_bomb_on_death, new THREE.CubeGeometry(64, 64, 64), data.id, data.x, data.y);
+                return
+            }
+            if (data.object_type === 'bonus_invulnerability') {
+                gameObjects.addObjectToWorldWithNoCollisions(gameObjects.worldObjects.drop_bomb_on_death, new THREE.CubeGeometry(64, 64, 64), data.id, data.x, data.y);
+                return
+            }
+            if (data.object_type === 'bonus_bombs_amount') {
                 gameObjects.addObjectToWorldWithNoCollisions(gameObjects.worldObjects.drop_bomb_on_death, new THREE.CubeGeometry(64, 64, 64), data.id, data.x, data.y);
                 return
             }

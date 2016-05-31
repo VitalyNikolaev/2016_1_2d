@@ -2,7 +2,7 @@ define(function(require) {
 	var THREE = require('three');
     var modelLoader = require('utils/modelLoader');
 	var gameObjects = require('views/GameModules/gameObjects');
-	    
+    var app = require('app');
 	var undestructibleWallsCount = 3;
     var destructibleWallsCount = 2;
 	
@@ -39,6 +39,8 @@ define(function(require) {
 					modelLoader.getModel('undestructible_walls', 'rock3uvw64', function(object) {
 						object.scale.set(cubeScale, cubeScale, cubeScale);
 						gameObjects.prefabsObjects['indestructibleCube3'] = object;
+                       
+                        app.Events.trigger('ModelsReady');
 					});
 				});
             });

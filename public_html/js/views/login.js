@@ -12,7 +12,6 @@ define(function (require) {
                     this.$('.alert-box.error').finish();
                     var login = document.getElementById('login-input').value;
                     var password = document.getElementById('password-input').value;
-                    this.$('#sign-in').prop("disabled", true);
                     app.session.save({login: login, password: password}, {
                         success: function() {
                             app.session.set('authed', true);

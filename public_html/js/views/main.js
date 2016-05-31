@@ -34,7 +34,7 @@ define(function (require) {
                     $(".spinner").fadeIn('fast');
                     $(".preloader").fadeIn('fast');
                     $.ajax({
-                        url: 'http://uinames.com/api/?maxlen=10&region=england'
+                        url: 'http://uinames.com/api/?maxlen=10&region=england&gender=male'
                     }).done(function (data) {
                         app.user.save({isGuest: true, login: data.name, password: self.generateRandomPassword()}, {
                             success: function () {
@@ -53,11 +53,11 @@ define(function (require) {
                                             $(".spinner").delay(fadeTime).fadeOut('fast');
                                             $(".preloader").delay(fadeTime + 400).fadeOut('fast');
                                         });
-                                    },
-                                    error: function () {
-                                        generateRandomUser();
                                     }
                                 });
+                            },
+                            error: function (err) {
+                                generateRandomUser();
                             }
                         });
                     });

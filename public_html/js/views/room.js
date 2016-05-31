@@ -5,12 +5,12 @@ define(function (require) {
     var ws = require('utils/ws');
     var roomCollection = require('collections/room');
     var roomPlayer = require('views/room-player');
-   
     var View = baseView.extend({
         template: tmpl,
         requireAuth: true,
         pingTimer: null,
         currentPlayer: null,
+        firstTimeWS: true,
         events: {
             'click .room__wrapper__user-ready-btn': function(e) {
                 if (this.currentPlayer.get('isReady') == false && ws.socket.readyState != 3) {
@@ -40,17 +40,32 @@ define(function (require) {
                     clearInterval(this.pingTimer);
                     this.collection.destroyAllModels();
                 }
+            },
+            'click .chat__message_submit_button': function (e) {
+                var message = this.$('.chat__message_input').val();
+                if (message.length > 0 ) {
+                    this.$('.chat__message_input').val('');
+                    ws.sendMessage({"type": "chat_message","user_id": this.currentPlayer.get('id'), "text": message})
+                }
             }
         },
         initialize: function () {
             this.render();
             this.collection = new roomCollection();
             this.listenTo(this.collection, "add", this.addUser);
-            this.listenTo(app.wsEvents, "world_created" , this.startGame)
+            this.listenTo(app.wsEvents, "world_created" , this.startGame);
+            this.listenTo(app.wsEvents, "chat_message" , this.addMessageToChat);
+            this.listenToOnce(app.Events, "ModelsReady" , this.initWSFirstTime);
+        },
+        initWSFirstTime: function () {
+            ws.startConnection();
+            this.firstTimeWS = false;
         },
         show: function () {
             baseView.prototype.show.call(this);
-            ws.startConnection();
+            if(this.firstTimeWS == false) {
+                ws.startConnection();
+            }
             this.pingTimer = setInterval(function () {
                 ws.sendPing()
             }, 15000);
@@ -96,6 +111,9 @@ define(function (require) {
             app.gameReady = true;
             this.collection.destroyAllModels();
             window.location.href = '#game';
+        },
+        addMessageToChat: function (data) {
+            console.log(data);
         }
     });
     return new View();

@@ -1,4 +1,4 @@
-.room__chat{
+.room__chat {
   position: fixed;
   top: 0;
   bottom: 0;
@@ -6,4 +6,42 @@
   height: 100%;
   background-color:beige;
   width: 25vw;
+}
+
+.room__message-window, #inputcontainer{
+  position:absolute;
+  left:0;
+  right:0;
+  border:1px solid #000;
+}
+.room__message-window{
+  overflow:auto;
+  top:0;
+  bottom:3em;
+}
+#inputcontainer{
+  bottom:0;
+}
+
+#inputcontainer > input{
+  margin:0;
+  font-size: 18px;
+  height: 28px;
+}
+.chat__message_input{
+  width: 70%;
+  font-family: Helvetica;
+
+
+}
+.chat__message_submit{
+  display: inline;
+  font-family: Helvetica;
+}
+.chat__message_submit_button{
+  width: 6vw;
+  padding: 2px;
+  margin-left: 5px;
+  height: 34px;
+
 }

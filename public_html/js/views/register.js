@@ -11,7 +11,6 @@ define(function (require) {
                     this.$('.alert-box.error').finish();
                     var login = document.getElementById('reg-login-input').value;
                     var password = document.getElementById('reg-password-input').value;
-                    this.$('#sign-in').prop("disabled", true);
                     app.user.save({login: login, password: password}, {
                         success: function() {
                             app.session.set('authed', true);
@@ -33,13 +32,13 @@ define(function (require) {
                 this.listenTo(app.user, "invalidForm", this.showErrorMessage);
             },
             reloadAll: function() {
-                this.$('#sign-in').prop("disabled", false);
+                this.$('#sign-up').prop("disabled", false);
                 document.getElementById('reg-login-input').value = "";
                 document.getElementById('reg-password-input').value = "";
             },
             showErrorMessage: function (msg) {
                 this.$('.alert-box.error').html('Error: ' + msg).fadeIn(400,function(){
-                    $('#sign-in').prop("disabled", false)}).fadeOut(2200);
+                    $('#sign-up').prop("disabled", false)}).fadeOut(2200);
             }
 
         });
