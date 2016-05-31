@@ -10,12 +10,8 @@ var require = {
         MTLLoader: 'lib/MTLLoader',
         webcam : 'lib/webcam.min',
         OrbitControls : 'lib/OrbitControls',
-        msgPack: 'lib/msgpack.min'
     },
     shim: {
-        'msgPack': {
-          exports: 'msgPack'  
-        },
         'backbone': {
             deps: ['underscore', 'jquery'],
             exports: 'Backbone'

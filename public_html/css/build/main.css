@@ -187,7 +187,8 @@ html, body {
 
 .room__profile_status {
   width: 15vh;
-  margin: 25px 30px 20px 3vw; }
+  padding: 5px;
+  margin: 25px 30px 20px 2vw; }
 
 .text {
   font-size: 30px;
