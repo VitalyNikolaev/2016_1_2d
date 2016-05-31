@@ -9,56 +9,15 @@
         </div>
         <div class="room__players-wrapper"></div>
         <div  class="room__chat">
+            <h1 align="center" class="chat__logo">Game Chat</h1>
             <div class="room__message-window">
-                <p>Daniel wrote: Great party yesterday</p>
-                <p>Alex wrote: stil hungover</p>
-                <p>Chris: great party? nah.</p>
-                <p>Sam: what party</p>
-                <p>jenny: partytime!</p>
-                <p>Daniel wrote: Great party yesterday</p>
-                <p>Alex wrote: stil hungover</p>
-                <p>Chris: great party? nah.</p>
-                <p>Sam: what party</p>
-                <p>jenny: partytime!</p>
-                <p>Daniel wrote: Great party yesterday</p>
-                <p>Alex wrote: stil hungover</p>
-                <p>Chris: great party? nah.</p>
-                <p>Sam: what party</p>
-                <p>jenny: partytime!</p>
-                <p>Daniel wrote: Great party yesterday</p>
-                <p>Alex wrote: stil hungover</p>
-                <p>Chris: great party? nah.</p>
-                <p>Sam: what party</p>
-                <p>jenny: partytime!</p>
-                <p>Daniel wrote: Great party yesterday</p>
-                <p>Alex wrote: stil hungover</p>
-                <p>Chris: great party? nah.</p>
-                <p>Sam: what party</p>
-                <p>jenny: partytime!</p>
-                <p>Daniel wrote: Great party yesterday</p>
-                <p>Alex wrote: stil hungover</p>
-                <p>Chris: great party? nah.</p>
-                <p>Sam: what party</p>
-                <p>jenny: partytime!</p>
-                <p>Daniel wrote: Great party yesterday</p>
-                <p>Alex wrote: stil hungover</p>
-                <p>Chris: great party? nah.</p>
-                <p>Sam: what party</p>
-                <p>jenny: partytime!</p>
-                <p>Daniel wrote: Great party yesterday</p>
-                <p>Alex wrote: stil hungover</p>
-                <p>Chris: great party? nah.</p>
-                <p>Sam: what party</p>
-                <p>jenny: partytime!</p>
-                <p>Daniel wrote: Great party yesterday</p>
-                <p>Alex wrote: stil hungover</p>
-                <p>Chris: great party? nah.</p>
-                <p>Sam: what party</p>
-                <p>jenny: partytime!</p>
+
             </div>
             <div id="inputcontainer">
-                <input name="message" class="chat__message_input" type="text" placeholder="Enter Message"></input>
+                <form>
+                <input name="message" class="chat__message_input" type="text" autofocus="true" placeholder="Enter Message"></input>
                 <p class="chat__message_submit"><button class="chat__message_submit_button">Send</button></p>
+                </form>
             </div>
         </div>
         <div class="room__wrapper">

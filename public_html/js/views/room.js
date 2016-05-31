@@ -16,14 +16,14 @@ define(function (require) {
                 if (this.currentPlayer.get('isReady') == false && ws.socket.readyState != 3) {
                     ws.sendReady(true, app.user.get('contentLoaded'));
                     this.currentPlayer.set('isReady', true);
-                    $('.room__wrapper__user-ready-btn')
+                    this.$('.room__wrapper__user-ready-btn')
                         .html('Not Ready?')
                         .css('background-color', '#FF9800');
                 } else {
                     if (this.currentPlayer.get('isReady') == true && ws.socket.readyState != 3) {
                         this.currentPlayer.set('isReady', false);
                         ws.sendReady(false, app.user.get('contentLoaded'));
-                        $('.room__wrapper__user-ready-btn')
+                        this.$('.room__wrapper__user-ready-btn')
                             .html('Set Ready')
                             .css('background-color', '#039BE5');
                     } else {
@@ -42,7 +42,9 @@ define(function (require) {
                 }
             },
             'click .chat__message_submit_button': function (e) {
+                e.preventDefault();
                 var message = this.$('.chat__message_input').val();
+
                 if (message.length > 0 ) {
                     this.$('.chat__message_input').val('');
                     ws.sendMessage({"type": "chat_message","user_id": this.currentPlayer.get('id'), "text": message})
@@ -69,16 +71,19 @@ define(function (require) {
             this.pingTimer = setInterval(function () {
                 ws.sendPing()
             }, 15000);
+            this.$('.chat__message_input').focus();
         },
         hide: function () {
             if(this.pingTimer != null) {
                 clearInterval(this.pingTimer)
             }
             this.currentPlayer = null;
-            $('.room__wrapper__user-ready-btn')
+            this.$('.room__wrapper__user-ready-btn')
                 .html('Set Ready')
                 .css('background-color', '#039BE5');
             this.collection.destroyAllModels();
+            this.$('.chat__message_input').val('');
+            this.$('.room__message-window').html('');
             baseView.prototype.hide.call(this);
         },
         showErrorMessage: function (msg) {
@@ -113,8 +118,27 @@ define(function (require) {
             window.location.href = '#game';
         },
         addMessageToChat: function (data) {
-            console.log(data);
+            var model = this.collection.findWhere({id: data.user_id});
+            var username = model.get('name');
+            if (username) {
+                this.$('.room__message-window').append('<p class="chat__message_text">' + username + ': ' +
+                    this.escapeHtml(data.text) + '</p>')
+            }
+        },
+        escapeHtml: function(string) {
+            var entityMap = {
+                "&": "&amp;",
+                    "<": "&lt;",
+                    ">": "&gt;",
+                    '"': '&quot;',
+                    "'": '&#39;',
+                    "/": '&#x2F;'
+            };
+            return String(string).replace(/[&<>"'\/]/g, function (s) {
+                return entityMap[s];
+                });
         }
+
     });
     return new View();
 

@@ -4,7 +4,8 @@
   src: url(bangers.ttf); }
 
 * {
-  font-family: Bangers, serif; }
+  font-family: Bangers, serif;
+  outline: 0; }
 
 html, body {
   padding: 0;
@@ -290,6 +291,9 @@ html, body {
   background-color: beige;
   width: 25vw; }
 
+.chat__logo {
+  font-size: 18px; }
+
 .room__message-window, #inputcontainer {
   position: absolute;
   left: 0;
@@ -297,6 +301,7 @@ html, body {
   border: 1px solid #000; }
 
 .room__message-window {
+  margin-top: 40px;
   overflow: auto;
   top: 0;
   bottom: 3em; }
@@ -304,24 +309,31 @@ html, body {
 #inputcontainer {
   bottom: 0; }
 
-#inputcontainer > input {
-  margin: 0;
+#inputcontainer > form {
+  margin: 10px;
   font-size: 18px;
   height: 28px; }
 
 .chat__message_input {
   width: 70%;
+  height: 90%;
+  font-size: 18px;
+  font-family: Helvetica; }
+
+.chat__message_text {
+  margin-left: 7px;
   font-family: Helvetica; }
 
 .chat__message_submit {
-  display: inline;
-  font-family: Helvetica; }
+  display: inline; }
 
 .chat__message_submit_button {
   width: 6vw;
   padding: 2px;
   margin-left: 5px;
-  height: 34px; }
+  height: 34px;
+  font-family: Helvetica;
+  font-size: 16px; }
 
 .preloader {
   height: 100%;
