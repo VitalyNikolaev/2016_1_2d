@@ -15,4 +15,4 @@ newmtl Material_50
 	map_Ka lambert11SG_Base_Color.jpg
 	map_Kd lambert11SG_Base_Color.jpg
 	map_Ks lambert11SG_Roughness.jpg
-	map_bump Map_10_Normal_Bump.jpg
+	map_bump Map_10_Normal_Bump.png
