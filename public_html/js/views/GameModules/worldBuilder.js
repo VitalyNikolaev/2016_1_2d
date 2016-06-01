@@ -46,8 +46,6 @@ define(function (require) {
             this.walls[2].position.x = -1056;
 
             this.walls[3].position.z = -1056;
-			
-			// modelLoader.getModel('example_pkg', '64mm2', function(object) {object.rotation.y =  Math.PI; gameObjects.addPrefabToWorld(object, 5, 5, 5)});
         },
         addSkybox: function () {
             var imagePrefix = "media/game/skybox/panorama/";

@@ -8,6 +8,7 @@ define(function (require) {
     var Character = require('views/GameModules/character');
     var ws = require('utils/ws');
 	var tileFactory = require('views/GameModules/tileFactory');
+    var Bomb = require('views/GameModules/bomb');
 
     var View = baseView.extend({
         template: tmpl,
@@ -18,6 +19,8 @@ define(function (require) {
         initialize: function () {
             this.render();
             gameInit.init();
+            tileFactory.init();
+            Bomb.init();
             
             this.listenTo(app.Events, "needToReloadGame", this.deallocGame);
             this.listenTo(app.wsEvents, "object_spawned", this.addObject);
@@ -115,7 +118,6 @@ define(function (require) {
                 this.previousCoordinates[data.id] = {
                     x: gameObjects.objects[data.id].index.mesh.position.x,
                     z: gameObjects.objects[data.id].index.mesh.position.z
-
                 };
                 gameObjects.scene.add(gameObjects.objects[data.id].index.mesh);
             }

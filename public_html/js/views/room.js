@@ -10,7 +10,7 @@ define(function (require) {
         requireAuth: true,
         pingTimer: null,
         currentPlayer: null,
-        firstTimeWS: true,
+        modelsReady: false,
         events: {
             'click .room__wrapper__user-ready-btn': function(e) {
                 if (this.currentPlayer.get('isReady') == false && ws.socket.readyState != 3) {
@@ -57,21 +57,26 @@ define(function (require) {
             this.listenTo(this.collection, "add", this.addUser);
             this.listenTo(app.wsEvents, "world_created" , this.startGame);
             this.listenTo(app.wsEvents, "chat_message" , this.addMessageToChat);
-            this.listenToOnce(app.Events, "ModelsReady" , this.initWSFirstTime);
+            this.listenToOnce(app.Events, "ModelsReady" , this.initModelsReadyFlag);
         },
-        initWSFirstTime: function () {
-            ws.startConnection();
-            this.firstTimeWS = false;
+        initModelsReadyFlag: function () {
+            this.modelsReady = true;
         },
         show: function () {
+            var self = this;
             baseView.prototype.show.call(this);
-            if(this.firstTimeWS == false) {
-                ws.startConnection();
+             function openSocket() {
+                if (self.modelsReady) {
+                    ws.startConnection();
+                    this.pingTimer = setInterval(function () {
+                        ws.sendPing()
+                    }, 15000);
+                    this.$('.chat__message_input').focus();
+                } else {
+                    setTimeout(openSocket, 1500);
+                }
             }
-            this.pingTimer = setInterval(function () {
-                ws.sendPing()
-            }, 15000);
-            this.$('.chat__message_input').focus();
+            openSocket();
         },
         hide: function () {
             if(this.pingTimer != null) {
