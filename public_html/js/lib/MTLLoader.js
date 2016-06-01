@@ -369,6 +369,8 @@ THREE.MTLLoader.MaterialCreator.prototype = {
 					// Alpha texture map
 					params[ 'alphaMap' ] = this.loadTexture( this.baseUrl + value );
 					params[ 'transparent' ] = true;
+					params[ 'alphaMap' ].wrapS = this.wrap;
+					params[ 'alphaMap' ].wrapT = this.wrap;
 
 					break;
 	

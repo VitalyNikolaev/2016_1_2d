@@ -125,7 +125,7 @@ define(function (require) {
         },
         addObject: function (data) {
             if (data.object_type === 'destructible_wall') {
-                gameObjects.addObjectToWorldWithNoCollisions(gameObjects.worldObjects.destructible_crate, new THREE.CubeGeometry(64, 64, 64), data.id, data.x, data.y);
+                tileFactory.spawnRandomDestructibleWallAt(data.id, data.x, data.y);
                 return
             }
             if (data.object_type === 'undestructible_wall') {
