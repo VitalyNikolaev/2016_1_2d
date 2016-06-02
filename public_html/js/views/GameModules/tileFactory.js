@@ -8,6 +8,7 @@ define(function(require) {
     //var destructibleWallsCount = 1;
 	
 	var cubeScale = 2.5;
+	var ringScale = 1.2;
     
     
 	var randomInt = function(max) {
@@ -57,7 +58,17 @@ define(function(require) {
 							object.scale.set(cubeScale, cubeScale, cubeScale);
 							gameObjects.prefabsObjects['destructibleCube1'] = object;
 						   
-							app.Events.trigger('ModelsReady');
+							modelLoader.getModel('bonuses', 'bonusRing48', function(object) {
+								object.scale.set(ringScale, ringScale, ringScale);
+								gameObjects.prefabsObjects['bonusRingBig'] = object;
+							   
+								modelLoader.getModel('bonuses', 'bonusRing32', function(object) {
+									object.scale.set(ringScale, ringScale, ringScale);
+									gameObjects.prefabsObjects['bonusRingSmall'] = object;
+								   
+									app.Events.trigger('ModelsReady');
+								});
+							});
 						});
 					});
 				});
