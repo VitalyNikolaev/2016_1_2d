@@ -6,7 +6,7 @@ define(function (require) {
         init: function () {
             this.group = new SPE.Group({
                 texture: {
-                    value: THREE.ImageUtils.loadTexture('../media/game/textures/sprite-explosion2.png'),
+                    value: gameObjects.worldObjects.fireball,
                     frames: new THREE.Vector2(5, 5),
                     loop: 1
                 },
@@ -17,7 +17,7 @@ define(function (require) {
             });
             this.shockwaveGroup = new SPE.Group({
                 texture: {
-                    value: THREE.ImageUtils.loadTexture('../media/game/textures/smokeparticle.png'),
+                    value: gameObjects.worldObjects.shockwaveGroup,
                 },
                 depthTest: false,
                 depthWrite: true,
@@ -28,7 +28,7 @@ define(function (require) {
                 type: SPE.distributions.DISC,
                 position: {
                     radius: 5,
-                    spread: new THREE.Vector3(5)
+                    spread: new THREE.Vector3( 20 )
                 },
                 maxAge: {
                     value: 2,
@@ -38,21 +38,21 @@ define(function (require) {
                 activeMultiplier: 2000,
 
                 velocity: {
-                    value: new THREE.Vector3(40)
+                    value: new THREE.Vector3( 70 )
                 },
                 rotation: {
-                    axis: new THREE.Vector3(1, 0, 0),
+                    axis: new THREE.Vector3( 1, 0, 0 ),
                     angle: Math.PI * 0.5,
                     static: true
                 },
-                size: {value: 2},
+                size: { value: 2 },
                 color: {
                     value: [
-                        new THREE.Color(0.4, 0.2, 0.1),
-                        new THREE.Color(0.2, 0.2, 0.2)
+                        new THREE.Color( 0.4, 0.2, 0.1 ),
+                        new THREE.Color( 0.2, 0.2, 0.2 )
                     ]
                 },
-                opacity: {value: [0.5, 0.2, 0]}
+                opacity: { value: [0.5, 0.2, 0] }
             }),
                 this.debris = new SPE.Emitter({
                     particleCount: 100,
@@ -88,18 +88,18 @@ define(function (require) {
                     opacity: {value: [0.4, 0]}
                 }),
                 this.fireball = new SPE.Emitter({
-                    particleCount: 120,
+                    particleCount: 150,
                     type: SPE.distributions.SPHERE,
                     position: {
-                        radius: 2
+                        radius: 1
                     },
-                    maxAge: {value: 2},
-                    // duration: 1,
+                    maxAge: {value: 1.1},
+                    duration: 1,
                     activeMultiplier: 20,
                     velocity: {
-                        value: new THREE.Vector3(10)
+                        value: new THREE.Vector3(90)
                     },
-                    size: {value: [20, 200]},
+                    size: {value: [40, 150]},
                     color: {
                         value: [
                             new THREE.Color(0.5, 0.1, 0.05),

@@ -1,5 +1,7 @@
 define(function (require) {
     var THREE = require('three');
+    var bombRey = require('views/GameModules/bombRey');
+    
     var objects = {
         scene: null,
         camera: null,
@@ -20,6 +22,8 @@ define(function (require) {
             bomb_bonus_range: new THREE.MeshPhongMaterial({map: new THREE.TextureLoader().load('media/game/textures/bonus_bomb.gif')}),
             drop_bomb_on_death: new THREE.MeshPhongMaterial({map: new THREE.TextureLoader().load('media/game/textures/death_bomb.jpg')}),
             explosion_rey: new THREE.MeshPhongMaterial({map: new THREE.TextureLoader().load('media/game/textures/explosion.jpg')}),
+            shockwaveGroup : THREE.ImageUtils.loadTexture('../media/game/textures/smokeparticle.png'),
+            fireball: THREE.ImageUtils.loadTexture('../media/game/textures/sprite-explosion2.png')
         },
         getRealCoordinates: function (x, z) {
             return {
@@ -50,15 +54,15 @@ define(function (require) {
             };
             this.scene.add(realObj);
         },
-        addReyToWorldWithNoCollisions: function (type, obj_geometry, id, x, z) { // needed to place objects by x, y and its id
+        addReyToWorldWithNoCollisions: function (id, x, z) { // needed to place objects by x, y and its id
             var self = this;
-            var realObj = new THREE.Mesh(obj_geometry, type);
-            var coordinates = this.getRealCoordinates(x, z);
-            realObj.position.set(coordinates.x, 32, coordinates.z);
-            this.objects[id] = {
-                index: realObj
-            };
-            this.scene.add(realObj);
+            var rey = new bombRey.init();
+            var coords = this.getRealCoordinates(x, z);
+            rey.group.mesh.position.set(coords.x, 42, coords.z);
+            rey.shockwaveGroup.mesh.position.set(coords.x, 42, coords.z);
+            this.bombReys[id] = rey;
+            this.scene.add(rey.shockwaveGroup.mesh);
+            this.scene.add(rey.group.mesh);
             setTimeout(function () {
                self.deleteObjectFromWorld(id);
             }, 1050);
