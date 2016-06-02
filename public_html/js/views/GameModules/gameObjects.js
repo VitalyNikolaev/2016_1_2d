@@ -74,6 +74,7 @@ define(function (require) {
             }, 1050);
         },
         deleteObjectFromWorld: function (id) {
+			this.deleteComplexObject(id);
             if (this.objects[id]) {
                 if (this.objects[id].index.mesh != undefined) {
                     this.scene.remove(this.objects[id].index.mesh);
@@ -87,6 +88,18 @@ define(function (require) {
                 this.scene.remove(this.bombReys[id].group.mesh);
                 delete this.bombReys[id];
             }
+        },
+		deleteComplexObject: function (id) {
+            if (this.objects[id]) {
+				var object = this.objects[id];
+                if (object.isComplex) {
+                    for (var i = 0; i < object.index.objects.length; i++) {
+						var model = object.index[object.index.objects[i]];
+						this.scene.remove(model);
+					}
+					delete this.objects[id];
+                }
+            } 
         },
         setBomb: function (id, x, z) {
             var self = this;
