@@ -11,7 +11,7 @@ define(function(require) {
 	var ringScale = 1.8;
 	var angleSpeedCoefficient = 0.1;
 	var fps = 60;
-	var numberOfFramesToFullyGrownBonus = fps * 0.5; // 0.5 of second
+	var numberOfFramesToFullyGrownBonus = fps * 0.35; // 0.35 of second
     
     
 	var randomInt = function(max) {
@@ -135,13 +135,13 @@ define(function(require) {
 
 			var deltaT = 1000 / fps;
 			var timerID = setInterval(function () {
-                complexObject.bonus.position.y = 52 + 8 * Math.sin(2 * complexObject.bonus.rotation.y);
+                complexObject.bonus.position.y = 52 + 9 * Math.sin(2 * complexObject.bonus.rotation.y);
                 complexObject.bonus.rotation.y += angleSpeedCoefficient * -1 * Math.PI / deltaT;
                 complexObject.ring1.rotation.y += angleSpeedCoefficient * 2 * Math.PI / deltaT;
                 complexObject.ring2.rotation.y += angleSpeedCoefficient * -2 * Math.PI / deltaT;
                 complexObject.ring3.rotation.y += angleSpeedCoefficient * 4 * Math.PI / deltaT;
 
-				bonusSpawnScaleTransistion(complexObject.bonus, complexObject.growthStep, 1);
+				bonusSpawnScaleTransistion(complexObject.bonus, complexObject.growthStep, 1.4);
 				bonusSpawnScaleTransistion(complexObject.ring1, complexObject.growthStep, ringScale);
 				bonusSpawnScaleTransistion(complexObject.ring2, complexObject.growthStep, ringScale);
 				bonusSpawnScaleTransistion(complexObject.ring3, complexObject.growthStep, ringScale);
