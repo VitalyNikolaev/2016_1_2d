@@ -28,6 +28,7 @@ define(function (require) {
             this.mesh = new THREE.Object3D();
             this.ground = new THREE.Mesh(ground, groundMaterial);
             this.ground.rotation.x = -Math.PI / 2;
+            this.ground.receiveShadow = true;
             this.mesh.add(this.ground);
 
             this.walls = [];
