@@ -9,6 +9,7 @@ define(function (require) {
     var ws = require('utils/ws');
 	var tileFactory = require('views/GameModules/tileFactory');
     var Bomb = require('views/GameModules/bomb');
+    var bombRey = require('views/GameModules/bombRey');
 
     var View = baseView.extend({
         template: tmpl,
@@ -149,7 +150,13 @@ define(function (require) {
                 return
             }
             if (data.object_type === 'bomb_ray') {
-                gameObjects.addReyToWorldWithNoCollisions(gameObjects.worldObjects.explosion_rey, new THREE.CubeGeometry(64, 64, 64), data.id, data.x, data.y);
+                var rey = new bombRey.init();
+                var coords = gameObjects.getRealCoordinates(data.x, data.y);
+                rey.group.mesh.position.set(coords.x, 42, coords.z);
+                rey.shockwaveGroup.mesh.position.set(coords.x, 42, coords.z);
+                gameObjects.bombReys[data.id] = rey;
+                gameObjects.scene.add(rey.shockwaveGroup.mesh);
+                gameObjects.scene.add(rey.group.mesh);
                 return
             }
             if (data.object_type === 'bonus_drop_bomb_on_death') {

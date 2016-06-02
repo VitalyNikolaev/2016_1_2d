@@ -9,7 +9,8 @@ require.config({
         OBJLoader: 'lib/OBJLoader',
         MTLLoader: 'lib/MTLLoader',
         webcam : 'lib/webcam.min',
-        OrbitControls : 'lib/OrbitControls'
+        OrbitControls : 'lib/OrbitControls',
+        SPE: 'lib/SPE.min'
     },
     shim: {
         'backbone': {
@@ -29,7 +30,11 @@ require.config({
             deps: ['three'],
             exports: 'OBJLoader'
         },
-		'MTLLoader': {
+        'SPE': {
+            deps: ['three'],
+            exports: 'SPE'
+        },
+        'MTLLoader': {
             deps: ['three'],
             exports: 'MTLLoader'
         },
@@ -37,7 +42,7 @@ require.config({
             exports: 'webcam'
         },
         'OrbitControls': {
-			deps: ['three'],
+            deps: ['three'],
             exports: 'OrbitControls'
         }
       

@@ -6,7 +6,9 @@ define(function (require) {
 		cameraControls: null,
         light: null,
         renderer: null,
+        particleEngine: null,
         playersCharacter: null,
+        bombReys:{},
         playersCharacterLook: 950,
         fps: 0, // needed to move bomber sync to server
         objects: {}, // here we dump all links to obstacle index by id of object
