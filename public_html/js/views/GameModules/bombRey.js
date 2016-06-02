@@ -34,7 +34,7 @@ define(function (require) {
                     value: 2,
                     spread: 0
                 },
-                // duration: 1,
+                duration: 1,
                 activeMultiplier: 2000,
 
                 velocity: {
@@ -88,7 +88,7 @@ define(function (require) {
                     opacity: {value: [0.4, 0]}
                 }),
                 this.fireball = new SPE.Emitter({
-                    particleCount: 150,
+                    particleCount: 170,
                     type: SPE.distributions.SPHERE,
                     position: {
                         radius: 1
@@ -97,7 +97,7 @@ define(function (require) {
                     duration: 1,
                     activeMultiplier: 20,
                     velocity: {
-                        value: new THREE.Vector3(90)
+                        value: new THREE.Vector3(Math.random() * (100 - 50) + 50)
                     },
                     size: {value: [40, 150]},
                     color: {
@@ -127,18 +127,7 @@ define(function (require) {
                     },
                     opacity: {value: [0, 0, 0.2, 0]}
                 }),
-                this.flash = new SPE.Emitter({
-                    particleCount: 50,
-                    position: {spread: new THREE.Vector3(5, 5, 5)},
-                    velocity: {
-                        spread: new THREE.Vector3(30),
-                        distribution: SPE.distributions.SPHERE
-                    },
-                    size: {value: [2, 20, 20, 20]},
-                    maxAge: {value: 2},
-                    activeMultiplier: 2000,
-                    opacity: {value: [0.5, 0.25, 0, 0]}
-                });
+
             this.group.addEmitter(this.fireball);
             this.shockwaveGroup.addEmitter(this.debris).addEmitter(this.mist);
         }

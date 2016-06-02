@@ -8,7 +8,7 @@ define(function(require) {
     //var destructibleWallsCount = 1;
 	
 	var cubeScale = 2.5;
-	var ringScale = 1.6;
+	var ringScale = 1.8;
 	var angleSpeedCoefficient = 0.1;
     
     
@@ -105,26 +105,26 @@ define(function(require) {
 			complexObject['isComplexObject'] = true;	// not undefined :)
 
 			var coordinates = gameObjects.getRealCoordinates(x, y);
-			complexObject.bonus.position.set(coordinates.x, 32, coordinates.z);
-			complexObject.ring1.position.set(coordinates.x - 8, 32, coordinates.z);
-			complexObject.ring2.position.set(coordinates.x + 8, 32 + 8, coordinates.z);
-			complexObject.ring3.position.set(coordinates.x, 32 + 8, coordinates.z);
+			complexObject.bonus.position.set(coordinates.x, 52, coordinates.z);
+			complexObject.ring1.position.set(coordinates.x - 8, 52, coordinates.z);
+			complexObject.ring2.position.set(coordinates.x + 8, 52 + 8, coordinates.z);
+			complexObject.ring3.position.set(coordinates.x, 52 + 8, coordinates.z);
 
 			if (shouldSpawn4thRing) {
 				complexObject['ring4'] = randomRotation(gameObjects.prefabsObjects['bonusRingSmall'].clone());	
-				complexObject.ring4.position.set(coordinates.x, 32 - 8, coordinates.z + 8);
+				complexObject.ring4.position.set(coordinates.x, 52 - 8, coordinates.z + 8);
 				complexObject.objects.push('ring4');
 			}
 			if (shouldSpawn5thRing) {
 				complexObject['ring5'] = randomRotation(gameObjects.prefabsObjects['bonusRingBig'].clone());	
-				complexObject.ring5.position.set(coordinates.x, 32, coordinates.z - 8);
+				complexObject.ring5.position.set(coordinates.x, 52, coordinates.z - 8);
 				complexObject.ring5.rotation.x = Math.PI / (2.1 + randomInt(91) / 100);
 				complexObject.objects.push('ring5');
 			}
 
 			var deltaT = 1000 / 60;
 			var timerID = setInterval(function () {
-                complexObject.bonus.position.y = 32 + 8 * Math.sin(2 * complexObject.bonus.rotation.y);
+                complexObject.bonus.position.y = 52 + 8 * Math.sin(2 * complexObject.bonus.rotation.y);
                 complexObject.bonus.rotation.y += angleSpeedCoefficient * -1 * Math.PI / deltaT;
                 complexObject.ring1.rotation.y += angleSpeedCoefficient * 2 * Math.PI / deltaT;
                 complexObject.ring2.rotation.y += angleSpeedCoefficient * -2 * Math.PI / deltaT;

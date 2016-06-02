@@ -4,7 +4,6 @@ define(function (require) {
     var tmpl = require('tmpl/game');
     var app = require('app');
     var gameObjects = require('views/GameModules/gameObjects');
-    var THREE = require('three');
     var Character = require('views/GameModules/character');
     var ws = require('utils/ws');
 	var tileFactory = require('views/GameModules/tileFactory');
