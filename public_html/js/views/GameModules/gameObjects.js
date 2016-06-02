@@ -65,14 +65,23 @@ define(function (require) {
             this.scene.add(realObj);
         },
         deleteObjectFromWorld: function (id) {
-			this.deleteComplexObject(id);
             if (this.objects[id]) {
+                var object = this.objects[id];
+                if (object.isComplex) {
+                    for (var i = 0; i < object.index.objects.length; i++) {
+                        var model = object.index[object.index.objects[i]];
+                        this.scene.remove(model);
+                    }
+                    delete this.objects[id];
+                    return
+                }
                 if (this.objects[id].index.mesh != undefined) {
                     this.scene.remove(this.objects[id].index.mesh);
                 } else {
                     this.scene.remove(this.objects[id].index);
                 }
                 delete this.objects[id];
+                return
             } 
             if (this.bombReys[id]) {
                 this.scene.remove(this.bombReys[id].shockwaveGroup.mesh);
@@ -80,27 +89,14 @@ define(function (require) {
                 delete this.bombReys[id];
             }
         },
-		deleteComplexObject: function (id) {
-            if (this.objects[id]) {
-				var object = this.objects[id];
-                if (object.isComplex) {
-                    for (var i = 0; i < object.index.objects.length; i++) {
-						var model = object.index[object.index.objects[i]];
-						this.scene.remove(model);
-					}
-					delete this.objects[id];
-                }
-            } 
-        },
         setBomb: function (id, x, z) {
-            var self = this;
             var bomb = this.bombObj.clone();
             var coordinates = this.getRealCoordinates(x,z);
             bomb.position.set(coordinates.x, 2, coordinates.z);
             var timerId = setInterval(function () {
-                bomb.scale.y *= 1.09;
-                bomb.scale.x *= 1.09;
-                bomb.scale.z *= 1.09;
+                bomb.scale.y *= 1.11;
+                bomb.scale.x *= 1.11;
+                bomb.scale.z *= 1.11;
             }, 500);
             setTimeout(function () {
                 clearInterval(timerId);

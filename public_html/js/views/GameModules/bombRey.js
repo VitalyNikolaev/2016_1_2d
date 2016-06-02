@@ -63,7 +63,7 @@ define(function (require) {
                     maxAge: {
                         value: 2
                     },
-                    // duration: 2,
+                    duration: 2,
                     activeMultiplier: 40,
 
                     velocity: {
