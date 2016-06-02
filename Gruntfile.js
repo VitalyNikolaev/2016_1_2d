@@ -24,7 +24,7 @@ module.exports = function (grunt) {
                 command: 'node server.js '
             },
             backend : {
-                command : 'java -cp *.jar main.Main'
+                command : 'java -cp Bomberman-server-1.0.1-rc2.jar main.Main'
             },
         },
         fest: {
@@ -70,7 +70,7 @@ module.exports = function (grunt) {
             }
         },
         concurrent: {
-            target: ['watch','shell:backend'],
+            target: ['watch','shell:server'],
             options: {
                 logConcurrentOutput: true
             }
