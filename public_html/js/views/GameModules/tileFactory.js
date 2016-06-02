@@ -88,6 +88,28 @@ define(function(require) {
 		
 		spawnRandomDestructibleWallAt: function(id, x, y) {
 			gameObjects.addPrefabToWorld(randomRotation(gameObjects.prefabsObjects['destructibleCube1'].clone()), id, x, y);
+        },
+		
+		spawnBonusByNameAt: function(name, id, x, y) {
+			var complexObject = {};
+		
+			complexObject['bonus'] = randomRotation(gameObjects.prefabsObjects[name].clone());
+			complexObject['ring1'] = randomRotation(gameObjects.prefabsObjects['bonusRingBig'].clone());
+			complexObject['ring2'] = randomRotation(gameObjects.prefabsObjects['bonusRingBig'].clone());
+			complexObject['ring3'] = randomRotation(gameObjects.prefabsObjects['bonusRingSmall'].clone());
+			complexObject['objects'] = ['bonus', 'ring1', 'ring2', 'ring3'];
+			complexObject['isComplexObject'] = true;	// not undefined :)
+			
+			var deltaT = 1000 / gameObjects.fps;
+			var timerID = setInterval(function () {
+                complexObject.bonus.rotation.y += -1 * Math.PI / deltaT;
+                complexObject.bonus.position.y += 32 + 8 * Math.sin(complexObject.bonus.rotation.y);
+                complexObject.ring1.rotation.y += 2 * Math.PI / deltaT;
+                complexObject.ring2.rotation.y += -2 * Math.PI / deltaT;
+                complexObject.ring3.rotation.y += 4 * Math.PI / deltaT;
+            }, deltaT);
+			
+			complexObject['stopBehavior'] = function() {clearInterval(timerID)};
         }
 	};
 	
