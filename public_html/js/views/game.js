@@ -158,8 +158,8 @@ define(function (require) {
                 gameObjects.scene.add(rey.shockwaveGroup.mesh);
                 gameObjects.scene.add(rey.group.mesh);
                 setTimeout(function () {
-                    gameObjects.deleteObjectFromWorld(data.id);
-                }, 1050);
+                    gameObjects.deleteBombRey(data.id);
+                }, 2100);
                 return
             }
             if (data.object_type === 'bonus_drop_bomb_on_death') {

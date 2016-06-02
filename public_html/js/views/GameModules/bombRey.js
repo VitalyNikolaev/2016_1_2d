@@ -61,9 +61,9 @@ define(function (require) {
                         radius: 0.1,
                     },
                     maxAge: {
-                        value: 2
+                        value: 3
                     },
-                    duration: 2,
+                    duration: 1,
                     activeMultiplier: 40,
 
                     velocity: {
@@ -115,8 +115,8 @@ define(function (require) {
                         distribution: SPE.distributions.SPHERE
                     },
                     maxAge: {value: 2},
-                    // duration: 1,
-                    activeMultiplier: 2000,
+                    duration: 1,
+                    activeMultiplier: 3000,
                     velocity: {
                         value: new THREE.Vector3(8, 3, 10),
                         distribution: SPE.distributions.SPHERE

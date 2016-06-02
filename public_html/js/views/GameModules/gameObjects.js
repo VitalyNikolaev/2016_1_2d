@@ -82,7 +82,9 @@ define(function (require) {
                 }
                 delete this.objects[id];
                 return
-            } 
+            }
+        },
+        deleteBombRey: function (id) {
             if (this.bombReys[id]) {
                 this.scene.remove(this.bombReys[id].shockwaveGroup.mesh);
                 this.scene.remove(this.bombReys[id].group.mesh);
