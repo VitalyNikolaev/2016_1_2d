@@ -88,7 +88,7 @@ define(function (require) {
                     opacity: {value: [0.4, 0]}
                 }),
                 this.fireball = new SPE.Emitter({
-                    particleCount: 100,
+                    particleCount: 120,
                     type: SPE.distributions.SPHERE,
                     position: {
                         radius: 2
