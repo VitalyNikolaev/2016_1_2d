@@ -14,4 +14,4 @@ newmtl Material__25
 	Ke 0.0000 0.0000 0.0000
 	map_Ka crate_al.jpg
 	map_Kd crate_al.jpg
-	map_bump Map__7_Normal_Bump.png
+	map_bump Map_7_Normal_Bump.png

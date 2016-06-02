@@ -73,7 +73,7 @@ define(function (require) {
                     }, 15000);
                     this.$('.chat__message_input').focus();
                 } else {
-                    setTimeout(openSocket, 1500);
+                    setTimeout(openSocket, 500);
                 }
             }
             openSocket();

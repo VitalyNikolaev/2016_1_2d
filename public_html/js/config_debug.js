@@ -10,6 +10,7 @@ var require = {
         MTLLoader: 'lib/MTLLoader',
         webcam : 'lib/webcam.min',
         OrbitControls : 'lib/OrbitControls',
+        SPE: 'lib/SPE.min',
     },
     shim: {
         'backbone': {
@@ -28,6 +29,10 @@ var require = {
         'OBJLoader': {
             deps: ['three'],
             exports: 'OBJLoader'
+        },
+        'SPE': {
+            deps: ['three'],
+            exports: 'SPE'
         },
         'MTLLoader': {
             deps: ['three'],
