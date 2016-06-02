@@ -39,6 +39,16 @@ define(function (require) {
             };
             this.scene.add(model);
         },
+		addComplexObjectToWorld: function (object, id) {
+            this.objects[id] = {
+                index: object,
+				isComplex: true
+            };
+			for (var i = 0; i < object.objects.length; i++) {
+				var model = object[object.objects[i]];
+				this.scene.add(model);
+			}
+        },
         addObjectToWorldWithNoCollisions: function (type, obj_geometry, id, x, z) { // needed to place objects by x, y and its id
             var realObj = new THREE.Mesh(obj_geometry, type);
             var coordinates = this.getRealCoordinates(x, z);

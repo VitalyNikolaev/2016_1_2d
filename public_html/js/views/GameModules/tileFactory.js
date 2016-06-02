@@ -8,7 +8,8 @@ define(function(require) {
     //var destructibleWallsCount = 1;
 	
 	var cubeScale = 2.5;
-	var ringScale = 1.2;
+	var ringScale = 1.6;
+	var angleSpeedCoefficient = 0.1;
     
     
 	var randomInt = function(max) {
@@ -94,22 +95,31 @@ define(function(require) {
 			var complexObject = {};
 		
 			complexObject['bonus'] = randomRotation(gameObjects.prefabsObjects[name].clone());
+			complexObject['bonus'].scale.set(1,1,1);
 			complexObject['ring1'] = randomRotation(gameObjects.prefabsObjects['bonusRingBig'].clone());
 			complexObject['ring2'] = randomRotation(gameObjects.prefabsObjects['bonusRingBig'].clone());
 			complexObject['ring3'] = randomRotation(gameObjects.prefabsObjects['bonusRingSmall'].clone());
 			complexObject['objects'] = ['bonus', 'ring1', 'ring2', 'ring3'];
 			complexObject['isComplexObject'] = true;	// not undefined :)
 			
+			var coordinates = gameObjects.getRealCoordinates(x, y);
+			complexObject.bonus.position.set(coordinates.x, 32, coordinates.z);
+			complexObject.ring1.position.set(coordinates.x - 8, 32, coordinates.z);
+			complexObject.ring2.position.set(coordinates.x + 8, 32 + 8, coordinates.z);
+			complexObject.ring3.position.set(coordinates.x, 32 + 8, coordinates.z);
+			
 			var deltaT = 1000 / gameObjects.fps;
 			var timerID = setInterval(function () {
-                complexObject.bonus.rotation.y += -1 * Math.PI / deltaT;
-                complexObject.bonus.position.y += 32 + 8 * Math.sin(complexObject.bonus.rotation.y);
-                complexObject.ring1.rotation.y += 2 * Math.PI / deltaT;
-                complexObject.ring2.rotation.y += -2 * Math.PI / deltaT;
-                complexObject.ring3.rotation.y += 4 * Math.PI / deltaT;
+                //complexObject.bonus.position.y += 32 + 8 * Math.sin(complexObject.bonus.rotation.y);
+                complexObject.bonus.rotation.y += angleSpeedCoefficient * -1 * Math.PI / deltaT;
+                complexObject.ring1.rotation.y += angleSpeedCoefficient * 2 * Math.PI / deltaT;
+                complexObject.ring2.rotation.y += angleSpeedCoefficient * -2 * Math.PI / deltaT;
+                complexObject.ring3.rotation.y += angleSpeedCoefficient * 4 * Math.PI / deltaT;
             }, deltaT);
 			
 			complexObject['stopBehavior'] = function() {clearInterval(timerID)};
+			
+			gameObjects.addComplexObjectToWorld(complexObject, id);
         }
 	};
 	
