@@ -366,7 +366,9 @@ THREE.MTLLoader.MaterialCreator.prototype = {
 					break;
 
 				case 'map_d':
+				
 					// Alpha texture map
+					
 					params[ 'alphaMap' ] = this.loadTexture( this.baseUrl + value );
 					params[ 'transparent' ] = true;
 					params[ 'alphaMap' ].wrapS = this.wrap;
@@ -375,11 +377,20 @@ THREE.MTLLoader.MaterialCreator.prototype = {
 					break;
 	
 				case 'map_bump':
+					
+					// Normal map
+					
+					params[ 'normalMap' ] = this.loadTexture( this.baseUrl + value );
+					params[ 'normalMap' ].wrapS = this.wrap;
+					params[ 'normalMap' ].wrapT = this.wrap;
+					
+					params[ 'normalScale' ] = new THREE.Vector2( 1.0, 1.0 );
+					
+					break;
+					
 				case 'bump':
 
 					// Bump texture map
-
-					if ( params[ 'bumpMap' ] ) break; // Avoid loading twice.
 
 					params[ 'bumpMap' ] = this.loadTexture( this.baseUrl + value );
 					params[ 'bumpMap' ].wrapS = this.wrap;
