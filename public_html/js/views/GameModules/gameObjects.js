@@ -1,6 +1,6 @@
 define(function (require) {
     var THREE = require('three');
-    var bombRey = require('views/GameModules/bombRey');
+   
     
     var objects = {
         scene: null,
@@ -63,19 +63,6 @@ define(function (require) {
                 index: realObj
             };
             this.scene.add(realObj);
-        },
-        addReyToWorldWithNoCollisions: function (id, x, z) { // needed to place objects by x, y and its id
-            var self = this;
-            var rey = new bombRey.init();
-            var coords = this.getRealCoordinates(x, z);
-            rey.group.mesh.position.set(coords.x, 42, coords.z);
-            rey.shockwaveGroup.mesh.position.set(coords.x, 42, coords.z);
-            this.bombReys[id] = rey;
-            this.scene.add(rey.shockwaveGroup.mesh);
-            this.scene.add(rey.group.mesh);
-            setTimeout(function () {
-               self.deleteObjectFromWorld(id);
-            }, 1050);
         },
         deleteObjectFromWorld: function (id) {
 			this.deleteComplexObject(id);
