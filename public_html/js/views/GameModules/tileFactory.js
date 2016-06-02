@@ -3,6 +3,7 @@ define(function(require) {
     var modelLoader = require('utils/modelLoader');
 	var gameObjects = require('views/GameModules/gameObjects');
     var app = require('app');
+	var bonusParticles = require('views/GameModules/bonusParticles');
 	
 	var undestructibleWallsCount = 3;
     //var destructibleWallsCount = 1;
@@ -107,12 +108,15 @@ define(function(require) {
 			var shouldSpawn4thRing = randomInt(2) == 1;
 			var shouldSpawn5thRing = randomInt(2) == 1;
 
+			var particleEmitter  = new bonusParticles.init();
+			complexObject['bonusParticles'] = particleEmitter.group.mesh;
+			
 			complexObject['bonus'] = randomRotation(gameObjects.prefabsObjects[name].clone());
 			complexObject['bonus'].scale.set(0,0,0);
 			complexObject['ring1'] = randomRotation(gameObjects.prefabsObjects['bonusRingBig'].clone());
 			complexObject['ring2'] = randomRotation(gameObjects.prefabsObjects['bonusRingBig'].clone());
 			complexObject['ring3'] = randomRotation(gameObjects.prefabsObjects['bonusRingSmall'].clone());
-			complexObject['objects'] = ['bonus', 'ring1', 'ring2', 'ring3'];
+			complexObject['objects'] = ['bonus', 'ring1', 'ring2', 'ring3', 'bonusParticles'];
 			complexObject['isComplexObject'] = true;	// not undefined :)
 
 			var coordinates = gameObjects.getRealCoordinates(x, y);
@@ -120,6 +124,7 @@ define(function(require) {
 			complexObject.ring1.position.set(coordinates.x - 8, 52, coordinates.z);
 			complexObject.ring2.position.set(coordinates.x + 8, 52 + 8, coordinates.z);
 			complexObject.ring3.position.set(coordinates.x, 52 + 8, coordinates.z);
+			complexObject.bonusParticles.position.set(coordinates.x, 52, coordinates.z);
 
 			if (shouldSpawn4thRing) {
 				complexObject['ring4'] = randomRotation(gameObjects.prefabsObjects['bonusRingSmall'].clone());	
@@ -136,6 +141,7 @@ define(function(require) {
 			var deltaT = 1000 / fps;
 			var timerID = setInterval(function () {
                 complexObject.bonus.position.y = 52 + 9 * Math.sin(2 * complexObject.bonus.rotation.y);
+				
                 complexObject.bonus.rotation.y += angleSpeedCoefficient * -1 * Math.PI / deltaT;
                 complexObject.ring1.rotation.y += angleSpeedCoefficient * 2 * Math.PI / deltaT;
                 complexObject.ring2.rotation.y += angleSpeedCoefficient * -2 * Math.PI / deltaT;
@@ -145,6 +151,9 @@ define(function(require) {
 				bonusSpawnScaleTransistion(complexObject.ring1, complexObject.growthStep, ringScale);
 				bonusSpawnScaleTransistion(complexObject.ring2, complexObject.growthStep, ringScale);
 				bonusSpawnScaleTransistion(complexObject.ring3, complexObject.growthStep, ringScale);
+				
+                complexObject.bonusParticles.y = complexObject.bonus.position.y;
+				particleEmitter.group.tick();
 				
 				if (shouldSpawn4thRing) {
 					complexObject.ring4.rotation.y += angleSpeedCoefficient * -3 * Math.PI / deltaT;
