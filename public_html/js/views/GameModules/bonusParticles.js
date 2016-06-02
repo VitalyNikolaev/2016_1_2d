@@ -6,13 +6,13 @@ define(function (require) {
         init: function () {
             this.group = new SPE.Group({
                 texture: {
-                    value: gameObjects.worldObjects.fireball,
+                    value: gameObjects.worldObjects.shockwaveGroup,
                     loop: Infinity
                 },
                 depthTest: true,
                 depthWrite: false,
                 blending: THREE.AdditiveBlending,
-                scale: 600
+                scale: 400
             });
 			this.fireball = new SPE.Emitter({
 				particleCount: 1000, // 10^3 is almost an infinite source of particles
