@@ -10,6 +10,8 @@ define(function(require) {
 	var cubeScale = 2.5;
 	var ringScale = 1.8;
 	var angleSpeedCoefficient = 0.1;
+	var fps = 60;
+	var numberOfFramesToFullyGrownBonus = fps * 0.5; // 0.5 of second
     
     
 	var randomInt = function(max) {
@@ -41,6 +43,15 @@ define(function(require) {
 		return model;
 	};
    
+	var bonusSpawnScaleTransistion = function(object, stepNum, targetScale) {
+		var currentScale = (targetScale / numberOfFramesToFullyGrownBonus) * stepNum;
+		
+		if (currentScale > targetScale)
+			currentScale = targetScale;
+			
+		object.scale.set(currentScale, currentScale, currentScale);
+	};
+   
 	var tileFactory = {
         init: function () {
             modelLoader.getModel('undestructible_walls', 'rock1uvw64', function(object) {
@@ -60,11 +71,11 @@ define(function(require) {
 							gameObjects.prefabsObjects['destructibleCube1'] = object;
 						   
 							modelLoader.getModel('bonuses', 'bonusRing48', function(object) {
-								object.scale.set(ringScale, ringScale, ringScale);
+								object.scale.set(0, 0, 0);
 								gameObjects.prefabsObjects['bonusRingBig'] = object;
 							   
 								modelLoader.getModel('bonuses', 'bonusRing32', function(object) {
-									object.scale.set(ringScale, ringScale, ringScale);
+									object.scale.set(0, 0, 0);
 									gameObjects.prefabsObjects['bonusRingSmall'] = object;
 								   
 									app.Events.trigger('ModelsReady');
@@ -92,12 +103,12 @@ define(function(require) {
         },
 		
 		spawnBonusByNameAt: function(name, id, x, y) {
-			var complexObject = {};
+			var complexObject = { growthStep: 0 };
 			var shouldSpawn4thRing = randomInt(2) == 1;
 			var shouldSpawn5thRing = randomInt(2) == 1;
 
 			complexObject['bonus'] = randomRotation(gameObjects.prefabsObjects[name].clone());
-			complexObject['bonus'].scale.set(1,1,1);
+			complexObject['bonus'].scale.set(0,0,0);
 			complexObject['ring1'] = randomRotation(gameObjects.prefabsObjects['bonusRingBig'].clone());
 			complexObject['ring2'] = randomRotation(gameObjects.prefabsObjects['bonusRingBig'].clone());
 			complexObject['ring3'] = randomRotation(gameObjects.prefabsObjects['bonusRingSmall'].clone());
@@ -122,7 +133,7 @@ define(function(require) {
 				complexObject.objects.push('ring5');
 			}
 
-			var deltaT = 1000 / 60;
+			var deltaT = 1000 / fps;
 			var timerID = setInterval(function () {
                 complexObject.bonus.position.y = 52 + 8 * Math.sin(2 * complexObject.bonus.rotation.y);
                 complexObject.bonus.rotation.y += angleSpeedCoefficient * -1 * Math.PI / deltaT;
@@ -130,10 +141,21 @@ define(function(require) {
                 complexObject.ring2.rotation.y += angleSpeedCoefficient * -2 * Math.PI / deltaT;
                 complexObject.ring3.rotation.y += angleSpeedCoefficient * 4 * Math.PI / deltaT;
 
-				if (shouldSpawn4thRing)
+				bonusSpawnScaleTransistion(complexObject.bonus, complexObject.growthStep, 1);
+				bonusSpawnScaleTransistion(complexObject.ring1, complexObject.growthStep, ringScale);
+				bonusSpawnScaleTransistion(complexObject.ring2, complexObject.growthStep, ringScale);
+				bonusSpawnScaleTransistion(complexObject.ring3, complexObject.growthStep, ringScale);
+				
+				if (shouldSpawn4thRing) {
 					complexObject.ring4.rotation.y += angleSpeedCoefficient * -3 * Math.PI / deltaT;
-				if (shouldSpawn5thRing)
+					bonusSpawnScaleTransistion(complexObject.ring4, complexObject.growthStep, ringScale);
+					}
+				if (shouldSpawn5thRing) {
 					complexObject.ring5.rotation.y += angleSpeedCoefficient * 2.5 * Math.PI / deltaT;
+					bonusSpawnScaleTransistion(complexObject.ring5, complexObject.growthStep, ringScale);
+					}
+					
+				complexObject.growthStep++;
 
             }, deltaT);
 			
