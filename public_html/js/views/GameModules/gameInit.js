@@ -62,6 +62,12 @@ define(function (require) {
             gameObjects.playersCharacter.sendDirectionWS();
             gameObjects.playersCharacter.setFocus(gameObjects.playersCharacter.mesh , gameObjects.playersCharacterLook);
             gameObjects.renderer.render(gameObjects.scene, gameObjects.camera);
+			for (var rey in gameObjects.bombReys) {
+                if (gameObjects.bombReys.hasOwnProperty(rey)) {
+                    gameObjects.bombReys[rey].group.tick();
+                    gameObjects.bombReys[rey].shockwaveGroup.tick();
+                }
+            }
 			jQuery('#game').focus();
         },
         dealloc: function () {
@@ -72,9 +78,11 @@ define(function (require) {
             gameObjects.renderer = undefined;
             gameObjects.playersCharacter = undefined;
             gameObjects.objects = {};
+			gameObjects.bombReys = {};
             gameObjects.playersCharacterLook = 0;
         }
     };
+
 
     return BasicScene;
 });
