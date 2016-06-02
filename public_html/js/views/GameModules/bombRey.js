@@ -23,70 +23,7 @@ define(function (require) {
                 depthWrite: true,
                 blending: THREE.NormalBlending,
             });
-            this.shockwave = new SPE.Emitter({
-                particleCount: Math.random() * (200 - 50) + 50,
-                type: SPE.distributions.DISC,
-                position: {
-                    radius: 5,
-                    spread: new THREE.Vector3( 20 )
-                },
-                maxAge: {
-                    value: 2,
-                    spread: 0
-                },
-                duration: 1,
-                activeMultiplier: 2000,
 
-                velocity: {
-                    value: new THREE.Vector3( 70 )
-                },
-                rotation: {
-                    axis: new THREE.Vector3( 1, 0, 0 ),
-                    angle: Math.PI * 0.5,
-                    static: true
-                },
-                size: { value: 2 },
-                color: {
-                    value: [
-                        new THREE.Color( 0.4, 0.2, 0.1 ),
-                        new THREE.Color( 0.2, 0.2, 0.2 )
-                    ]
-                },
-                opacity: { value: [0.5, 0.2, 0] }
-            }),
-                this.debris = new SPE.Emitter({
-                    particleCount: 100,
-                    type: SPE.distributions.SPHERE,
-                    position: {
-                        radius: 0.1,
-                    },
-                    maxAge: {
-                        value: 3
-                    },
-                    duration: 1,
-                    activeMultiplier: 40,
-
-                    velocity: {
-                        value: new THREE.Vector3(100)
-                    },
-                    acceleration: {
-                        value: new THREE.Vector3(0, -20, 0),
-                        distribution: SPE.distributions.BOX
-                    },
-                    size: {value: 2},
-                    drag: {
-                        value: 1
-                    },
-                    color: {
-                        value: [
-                            new THREE.Color(1, 1, 1),
-                            new THREE.Color(1, 1, 0),
-                            new THREE.Color(1, 0, 0),
-                            new THREE.Color(0.4, 0.2, 0.1)
-                        ]
-                    },
-                    opacity: {value: [0.4, 0]}
-                }),
                 this.fireball = new SPE.Emitter({
                     particleCount: 170,
                     type: SPE.distributions.SPHERE,
@@ -109,7 +46,7 @@ define(function (require) {
                     opacity: {value: [0.5, 0.35, 0.1, 0]}
                 }),
                 this.mist = new SPE.Emitter({
-                    particleCount: 50,
+                    particleCount: 90,
                     position: {
                         spread: new THREE.Vector3(10, 10, 10),
                         distribution: SPE.distributions.SPHERE
@@ -129,7 +66,7 @@ define(function (require) {
                 }),
 
             this.group.addEmitter(this.fireball);
-            this.shockwaveGroup.addEmitter(this.debris).addEmitter(this.mist);
+            this.shockwaveGroup.addEmitter(this.mist);
         }
 
     };
