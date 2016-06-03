@@ -100,10 +100,35 @@ define(function(require) {
 															gameObjects.prefabsObjects['death'] = object;
 														   
 															modelLoader.getModel('bonuses', 'boots', function(object) {
-																object.scale.set(defaultBonusScale, defaultBonusScale, defaultBonusScale);
+																//object.scale.set(defaultBonusScale, defaultBonusScale, defaultBonusScale);
 																gameObjects.prefabsObjects['boots'] = object;
 															   
-																app.Events.trigger('ModelsReady');
+																modelLoader.getModel('player', 'player_body', function(object) {
+																	//object.scale.set(defaultBonusScale, defaultBonusScale, defaultBonusScale);
+																	gameObjects.prefabsObjects['player_body'] = object;
+																   
+																	modelLoader.getModel('player', 'player_l_hand', function(object) {
+																		//object.scale.set(defaultBonusScale, defaultBonusScale, defaultBonusScale);
+																		gameObjects.prefabsObjects['player_l_hand'] = object;
+																	   
+																		modelLoader.getModel('player', 'player_r_hand', function(object) {
+																			//object.scale.set(defaultBonusScale, defaultBonusScale, defaultBonusScale);
+																			gameObjects.prefabsObjects['player_r_hand'] = object;
+																		   
+																			modelLoader.getModel('player', 'player_l_foot', function(object) {
+																				//object.scale.set(defaultBonusScale, defaultBonusScale, defaultBonusScale);
+																				gameObjects.prefabsObjects['player_l_foot'] = object;
+																			   
+																				modelLoader.getModel('player', 'player_r_foot', function(object) {
+																					//object.scale.set(defaultBonusScale, defaultBonusScale, defaultBonusScale);
+																					gameObjects.prefabsObjects['player_r_foot'] = object;
+																				   
+																					app.Events.trigger('ModelsReady');
+																				});
+																			});
+																		});
+																	});
+																});
 															});
 														});
 													});
