@@ -11,6 +11,7 @@ define(function (require) {
         particleEngine: null,
         playersCharacter: null,
         bombReys:{},
+        clouds: {},
         playersCharacterLook: 950,
         fps: 0, // needed to move bomber sync to server
         objects: {}, // here we dump all links to obstacle index by id of object
@@ -23,7 +24,8 @@ define(function (require) {
             drop_bomb_on_death: new THREE.MeshPhongMaterial({map: new THREE.TextureLoader().load('media/game/textures/death_bomb.jpg')}),
             explosion_rey: new THREE.MeshPhongMaterial({map: new THREE.TextureLoader().load('media/game/textures/explosion.jpg')}),
             shockwaveGroup : THREE.ImageUtils.loadTexture('../media/game/textures/smokeparticle.png'),
-            fireball: THREE.ImageUtils.loadTexture('../media/game/textures/sprite-explosion2.png')
+            fireball: THREE.ImageUtils.loadTexture('../media/game/textures/sprite-explosion2.png'),
+            cloud: THREE.ImageUtils.loadTexture('../media/game/textures/cloud.png')
         },
         getRealCoordinates: function (x, z) {
             return {

@@ -51,7 +51,7 @@ define(function (require) {
                     spread: new THREE.Vector3(10, 10, 10),
                     distribution: SPE.distributions.SPHERE
                 },
-                maxAge: {value: 2},
+                maxAge: {value: 1.6},
                 duration: 1,
                 activeMultiplier: 3000,
                 velocity: {

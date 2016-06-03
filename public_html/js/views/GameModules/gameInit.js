@@ -3,6 +3,7 @@ define(function (require) {
     var THREE = require('three');
     var gameObjects = require('views/GameModules/gameObjects');
     var World = require('views/GameModules/worldBuilder');
+    var cloud = require('views/GameModules/cloud');
     
 	var createShadowLight = function(name, x, y, z) {
 		var directionalLight = new THREE.DirectionalLight( 0xffffff, 1);
@@ -38,8 +39,14 @@ define(function (require) {
 			gameObjects.renderer.shadowMap.type = THREE.BasicShadowMap;		
            
             World.init();
-            
+            var fCloud = new cloud.init();
+            var coords = gameObjects.getRealCoordinates(0, 0);
+            fCloud.particleGroup.mesh.position.set(coords.x - 200, 192, coords.z - 200);
+            gameObjects.clouds[0] = fCloud;
+            gameObjects.scene.add(fCloud.particleGroup.mesh);
+
             gameObjects.scene.add(World.mesh);
+
             jQuery(window).resize(function () {
                 BasicScene.setAspect();
             });
@@ -68,6 +75,12 @@ define(function (require) {
                     gameObjects.bombReys[rey].shockwaveGroup.tick();
                 }
             }
+            for (var rey in gameObjects.clouds) {
+                if (gameObjects.clouds.hasOwnProperty(rey)) {
+                    gameObjects.clouds[rey].particleGroup.tick();
+                    gameObjects.clouds[rey].particleGroup.mesh.position.z += 0.2;
+                }
+            }
 			jQuery('#game').focus();
         },
         dealloc: function () {
@@ -79,6 +92,7 @@ define(function (require) {
             gameObjects.playersCharacter = undefined;
             gameObjects.objects = {};
 			gameObjects.bombReys = {};
+            gameObjects.clouds = {};
             gameObjects.playersCharacterLook = 0;
         }
     };
