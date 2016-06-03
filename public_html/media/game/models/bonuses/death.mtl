@@ -36,7 +36,7 @@ newmtl 01___Default__1
 	Kd 0.0000 0.1490 0.0078
 	Ks 0.1890 0.1890 0.1890
 	Ke 0.0000 0.0000 0.0000
-	map_bump -bm 0.1100 Map_3_Dent.png
+	map_bump Map_3_Dent.png
 
 newmtl 01___Default__14
 	Ns 23.0000
@@ -49,4 +49,4 @@ newmtl 01___Default__14
 	Kd 0.4863 0.4627 0.4235
 	Ks 0.0180 0.0180 0.0180
 	Ke 0.0000 0.0000 0.0000
-	map_bump -bm 0.1700 Map_4_Cellular.png
+	map_bump Map_4_Cellular.png
