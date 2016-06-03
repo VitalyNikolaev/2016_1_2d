@@ -37,11 +37,8 @@ define(function (require) {
             this.feet.right.position.y = -36;
             this.feet.right.rotation.y = Math.PI / 4;
             this.mesh.add(this.feet.left);
-            this.mesh.add(this.feet.right);
-            this.nose = new THREE.Mesh(nose, material);
-            this.nose.position.y = 0;
-            this.nose.position.z = 24;
-            this.mesh.add(this.nose);
+
+            this.head.scale.set(1.5,1.5,1.5);
 
 
             var playerCoordinates = gameObjects.getBomberManRealCoordinates(position.x, position.z); // where we need to place our character

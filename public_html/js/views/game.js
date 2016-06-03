@@ -87,12 +87,12 @@ define(function (require) {
             if (data.id != null) {
                 this.$('.gameover').append("<p class='gameover_text'>"  + 'Winner: '  + gameObjects.playerNicks[data.id] + "</p>");
             } else {
-                this.$('.gameover').append("<p class='gameover_text'>" + 'Game ended with draw' + "</p>");
+                this.$('.gameover').append("<p class='gameover_text'>" + 'Game Draw' + "</p>");
             }
             app.fetchNewScoreboard();
             setTimeout(function () {
                 self.endGame();
-                self.$('.gameover').html('');
+                self.$('.gameover_text').remove();
                 self.$('.gameover').fadeOut();
                 window.location.href = '#main'
             }, 3500);
