@@ -23,12 +23,12 @@ define(function (require) {
 					value: new THREE.Vector3(Math.random() * (100 - 50) + 50),
 					spread: new THREE.Vector3(Math.random() * (10 - 5) + 5)
 				},
-				size: {value: [150, 40, 0]},
-				wiggle: {value: 5},
+				size: {value: [120, 40, 0]},
+				wiggle: {value: 10},
 				color: {
 					value: [
-						new THREE.Color(0.5, 0.1, 0.05),
-						new THREE.Color(0.2, 0.2, 0.2)
+						new THREE.Color(246 / 256, 235 / 256, 19 / 256),
+						new THREE.Color(116 / 256, 111 / 256, 0)
 					]
 				},
 				opacity: {value: [0.5, 0.35, 0.1, 0]}
