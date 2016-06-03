@@ -1,28 +1,24 @@
 define(function (require) {
     var THREE = require('three');
     var gameObjects = require('views/GameModules/gameObjects');
+	var modelLoader = require('utils/modelLoader');
     var jQuery = require('jquery');
     var ws = require('utils/ws');
 
     var Character = {
         init: function (color, position) {
-            var head = new THREE.SphereGeometry(24, 16, 16),
-                hand = new THREE.SphereGeometry(8, 8, 8),
-                foot = new THREE.SphereGeometry(16, 4, 8, 0, Math.PI * 2, 0, Math.PI / 2),
-                nose = new THREE.SphereGeometry(4, 8, 8),
-                material = new THREE.MeshLambertMaterial(color);
             this.realDirection = {
                 x: 0,
                 z: 0
             };
             this.mesh = new THREE.Object3D();
             this.mesh.position.y = 48;
-            this.head = new THREE.Mesh(head, material);
+            this.head = gameObjects.prefabsObjects['player_body'].clone();
             this.head.position.y = 0;
             this.mesh.add(this.head);
             this.hands = {
-                left: new THREE.Mesh(hand, material),
-                right: new THREE.Mesh(hand, material)
+                left: gameObjects.prefabsObjects['player_l_hand'].clone(),
+                right: gameObjects.prefabsObjects['player_r_hand'].clone()
             };
             this.hands.left.position.x = -32;
             this.hands.left.position.y = -8;
@@ -31,8 +27,8 @@ define(function (require) {
             this.mesh.add(this.hands.left);
             this.mesh.add(this.hands.right);
             this.feet = {
-                left: new THREE.Mesh(foot, material),
-                right: new THREE.Mesh(foot, material)
+                left: gameObjects.prefabsObjects['player_l_foot'].clone(),
+                right: gameObjects.prefabsObjects['player_r_foot'].clone()
             };
             this.feet.left.position.x = -20;
             this.feet.left.position.y = -36;
