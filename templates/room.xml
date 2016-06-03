@@ -4,7 +4,7 @@
         <div class="room__tutorial">
             <img class="room__tutorial__keyboard" src="media/keyboard.png"></img>
             <p class="room__tutorial__keyboard_text">Movement - <img  align="center" class="room__tutorial__keys" src="media/controls.png"></img></p>
-            <p class="room__tutorial__keyboard_text">Place Bomb - <img  align="center" class="room__tutorial__keys" src="media/space_key.png"></img></p>
+            <p class="room__tutorial__keyboard_text">Place Bomb - <img  align="center" class="room__tutorial__bomb" src="media/space_key.png"></img></p>
             <img class="room__tutorial__bomberman_logo" src="media/bomberman.png"></img>
         </div>
         <div class="room__players-wrapper"></div>
