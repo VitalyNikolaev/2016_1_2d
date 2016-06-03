@@ -1,6 +1,6 @@
 .gameover{
   display: none;
-  background-color: beige;
+  background-color: rgba(25, 255, 223, 0.46);
   position: fixed;
   top: 50%;
   left: 50%;
@@ -16,5 +16,4 @@
 .gameover_text {
   font-size: 30px;
   margin-left: 10vw;
-  
 }

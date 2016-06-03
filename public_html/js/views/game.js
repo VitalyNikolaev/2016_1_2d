@@ -83,15 +83,19 @@ define(function (require) {
         },
         gameOver: function (data) {
             var self = this;
-            console.log(data);
             this.$('.gameover').fadeIn();
-            this.$('.gameover').append("<p class='gameover_text'>" + gameObjects.playerNicks[data.id] + "</p>");
+            if (data.id != null) {
+                this.$('.gameover').append("<p class='gameover_text'>"  + 'Winner: '  + gameObjects.playerNicks[data.id] + "</p>");
+            } else {
+                this.$('.gameover').append("<p class='gameover_text'>" + 'Game ended with draw' + "</p>");
+            }
             app.fetchNewScoreboard();
             setTimeout(function () {
                 self.endGame();
+                self.$('.gameover').html('');
                 self.$('.gameover').fadeOut();
                 window.location.href = '#main'
-            }, 2000);
+            }, 3500);
         },
         spawnBomberman: function (data) {
             if (data.user_id === app.user.get('id')) {
