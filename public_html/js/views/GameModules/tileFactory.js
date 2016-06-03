@@ -92,7 +92,12 @@ define(function(require) {
 												object.scale.set(defaultBonusScale, defaultBonusScale, defaultBonusScale);
 												gameObjects.prefabsObjects['4arrows'] = object;
 											   
-												app.Events.trigger('ModelsReady');
+												modelLoader.getModel('bonuses', 'onemorebomb', function(object) {
+													object.scale.set(defaultBonusScale, defaultBonusScale, defaultBonusScale);
+													gameObjects.prefabsObjects['onemorebomb'] = object;
+												   
+													app.Events.trigger('ModelsReady');
+												});
 											});
 										});
 									});

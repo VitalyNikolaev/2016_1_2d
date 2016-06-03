@@ -171,7 +171,7 @@ define(function (require) {
                 return
             }
             if (data.object_type === 'bonus_bombs_amount') {
-                tileFactory.spawnBonusByNameAt('destructibleCube1', data.id, data.x, data.y);
+                tileFactory.spawnBonusByNameAt('onemorebomb', data.id, data.x, data.y);
                 return
             }
             if (data.object_type === 'bomb') {
