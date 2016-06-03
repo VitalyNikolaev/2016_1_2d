@@ -96,7 +96,12 @@ define(function(require) {
 													object.scale.set(defaultBonusScale, defaultBonusScale, defaultBonusScale);
 													gameObjects.prefabsObjects['onemorebomb'] = object;
 												   
-													app.Events.trigger('ModelsReady');
+													modelLoader.getModel('bonuses', 'time', function(object) {
+														object.scale.set(defaultBonusScale, defaultBonusScale, defaultBonusScale);
+														gameObjects.prefabsObjects['time'] = object;
+													   
+														app.Events.trigger('ModelsReady');
+													});
 												});
 											});
 										});

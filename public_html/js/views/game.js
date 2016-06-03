@@ -138,7 +138,7 @@ define(function (require) {
                 return
             }
             if (data.object_type === 'bonus_decrease_bomb_spawn_delay') {
-                tileFactory.spawnBonusByNameAt('destructibleCube1', data.id, data.x, data.y);
+                tileFactory.spawnBonusByNameAt('time', data.id, data.x, data.y);
                 return
             }
             if (data.object_type === 'bonus_increase_speed') {
