@@ -72,6 +72,7 @@ define(function (require) {
                         var model = object.index[object.index.objects[i]];
                         this.scene.remove(model);
                     }
+                    this.objects[id] = null;
                     delete this.objects[id];
                     return
                 }
@@ -80,14 +81,15 @@ define(function (require) {
                 } else {
                     this.scene.remove(this.objects[id].index);
                 }
+                this.objects[id] = null;
                 delete this.objects[id];
-                return
             }
         },
         deleteBombRey: function (id) {
             if (this.bombReys[id]) {
-                this.scene.remove(this.bombReys[id].shockwaveGroup.mesh);
-                this.scene.remove(this.bombReys[id].group.mesh);
+                // this.scene.remove(this.bombReys[id].shockwaveGroup);
+                this.scene.remove(this.bombReys[id].group);
+                this.bombReys[id] = null;
                 delete this.bombReys[id];
             }
         },

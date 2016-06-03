@@ -9,7 +9,7 @@ define(function (require) {
 	var tileFactory = require('views/GameModules/tileFactory');
     var Bomb = require('views/GameModules/bomb');
     var bombRey = require('views/GameModules/bombRey');
-  
+    var THREE = require('three');
 
     var View = baseView.extend({
         template: tmpl,
@@ -153,9 +153,9 @@ define(function (require) {
                 var rey = new bombRey.init();
                 var coords = gameObjects.getRealCoordinates(data.x, data.y);
                 rey.group.mesh.position.set(coords.x, 42, coords.z);
-                rey.shockwaveGroup.mesh.position.set(coords.x, 42, coords.z);
+                // rey.shockwaveGroup.mesh.position.set(coords.x, 42, coords.z);
                 gameObjects.bombReys[data.id] = rey;
-                gameObjects.scene.add(rey.shockwaveGroup.mesh);
+                // gameObjects.scene.add(rey.shockwaveGroup.mesh);
                 gameObjects.scene.add(rey.group.mesh);
                 setTimeout(function () {
                     gameObjects.deleteBombRey(data.id);

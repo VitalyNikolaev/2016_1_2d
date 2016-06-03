@@ -33,13 +33,13 @@ define(function (require) {
             //createShadowLight('light2', 0, 1800, 600);
 			//createShadowLight('light3', -600, 1800, 0);
             //createShadowLight('light4', 600, 1800, 0);
-            gameObjects.renderer = new THREE.WebGLRenderer({ antialias: true, logarithmicDepthBuffer: true, alpha: true, premultipliedAlpha: true });
+            gameObjects.renderer = new THREE.WebGLRenderer({ antialias: true, logarithmicDepthBuffer: true, alpha: true});
 
-			gameObjects.renderer.shadowMap.enabled = true;
-			gameObjects.renderer.shadowMap.type = THREE.BasicShadowMap;		
+			// gameObjects.renderer.shadowMap.enabled = true;
+			// gameObjects.renderer.shadowMap.type = THREE.BasicShadowMap;
            
             World.init();
-            for (var i = 1; i < 5; i++) {
+            for (var i = 1; i < 3; i++) {
                 var fCloud = new cloud.init();
                 fCloud.angle = i * Math.PI;
                 fCloud.particleGroup.mesh.position.set(1024 * 1.5 * Math.cos(fCloud.angle), 252, 1024 * 1.5 * Math.sin(fCloud.angle));

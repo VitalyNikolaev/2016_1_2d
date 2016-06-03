@@ -10,11 +10,11 @@ define(function (require) {
                 },
                 blending: THREE.NormalBlending,
                 fog: true,
-                maxParticleCount: 400,
+                maxParticleCount: 200,
             });
 
             this.emitter = new SPE.Emitter({
-                particleCount: Math.floor(Math.random() * 200),
+                particleCount: 200,
                 maxAge: {
                     value: 3,
                 },
@@ -23,15 +23,14 @@ define(function (require) {
                     spread: new THREE.Vector3( 100, 30, 100 )
                 },
                 velocity: {
-                    value: new THREE.Vector3( 0, 0, 30 ),
-                    randomise: true
+                    value: new THREE.Vector3( 0, 0, 50 ),
                 },
                 wiggle: {
                     spread: 40
                 },
                 size: {
-                    value: Math.floor(Math.random() * 120),
-                    spread: Math.floor(Math.random() * 700),
+                    value: 100,
+                    spread: 400,
                 },
                 opacity: {
                     value: [ 0, 1, 0 ]
