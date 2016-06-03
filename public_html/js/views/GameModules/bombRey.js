@@ -23,6 +23,7 @@ define(function (require) {
                 depthTest: false,
                 depthWrite: true,
                 blending: THREE.NormalBlending,
+                maxParticleCount: 150,
             });
 
             this.fireball = new SPE.Emitter({
@@ -66,8 +67,8 @@ define(function (require) {
                     opacity: {value: [0, 0, 0.2, 0]}
                 }),
             this.group.addEmitter(this.fireball);
-            // this.shockwaveGroup.addEmitter(this.mist);
-        }
+            this.shockwaveGroup.addEmitter(this.mist);
+        },
 
     };
     return bombRey

@@ -42,11 +42,10 @@ define(function(require) {
 	};
    
 	var bonusSpawnScaleTransistion = function(object, stepNum, targetScale) {
-		var currentScale = (targetScale / numberOfFramesToFullyGrownBonus) * stepNum;
+		var currentScale = (targetScale / numberOfFramesToFullyGrownBonus) * stepNum + 0.01;
 		
 		if (currentScale > targetScale)
 			currentScale = targetScale;
-			
 		object.scale.set(currentScale, currentScale, currentScale);
 	};
    

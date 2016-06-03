@@ -153,9 +153,9 @@ define(function (require) {
                 var rey = new bombRey.init();
                 var coords = gameObjects.getRealCoordinates(data.x, data.y);
                 rey.group.mesh.position.set(coords.x, 42, coords.z);
-                // rey.shockwaveGroup.mesh.position.set(coords.x, 42, coords.z);
+                rey.shockwaveGroup.mesh.position.set(coords.x, 42, coords.z);
                 gameObjects.bombReys[data.id] = rey;
-                // gameObjects.scene.add(rey.shockwaveGroup.mesh);
+                gameObjects.scene.add(rey.shockwaveGroup.mesh);
                 gameObjects.scene.add(rey.group.mesh);
                 setTimeout(function () {
                     gameObjects.deleteBombRey(data.id);

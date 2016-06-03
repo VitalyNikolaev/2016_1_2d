@@ -16,10 +16,10 @@ define(function (require) {
                 maxParticleCount: 200,
             });
 			this.fireball = new SPE.Emitter({
-				particleCount: 50, // 10^3 is almost an infinite source of particles
+				particleCount: 80, // 10^3 is almost an infinite source of particles
 				type: SPE.distributions.SPHERE,
 				maxAge: {value: 1.25, spread: 1.1},	
-				activeMultiplier: 0.2,	// Lower it to ~50 pps
+				activeMultiplier: 0.5,	// Lower it to ~50 pps
 				velocity: {
 					value: 50,
 					spread: 50,

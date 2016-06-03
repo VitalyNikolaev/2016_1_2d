@@ -19,8 +19,6 @@ define(function (require) {
         prefabsObjects: {},
         worldObjects: {
             indestructible_crate: new THREE.MeshPhongMaterial({map: new THREE.TextureLoader().load('media/game/textures/grey_bricks2.jpg')}),
-            bomb_bonus_range: new THREE.MeshPhongMaterial({map: new THREE.TextureLoader().load('media/game/textures/bonus_bomb.gif')}),
-            drop_bomb_on_death: new THREE.MeshPhongMaterial({map: new THREE.TextureLoader().load('media/game/textures/death_bomb.jpg')}),
             shockwaveGroup : THREE.ImageUtils.loadTexture('../media/game/textures/smokeparticle.png'),
             fireball: THREE.ImageUtils.loadTexture('../media/game/textures/sprite-explosion2.png'),
             cloud: THREE.ImageUtils.loadTexture('../media/game/textures/cloud.png')
@@ -84,11 +82,12 @@ define(function (require) {
                 this.objects[id] = null;
                 delete this.objects[id];
             }
+            this.deleteBombRey(id);
         },
         deleteBombRey: function (id) {
             if (this.bombReys[id]) {
-                // this.scene.remove(this.bombReys[id].shockwaveGroup);
-                this.scene.remove(this.bombReys[id].group);
+                this.scene.remove(this.bombReys[id].shockwaveGroup.mesh);
+                this.scene.remove(this.bombReys[id].group.mesh);
                 this.bombReys[id] = null;
                 delete this.bombReys[id];
             }
