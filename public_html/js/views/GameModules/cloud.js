@@ -9,12 +9,12 @@ define(function (require) {
                     value: gameObjects.worldObjects.cloud
                 },
                 blending: THREE.NormalBlending,
-                fog: true
+                fog: true,
+                maxParticleCount: 400,
             });
 
             this.emitter = new SPE.Emitter({
-                particleCount: 250,
-                maxParticleCount: 400,
+                particleCount: Math.floor(Math.random() * 200),
                 maxAge: {
                     value: 3,
                 },
@@ -23,14 +23,15 @@ define(function (require) {
                     spread: new THREE.Vector3( 100, 30, 100 )
                 },
                 velocity: {
-                    value: new THREE.Vector3( 0, 0, 30 )
+                    value: new THREE.Vector3( 0, 0, 30 ),
+                    randomise: true
                 },
                 wiggle: {
                     spread: 40
                 },
                 size: {
-                    value: 65,
-                    spread: 400
+                    value: Math.floor(Math.random() * 120),
+                    spread: Math.floor(Math.random() * 700),
                 },
                 opacity: {
                     value: [ 0, 1, 0 ]
@@ -45,6 +46,7 @@ define(function (require) {
             });
 
             this.particleGroup.addEmitter(this.emitter);
+            this.angle  = 0;
         }
 
     };

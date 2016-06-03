@@ -13,7 +13,8 @@ define(function (require) {
                 depthTest: true,
                 depthWrite: false,
                 blending: THREE.AdditiveBlending,
-                scale: 600
+                scale: 600,
+                maxParticleCount: 1000,
             });
             this.shockwaveGroup = new SPE.Group({
                 texture: {
@@ -22,6 +23,7 @@ define(function (require) {
                 depthTest: false,
                 depthWrite: true,
                 blending: THREE.NormalBlending,
+                maxParticleCount: 200,
             });
 
             this.fireball = new SPE.Emitter({

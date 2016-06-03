@@ -39,9 +39,6 @@ define(function(require) {
 			model.rotation.y += fiveDegrees;
 		else if (smallRotation == 1)
 			model.rotation.y -= fiveDegrees;
-		//else // if (smallRotation == 2)
-		//	nothing
-		
 		return model;
 	};
    

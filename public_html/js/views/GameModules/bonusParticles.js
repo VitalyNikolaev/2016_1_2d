@@ -12,16 +12,18 @@ define(function (require) {
                 depthTest: true,
                 depthWrite: false,
                 blending: THREE.AdditiveBlending,
-                scale: 400
+                scale: 400,
+                maxParticleCount: 200,
             });
 			this.fireball = new SPE.Emitter({
-				particleCount: 1000, // 10^3 is almost an infinite source of particles
+				particleCount: 150, // 10^3 is almost an infinite source of particles
 				type: SPE.distributions.SPHERE,
-				maxAge: {value: 1.25, spread: 0.25},	// About 1000 particles per second
-				activeMultiplier: 0.05,	// Lower it to ~50 pps
+				maxAge: {value: 1.25, spread: 1.1},	
+				activeMultiplier: 0.2,	// Lower it to ~50 pps
 				velocity: {
 					value: new THREE.Vector3(Math.random() * (100 - 50) + 50),
-					spread: new THREE.Vector3(Math.random() * (10 - 5) + 5)
+					spread: new THREE.Vector3(Math.random() * (10 - 5) + 5),
+                    randomise: true
 				},
 				size: {value: [120, 40, 0]},
 				wiggle: {value: 10},

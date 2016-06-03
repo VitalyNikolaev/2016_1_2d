@@ -16,7 +16,7 @@ define(function (require) {
 		directionalLight.shadow.camera.bottom  =  -1350;
 		directionalLight.shadow.mapSize.width  = 1024;
 		directionalLight.shadow.mapSize.height = 1024;
-		directionalLight.target.position.set(0, 0, 0)
+		directionalLight.target.position.set(0, 0, 0);
 		
 		gameObjects[name] = directionalLight;
 		gameObjects.scene.add(gameObjects[name]);
@@ -39,11 +39,14 @@ define(function (require) {
 			gameObjects.renderer.shadowMap.type = THREE.BasicShadowMap;		
            
             World.init();
-            var fCloud = new cloud.init();
-            var coords = gameObjects.getRealCoordinates(0, 0);
-            fCloud.particleGroup.mesh.position.set(coords.x - 200, 192, coords.z - 200);
-            gameObjects.clouds[0] = fCloud;
-            gameObjects.scene.add(fCloud.particleGroup.mesh);
+            for (var i = 1; i < 5; i++) {
+                var fCloud = new cloud.init();
+                fCloud.angle = i * Math.PI;
+                fCloud.particleGroup.mesh.position.set(1024 * 1.5 * Math.cos(fCloud.angle), 252, 1024 * 1.5 * Math.sin(fCloud.angle));
+                gameObjects.clouds[i] = fCloud;
+                gameObjects.scene.add(fCloud.particleGroup.mesh);
+            }
+
 
             gameObjects.scene.add(World.mesh);
 
@@ -78,7 +81,9 @@ define(function (require) {
             for (var rey in gameObjects.clouds) {
                 if (gameObjects.clouds.hasOwnProperty(rey)) {
                     gameObjects.clouds[rey].particleGroup.tick();
-                    gameObjects.clouds[rey].particleGroup.mesh.position.z += 0.2;
+                    gameObjects.clouds[rey].angle += 0.001;
+                    gameObjects.clouds[rey].particleGroup.mesh.position.x = 1024 * 1.5 * Math.cos(gameObjects.clouds[rey].angle);
+                    gameObjects.clouds[rey].particleGroup.mesh.position.z = 1024 * 1.5 * Math.sin(gameObjects.clouds[rey].angle)
                 }
             }
 			jQuery('#game').focus();

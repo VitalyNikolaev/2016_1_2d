@@ -19,10 +19,8 @@ define(function (require) {
         prefabsObjects: {},
         worldObjects: {
             indestructible_crate: new THREE.MeshPhongMaterial({map: new THREE.TextureLoader().load('media/game/textures/grey_bricks2.jpg')}),
-            destructible_crate: new THREE.MeshPhongMaterial({map: new THREE.TextureLoader().load('media/game/textures/destruct_crate.gif')}),
             bomb_bonus_range: new THREE.MeshPhongMaterial({map: new THREE.TextureLoader().load('media/game/textures/bonus_bomb.gif')}),
             drop_bomb_on_death: new THREE.MeshPhongMaterial({map: new THREE.TextureLoader().load('media/game/textures/death_bomb.jpg')}),
-            explosion_rey: new THREE.MeshPhongMaterial({map: new THREE.TextureLoader().load('media/game/textures/explosion.jpg')}),
             shockwaveGroup : THREE.ImageUtils.loadTexture('../media/game/textures/smokeparticle.png'),
             fireball: THREE.ImageUtils.loadTexture('../media/game/textures/sprite-explosion2.png'),
             cloud: THREE.ImageUtils.loadTexture('../media/game/textures/cloud.png')
