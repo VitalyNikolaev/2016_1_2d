@@ -89,15 +89,16 @@ define(function (require) {
 			jQuery('#game').focus();
         },
         dealloc: function () {
-            gameObjects.scene = undefined;
-            gameObjects.camera = undefined;
-            gameObjects.cameraControls = undefined;
-            gameObjects.light = undefined;
-            gameObjects.renderer = undefined;
-            gameObjects.playersCharacter = undefined;
+            gameObjects.scene = null;
+            gameObjects.camera = null;
+            gameObjects.cameraControls = null;
+            gameObjects.light = null;
+            gameObjects.renderer = null;
+            gameObjects.playersCharacter = null;
             gameObjects.objects = {};
 			gameObjects.bombReys = {};
             gameObjects.clouds = {};
+            gameObjects.playerNicks = {};
             gameObjects.playersCharacterLook = 0;
         }
     };

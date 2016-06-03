@@ -5,6 +5,7 @@ define(function (require) {
     var ws = require('utils/ws');
     var roomCollection = require('collections/room');
     var roomPlayer = require('views/room-player');
+    var gameObjects = require('views/GameModules/gameObjects');
     var View = baseView.extend({
         template: tmpl,
         requireAuth: true,
@@ -98,6 +99,7 @@ define(function (require) {
         addUser: function(userModel) {
             var playerView = new roomPlayer({'model': userModel});
             this.$('.room__players-wrapper').append(playerView.el);
+            gameObjects.playerNicks[userModel.get('id')] = userModel.get('name');
             if (userModel.get('id') === app.user.get('id')) {
                 this.currentPlayer = userModel;
                 this.listenTo(app.user, "change:contentLoaded", this.checkContentLoadedStatus);

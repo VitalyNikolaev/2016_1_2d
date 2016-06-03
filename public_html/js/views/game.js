@@ -81,11 +81,15 @@ define(function (require) {
                 gameInit.init();
             }
         },
-        gameOver: function () {
+        gameOver: function (data) {
             var self = this;
+            console.log(data);
+            this.$('.gameover').fadeIn();
+            this.$('.gameover').append("<p class='gameover_text'>" + gameObjects.playerNicks[data.id] + "</p>");
             app.fetchNewScoreboard();
             setTimeout(function () {
                 self.endGame();
+                self.$('.gameover').fadeOut();
                 window.location.href = '#main'
             }, 2000);
         },

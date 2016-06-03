@@ -11,6 +11,7 @@ define(function (require) {
         particleEngine: null,
         playersCharacter: null,
         bombReys:{},
+        playerNicks: {},
         clouds: {},
         playersCharacterLook: 950,
         fps: 0, // needed to move bomber sync to server

@@ -17,6 +17,7 @@ html, body {
   height: 100%;
 }
 
+
 @import "wrap/wrap";
 @import "logo/logo";
 @import 'score/score';
@@ -29,3 +30,4 @@ html, body {
 @import "room/room";
 @import "preloader/preloader";
 @import "about/about";
+@import "gameover/gameover";

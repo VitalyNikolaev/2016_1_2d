@@ -1,7 +1,9 @@
 <fest:template xmlns:fest="http://fest.mail.ru">
     <div id="game">
+        <div class="gameover" contentEditable="false">
+            <img class="gameover_image" src="media/gameOver.png"></img>
+        </div>
         <div id="game-canvas">
-
         </div>
     </div>
 </fest:template>

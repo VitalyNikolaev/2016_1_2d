@@ -1,0 +1,20 @@
+.gameover{
+  display: none;
+  background-color: beige;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  height: 400px;
+  width: 400px;
+  transform: translate(-50%, -50%);
+}
+.gameover_image {
+  height: 45%;
+  margin-left: 8vw;
+  margin-top: -20px;
+}
+.gameover_text {
+  font-size: 30px;
+  margin-left: 10vw;
+  
+}
