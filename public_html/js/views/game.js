@@ -142,7 +142,7 @@ define(function (require) {
                 return
             }
             if (data.object_type === 'bonus_increase_speed') {
-                tileFactory.spawnBonusByNameAt('destructibleCube1', data.id, data.x, data.y);
+                tileFactory.spawnBonusByNameAt('boots', data.id, data.x, data.y);
                 return
             }
             if (data.object_type === 'bonus_increase_max_hp') {

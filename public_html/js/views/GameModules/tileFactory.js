@@ -101,7 +101,12 @@ define(function(require) {
 															object.scale.set(defaultBonusScale, defaultBonusScale, defaultBonusScale);
 															gameObjects.prefabsObjects['death'] = object;
 														   
-															app.Events.trigger('ModelsReady');
+															modelLoader.getModel('bonuses', 'boots', function(object) {
+																object.scale.set(defaultBonusScale, defaultBonusScale, defaultBonusScale);
+																gameObjects.prefabsObjects['boots'] = object;
+															   
+																app.Events.trigger('ModelsReady');
+															});
 														});
 													});
 												});
