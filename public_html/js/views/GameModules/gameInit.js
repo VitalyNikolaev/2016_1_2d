@@ -39,10 +39,12 @@ define(function (require) {
 			// gameObjects.renderer.shadowMap.type = THREE.BasicShadowMap;
            
             World.init();
-            for (var i = 1; i < 3; i++) {
+            for (var i = 1; i < 5; i++) {
                 var fCloud = new cloud.init();
-                fCloud.angle = i * Math.PI;
-                fCloud.particleGroup.mesh.position.set(1024 * 1.5 * Math.cos(fCloud.angle), 252, 1024 * 1.5 * Math.sin(fCloud.angle));
+                fCloud.angle = i;
+                var randInt = Math.floor(Math.random() * (1024 - 800 + 1) + 512);
+                fCloud.randInt = randInt;
+                fCloud.particleGroup.mesh.position.set(randInt * 1.4 * Math.cos(fCloud.angle), randInt / 3 , randInt * 1.4 * Math.sin(fCloud.angle));
                 gameObjects.clouds[i] = fCloud;
                 gameObjects.scene.add(fCloud.particleGroup.mesh);
             }
@@ -82,8 +84,8 @@ define(function (require) {
                 if (gameObjects.clouds.hasOwnProperty(rey)) {
                     gameObjects.clouds[rey].particleGroup.tick();
                     gameObjects.clouds[rey].angle += 0.001;
-                    gameObjects.clouds[rey].particleGroup.mesh.position.x = 1024 * 1.5 * Math.cos(gameObjects.clouds[rey].angle);
-                    gameObjects.clouds[rey].particleGroup.mesh.position.z = 1024 * 1.5 * Math.sin(gameObjects.clouds[rey].angle)
+                    gameObjects.clouds[rey].particleGroup.mesh.position.x = gameObjects.clouds[rey].randInt * 1.4 * Math.cos(gameObjects.clouds[rey].angle);
+                    gameObjects.clouds[rey].particleGroup.mesh.position.z = gameObjects.clouds[rey].randInt * 1.4 * Math.sin(gameObjects.clouds[rey].angle)
                 }
             }
 			jQuery('#game').focus();

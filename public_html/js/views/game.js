@@ -95,12 +95,12 @@ define(function (require) {
                 self.$('.gameover_text').remove();
                 self.$('.gameover').fadeOut();
                 window.location.href = '#main'
-            }, 3500);
+            }, 4500);
         },
         spawnBomberman: function (data) {
             if (data.user_id === app.user.get('id')) {
                 gameObjects.playersCharacter = new Character.init({
-                        color: Math.random() * 0xffffff}, {x: data.x, z: data.y});
+                        color: Math.random() * 0xffffff}, {x: data.x, z: data.y}, data.user_id);
                 gameObjects.playersCharacter.name = data.id;
                 gameObjects.objects[data.id] =  {
                   index: gameObjects.playersCharacter
@@ -122,7 +122,7 @@ define(function (require) {
                 gameObjects.objects[data.id] = {
                    index: new Character.init({
                         color: Math.random() * 0xffffff}, 
-                       {x: data.x, z: data.y})
+                       {x: data.x, z: data.y}, data.user_id)
                     };
                 this.previousCoordinates[data.id] = {
                     x: gameObjects.objects[data.id].index.mesh.position.x,

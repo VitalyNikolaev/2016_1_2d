@@ -6,7 +6,7 @@ define(function (require) {
     var ws = require('utils/ws');
 
     var Character = {
-        init: function (color, position) {
+        init: function (color, position, user_id) {
             this.realDirection = {
                 x: 0,
                 z: 0
@@ -37,6 +37,17 @@ define(function (require) {
             this.feet.right.position.y = -36;
             this.feet.right.rotation.y = Math.PI / 4;
             this.mesh.add(this.feet.left);
+            this.mesh.add(this.feet.right);
+            // this.textMaterial = new THREE.MeshPhongMaterial({
+            //     color: 0xdddddd
+            // });
+            // this.nickname = new THREE.TextGeometry(gameObjects.playerNicks[user_id],{
+            //     font:'bangers',
+            //     size: 40,
+            // });
+            // this.nickname.position.y = 57;
+            // this.mesh.add(this.nickname);
+
 
             this.head.scale.set(1.5,1.5,1.5);
 

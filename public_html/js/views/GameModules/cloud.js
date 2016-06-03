@@ -46,6 +46,7 @@ define(function (require) {
 
             this.particleGroup.addEmitter(this.emitter);
             this.angle  = 0;
+            this.randInt = 0;
         }
 
     };
