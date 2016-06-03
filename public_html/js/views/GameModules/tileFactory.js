@@ -10,6 +10,7 @@ define(function(require) {
 	
 	var cubeScale = 2.5;
 	var ringScale = 1.8;
+	var defaultBonusScale = 0.01;
 	var angleSpeedCoefficient = 0.1;
 	var fps = 60;
 	var numberOfFramesToFullyGrownBonus = fps * 0.35; // 0.35 of second
@@ -72,14 +73,19 @@ define(function(require) {
 							gameObjects.prefabsObjects['destructibleCube1'] = object;
 						   
 							modelLoader.getModel('bonuses', 'bonusRing48', function(object) {
-								object.scale.set(0, 0, 0);
+								object.scale.set(defaultBonusScale, defaultBonusScale, defaultBonusScale);
 								gameObjects.prefabsObjects['bonusRingBig'] = object;
 							   
 								modelLoader.getModel('bonuses', 'bonusRing32', function(object) {
-									object.scale.set(0, 0, 0);
+									object.scale.set(defaultBonusScale, defaultBonusScale, defaultBonusScale);
 									gameObjects.prefabsObjects['bonusRingSmall'] = object;
 								   
-									app.Events.trigger('ModelsReady');
+									modelLoader.getModel('bonuses', 'heart', function(object) {
+										object.scale.set(defaultBonusScale, defaultBonusScale, defaultBonusScale);
+										gameObjects.prefabsObjects['heart'] = object;
+									   
+										app.Events.trigger('ModelsReady');
+									});
 								});
 							});
 						});
@@ -112,7 +118,7 @@ define(function(require) {
 			complexObject['bonusParticles'] = particleEmitter.group.mesh;
 			
 			complexObject['bonus'] = randomRotation(gameObjects.prefabsObjects[name].clone());
-			complexObject['bonus'].scale.set(0,0,0);
+			complexObject['bonus'].scale.set(defaultBonusScale, defaultBonusScale, defaultBonusScale);
 			complexObject['ring1'] = randomRotation(gameObjects.prefabsObjects['bonusRingBig'].clone());
 			complexObject['ring2'] = randomRotation(gameObjects.prefabsObjects['bonusRingBig'].clone());
 			complexObject['ring3'] = randomRotation(gameObjects.prefabsObjects['bonusRingSmall'].clone());

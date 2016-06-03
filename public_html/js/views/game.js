@@ -146,7 +146,7 @@ define(function (require) {
                 return
             }
             if (data.object_type === 'bonus_increase_max_hp') {
-                tileFactory.spawnBonusByNameAt('destructibleCube1', data.id, data.x, data.y);
+                tileFactory.spawnBonusByNameAt('heart', data.id, data.x, data.y);
                 return
             }
             if (data.object_type === 'bomb_ray') {
