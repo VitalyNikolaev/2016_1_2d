@@ -134,7 +134,7 @@ define(function (require) {
                 return
             }
             if (data.object_type === 'bonus_increase_bomb_range') {
-                tileFactory.spawnBonusByNameAt('destructibleCube1', data.id, data.x, data.y);
+                tileFactory.spawnBonusByNameAt('4arrows', data.id, data.x, data.y);
                 return
             }
             if (data.object_type === 'bonus_decrease_bomb_spawn_delay') {
@@ -167,7 +167,7 @@ define(function (require) {
                 return
             }
             if (data.object_type === 'bonus_invulnerability') {
-                tileFactory.spawnBonusByNameAt('destructibleCube1', data.id, data.x, data.y);
+                tileFactory.spawnBonusByNameAt('shield', data.id, data.x, data.y);
                 return
             }
             if (data.object_type === 'bonus_bombs_amount') {

@@ -84,7 +84,17 @@ define(function(require) {
 										object.scale.set(defaultBonusScale, defaultBonusScale, defaultBonusScale);
 										gameObjects.prefabsObjects['heart'] = object;
 									   
-										app.Events.trigger('ModelsReady');
+										modelLoader.getModel('bonuses', 'shield', function(object) {
+											object.scale.set(defaultBonusScale, defaultBonusScale, defaultBonusScale);
+											gameObjects.prefabsObjects['shield'] = object;
+										   
+											modelLoader.getModel('bonuses', '4arrows', function(object) {
+												object.scale.set(defaultBonusScale, defaultBonusScale, defaultBonusScale);
+												gameObjects.prefabsObjects['4arrows'] = object;
+											   
+												app.Events.trigger('ModelsReady');
+											});
+										});
 									});
 								});
 							});
