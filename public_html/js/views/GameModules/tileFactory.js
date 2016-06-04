@@ -245,14 +245,18 @@ define(function(require) {
 			gameObjects.addPrefabToWorld(randomRotation(gameObjects.prefabsObjects['bomb'].clone()), id, x, y);
         },
 		
+		spawnSmallLight: function(complexObject, color) {	
+			return spawnSmallLight(complexObject, color);
+		},
+	
 		spawnBonusByNameAt: function(name, id, x, y) {
-			var complexObject = { growthStep: 0 };
+			var complexObject = { growthStep: 0, position: {x: x, y: 96 * globalScale, z: y} };
 			var shouldSpawn4thRing = randomInt(2) == 1;
 			var shouldSpawn5thRing = randomInt(2) == 1;
 
 			var particleEmitter  = new bonusParticles.init();
 			complexObject['bonusParticles'] = particleEmitter.group.mesh;
-			
+						
 			complexObject['bonus'] = randomRotation(gameObjects.prefabsObjects[name].clone());
 			complexObject['bonus'].scale.set(defaultBonusScale, defaultBonusScale, defaultBonusScale);
 			complexObject['ring1'] = randomRotation(gameObjects.prefabsObjects['bonusRingBig'].clone());
@@ -279,7 +283,9 @@ define(function(require) {
 				complexObject.ring5.rotation.x = Math.PI / (2.1 + randomInt(91) / 100);
 				complexObject.objects.push('ring5');
 			}
-
+			
+			//var light = spawnSmallLight(complexObject, 0xf6eb13);
+			
 			var deltaT = 1000 / fps;
 			var timerID = setInterval(function () {
                 complexObject.bonus.position.y = 52 * globalScale + 9 * globalScale * Math.sin(2 * complexObject.bonus.rotation.y);
@@ -295,6 +301,7 @@ define(function(require) {
 				bonusSpawnScaleTransistion(complexObject.ring3, complexObject.growthStep, ringScale);
 				
                 complexObject.bonusParticles.y = complexObject.bonus.position.y;
+				light.position.y = complexObject.bonus.position.y;
 				particleEmitter.group.tick();
 				
 				if (shouldSpawn4thRing) {
@@ -314,6 +321,22 @@ define(function(require) {
 
 			gameObjects.addComplexObjectToWorld(complexObject, id);
         }
+	};
+	
+	var spawnSmallLight = function(complexObject, color) {
+		complexObject.objects.push('light');
+		var directionalLight = new THREE.PointLight(color, 1.5, 128 * globalScale, 1);
+		directionalLight.position.set(complexObject.position.x, complexObject.position.y, complexObject.position.z);
+
+		/*directionalLight.castShadow = true;
+		directionalLight.shadow.camera.near = 32 * globalScale;
+		directionalLight.shadow.camera.far = 128 * globalScale;
+		directionalLight.shadow.mapSize.width  = 128;
+		directionalLight.shadow.mapSize.height = 128;
+		*/
+		complexObject['light'] = directionalLight;
+		
+		return directionalLight;
 	};
 	
     return tileFactory;
