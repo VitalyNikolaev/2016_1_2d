@@ -1,6 +1,6 @@
 define(function (require) {
     var THREE = require('three');
-   
+	var globalScale = require('utils/globalScale');
     
     var objects = {
         scene: null,
@@ -13,7 +13,7 @@ define(function (require) {
         bombReys:{},
         playerNicks: {},
         clouds: {},
-        playersCharacterLook: 950,
+        playersCharacterLook: 950 * globalScale,
         fps: 0, // needed to move bomber sync to server
         objects: {}, // here we dump all links to obstacle index by id of object
         bombObj: null,
@@ -26,19 +26,19 @@ define(function (require) {
         },
         getRealCoordinates: function (x, z) {
             return {
-                x: x * 64 - 992,
-                z: z * 64 - 992
+                x: (x * 64 - 992) * globalScale,
+                z: (z * 64 - 992) * globalScale
             }
         },
         getBomberManRealCoordinates: function (x, z) {
             return {
-                x: x * 64 - 1024,
-                z: z * 64 - 1024
+                x: (x * 64 - 1024) * globalScale,
+                z: (z * 64 - 1024) * globalScale
             }
         },
 		addPrefabToWorld: function (model, id, x, z) { // needed to place objects by x, y and its id
             var coordinates = this.getRealCoordinates(x, z);
-            model.position.set(coordinates.x, 32, coordinates.z);
+            model.position.set(coordinates.x, 32 * globalScale, coordinates.z);
             this.objects[id] = {
                 index: model
             };
@@ -57,7 +57,7 @@ define(function (require) {
         addObjectToWorldWithNoCollisions: function (type, obj_geometry, id, x, z) { // needed to place objects by x, y and its id
             var realObj = new THREE.Mesh(obj_geometry, type);
             var coordinates = this.getRealCoordinates(x, z);
-            realObj.position.set(coordinates.x, 32, coordinates.z);
+            realObj.position.set(coordinates.x, 32 * globalScale, coordinates.z);
             this.objects[id] = {
                 index: realObj
             };
@@ -96,7 +96,7 @@ define(function (require) {
         setBomb: function (id, x, z) {
             var bomb = this.prefabsObjects['bomb'].clone();
             var coordinates = this.getRealCoordinates(x,z);
-            bomb.position.set(coordinates.x, 2, coordinates.z);
+            bomb.position.set(coordinates.x, 2 * globalScale, coordinates.z);
             var timerId = setInterval(function () {
                 bomb.scale.y *= 1.11;
                 bomb.scale.x *= 1.11;

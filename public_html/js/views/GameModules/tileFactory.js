@@ -3,14 +3,15 @@ define(function(require) {
 	var gameObjects = require('views/GameModules/gameObjects');
     var app = require('app');
 	var bonusParticles = require('views/GameModules/bonusParticles');
+	var globalScale = require('utils/globalScale');
 	
 	var undestructibleWallsCount = 3;
 	var groundCount = 5;
 	
-	var cubeScale = 2.5;
-	var ringScale = 1.8;
-	var defaultBonusScale = 0.01;
-	var cmToUnitsScale = 128 / 50.394; // 2.539984918839544390205183156725
+	var cubeScale = 2.5 * globalScale;
+	var ringScale = 1.8 * globalScale;
+	var defaultBonusScale = 0.01 * globalScale;
+	var cmToUnitsScale = (128 / 50.394) * globalScale; // 2.539984918839544390205183156725
 	var angleSpeedCoefficient = 0.1;
 	var fps = 60;
 	var numberOfFramesToFullyGrownBonus = fps * 0.35; // 0.35 of second
@@ -221,7 +222,7 @@ define(function(require) {
                 ground = gameObjects.prefabsObjects['ground5'].clone();
 			}
 			ground.rotation.y = Math.PI;
-			ground.position.set(i * 128 - 960,0 ,j * 128 - 960);
+			ground.position.set((i * 128 - 960) * globalScale,0 ,(j * 128 - 960) * globalScale);
 			whereToAdd.add(ground);
         },
 
@@ -244,14 +245,18 @@ define(function(require) {
 			gameObjects.addPrefabToWorld(randomRotation(gameObjects.prefabsObjects['bomb'].clone()), id, x, y);
         },
 		
+		spawnSmallLight: function(complexObject, color) {	
+			return spawnSmallLight(complexObject, color);
+		},
+	
 		spawnBonusByNameAt: function(name, id, x, y) {
-			var complexObject = { growthStep: 0 };
+			var complexObject = { growthStep: 0, position: {x: x, y: 96 * globalScale, z: y} };
 			var shouldSpawn4thRing = randomInt(2) == 1;
 			var shouldSpawn5thRing = randomInt(2) == 1;
 
 			var particleEmitter  = new bonusParticles.init();
 			complexObject['bonusParticles'] = particleEmitter.group.mesh;
-			
+						
 			complexObject['bonus'] = randomRotation(gameObjects.prefabsObjects[name].clone());
 			complexObject['bonus'].scale.set(defaultBonusScale, defaultBonusScale, defaultBonusScale);
 			complexObject['ring1'] = randomRotation(gameObjects.prefabsObjects['bonusRingBig'].clone());
@@ -261,39 +266,42 @@ define(function(require) {
 			complexObject['isComplexObject'] = true;	// not undefined :)
 
 			var coordinates = gameObjects.getRealCoordinates(x, y);
-			complexObject.bonus.position.set(coordinates.x, 52, coordinates.z);
-			complexObject.ring1.position.set(coordinates.x - 8, 52, coordinates.z);
-			complexObject.ring2.position.set(coordinates.x + 8, 52 + 8, coordinates.z);
-			complexObject.ring3.position.set(coordinates.x, 52 + 8, coordinates.z);
-			complexObject.bonusParticles.position.set(coordinates.x, 52, coordinates.z);
+			complexObject.bonus.position.set(coordinates.x, 52 * globalScale, coordinates.z);
+			complexObject.ring1.position.set(coordinates.x - 8 * globalScale, 52 * globalScale, coordinates.z);
+			complexObject.ring2.position.set(coordinates.x + 8 * globalScale, 60 * globalScale, coordinates.z);
+			complexObject.ring3.position.set(coordinates.x, 60 * globalScale, coordinates.z);
+			complexObject.bonusParticles.position.set(coordinates.x, 52 * globalScale, coordinates.z);
 
 			if (shouldSpawn4thRing) {
 				complexObject['ring4'] = randomRotation(gameObjects.prefabsObjects['bonusRingSmall'].clone());	
-				complexObject.ring4.position.set(coordinates.x, 52 - 8, coordinates.z + 8);
+				complexObject.ring4.position.set(coordinates.x, 44 * globalScale, coordinates.z + 8 * globalScale);
 				complexObject.objects.push('ring4');
 			}
 			if (shouldSpawn5thRing) {
 				complexObject['ring5'] = randomRotation(gameObjects.prefabsObjects['bonusRingBig'].clone());	
-				complexObject.ring5.position.set(coordinates.x, 52, coordinates.z - 8);
+				complexObject.ring5.position.set(coordinates.x, 52 * globalScale, coordinates.z - 8 * globalScale);
 				complexObject.ring5.rotation.x = Math.PI / (2.1 + randomInt(91) / 100);
 				complexObject.objects.push('ring5');
 			}
-
+			
+			//var light = spawnSmallLight(complexObject, 0xf6eb13);
+			
 			var deltaT = 1000 / fps;
 			var timerID = setInterval(function () {
-                complexObject.bonus.position.y = 52 + 9 * Math.sin(2 * complexObject.bonus.rotation.y);
+                complexObject.bonus.position.y = 52 * globalScale + 9 * globalScale * Math.sin(2 * complexObject.bonus.rotation.y);
 				
                 complexObject.bonus.rotation.y += angleSpeedCoefficient * -1 * Math.PI / deltaT;
                 complexObject.ring1.rotation.y += angleSpeedCoefficient * 2 * Math.PI / deltaT;
                 complexObject.ring2.rotation.y += angleSpeedCoefficient * -2 * Math.PI / deltaT;
                 complexObject.ring3.rotation.y += angleSpeedCoefficient * 4 * Math.PI / deltaT;
 
-				bonusSpawnScaleTransistion(complexObject.bonus, complexObject.growthStep, 1.4);
+				bonusSpawnScaleTransistion(complexObject.bonus, complexObject.growthStep, 1.4 * globalScale);
 				bonusSpawnScaleTransistion(complexObject.ring1, complexObject.growthStep, ringScale);
 				bonusSpawnScaleTransistion(complexObject.ring2, complexObject.growthStep, ringScale);
 				bonusSpawnScaleTransistion(complexObject.ring3, complexObject.growthStep, ringScale);
 				
                 complexObject.bonusParticles.y = complexObject.bonus.position.y;
+				light.position.y = complexObject.bonus.position.y;
 				particleEmitter.group.tick();
 				
 				if (shouldSpawn4thRing) {
@@ -313,6 +321,22 @@ define(function(require) {
 
 			gameObjects.addComplexObjectToWorld(complexObject, id);
         }
+	};
+	
+	var spawnSmallLight = function(complexObject, color) {
+		complexObject.objects.push('light');
+		var directionalLight = new THREE.PointLight(color, 1.5, 128 * globalScale, 1);
+		directionalLight.position.set(complexObject.position.x, complexObject.position.y, complexObject.position.z);
+
+		/*directionalLight.castShadow = true;
+		directionalLight.shadow.camera.near = 32 * globalScale;
+		directionalLight.shadow.camera.far = 128 * globalScale;
+		directionalLight.shadow.mapSize.width  = 128;
+		directionalLight.shadow.mapSize.height = 128;
+		*/
+		complexObject['light'] = directionalLight;
+		
+		return directionalLight;
 	};
 	
     return tileFactory;

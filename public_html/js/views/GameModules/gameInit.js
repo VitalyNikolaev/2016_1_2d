@@ -4,46 +4,63 @@ define(function (require) {
     var gameObjects = require('views/GameModules/gameObjects');
     var World = require('views/GameModules/worldBuilder');
     var cloud = require('views/GameModules/cloud');
+	var globalScale = require('utils/globalScale');
     
 	var createShadowLight = function(name, x, y, z) {
-		var directionalLight = new THREE.PointLight(0xffffcc, 1.5, 960, 0.6);
+		var directionalLight = new THREE.PointLight(0xffffcc, 1.5, 4096 * globalScale, 0);
 		directionalLight.position.set(x, y, z);
 
 		directionalLight.castShadow = true;
-		directionalLight.shadow.camera.near = 8;
-		directionalLight.shadow.camera.far = 1024;
-		directionalLight.shadow.mapSize.width  = 256;
-		directionalLight.shadow.mapSize.height = 256;
+		directionalLight.shadow.camera.near = 64 * globalScale;
+		directionalLight.shadow.camera.far = 4096 * globalScale;
+		directionalLight.shadow.mapSize.width  = 1024;
+		directionalLight.shadow.mapSize.height = 1024;
 		
 		gameObjects[name] = directionalLight;
 		gameObjects.scene.add(gameObjects[name]);
+		
+		return directionalLight;
 	};	
+	
+	var sun = null;
+	
+	var rotateSun = function () {
+		if (sun) {
+			var timeToFullCycle = 120000; // ms. I.e. 120 seconds == 2 minutes
+			var medianHeight = 1024 * globalScale;
+			var deviationHeight = 512 * globalScale;
+			var xSemiaxis = 1280 * globalScale;
+			var zSemiaxis = 1024 * globalScale;
+			
+			var anglularSpeed = 2 * Math.PI / timeToFullCycle;	// radians per ms
+			sun.position.x = xSemiaxis * Math.cos(sun.angle);
+			sun.position.z = zSemiaxis * Math.sin(sun.angle);
+			sun.position.y = medianHeight + deviationHeight * Math.cos(sun.angle);	// 'cos' for 12am @ 0 angle, 'sin' for 6am (between 12pm and 12 am) @ 0 angle. 
+			
+			sun.angle += anglularSpeed * 1000 / gameObjects.fps;	// [radians/ms] * ms since previous frame;
+		}
+	}
 	
     var BasicScene = {
         init: function () {
             gameObjects.scene = new THREE.Scene();
             gameObjects.camera = new THREE.PerspectiveCamera(55, 1, 0.1, 10000);
             gameObjects.scene.add(gameObjects.camera);
-			gameObjects.ambientLight = new THREE.AmbientLight(0x3f3f3f);
+			gameObjects.ambientLight = new THREE.AmbientLight(0x4f4f4f);
 			gameObjects.scene.add(gameObjects.ambientLight);
             gameObjects.renderer = new THREE.WebGLRenderer({ antialias: true, logarithmicDepthBuffer: true, alpha: true});
 
 			gameObjects.renderer.shadowMap.enabled = true;
 			gameObjects.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
            
-			var lightHeight = 384;
-			var distanceFromCenter = 512 + 128;
-            createShadowLight('light1', 0, lightHeight, 0);			
-            createShadowLight('light2', distanceFromCenter, lightHeight, distanceFromCenter);			
-            createShadowLight('light3', distanceFromCenter, lightHeight, -distanceFromCenter);			
-            createShadowLight('light4', -distanceFromCenter, lightHeight, distanceFromCenter);			
-            createShadowLight('light5', -distanceFromCenter, lightHeight, -distanceFromCenter);			
+            sun = createShadowLight('sunLight', 0, 0, 0);		
+			sun['angle'] = 0;			
             
 			World.init();
             for (var i = 1; i < 5; i++) {
                 var fCloud = new cloud.init();
                 fCloud.angle = i;
-                var randInt = Math.floor(Math.random() * (1024 - 800 + 1) + 512);
+                var randInt = Math.floor(Math.random() * (1024 - 800 + 1) + 512) * globalScale;
                 fCloud.randInt = randInt;
                 fCloud.particleGroup.mesh.position.set(randInt * 1.4 * Math.cos(fCloud.angle), randInt / 3 , randInt * 1.4 * Math.sin(fCloud.angle));
                 gameObjects.clouds[i] = fCloud;
@@ -89,6 +106,7 @@ define(function (require) {
                     gameObjects.clouds[rey].particleGroup.mesh.position.z = gameObjects.clouds[rey].randInt * 1.4 * Math.sin(gameObjects.clouds[rey].angle)
                 }
             }
+			rotateSun();
 			jQuery('#game').focus();
         },
         dealloc: function () {

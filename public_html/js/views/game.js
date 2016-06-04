@@ -10,6 +10,7 @@ define(function (require) {
     var Bomb = require('views/GameModules/bomb');
     var bombRey = require('views/GameModules/bombRey');
     var THREE = require('three');
+	var globalScale = require('utils/globalScale');
 	
     var View = baseView.extend({
         template: tmpl,
@@ -113,10 +114,10 @@ define(function (require) {
                 };
                 if (data.y > 15) {
                     gameObjects.playersCharacter.setControls('top');
-                    gameObjects.playersCharacterLook = -950;
+                    gameObjects.playersCharacterLook = -950 * globalScale;
                 } else {
                     gameObjects.playersCharacter.setControls('bot');
-                    gameObjects.playersCharacterLook = 950;
+                    gameObjects.playersCharacterLook = 950 * globalScale;
                 }
             } else {
                 gameObjects.objects[data.id] = {
@@ -159,8 +160,8 @@ define(function (require) {
             if (data.object_type === 'bomb_ray') {
                 var rey = new bombRey.init();
                 var coords = gameObjects.getRealCoordinates(data.x, data.y);
-                rey.group.mesh.position.set(coords.x, 42, coords.z);
-                rey.shockwaveGroup.mesh.position.set(coords.x, 42, coords.z);
+                rey.group.mesh.position.set(coords.x, 42 * globalScale, coords.z);
+                rey.shockwaveGroup.mesh.position.set(coords.x, 42 * globalScale, coords.z);
                 gameObjects.bombReys[data.id] = rey;
                 gameObjects.scene.add(rey.shockwaveGroup.mesh);
                 gameObjects.scene.add(rey.group.mesh);
