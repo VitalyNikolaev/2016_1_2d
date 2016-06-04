@@ -301,7 +301,7 @@ define(function(require) {
 				bonusSpawnScaleTransistion(complexObject.ring3, complexObject.growthStep, ringScale);
 				
                 complexObject.bonusParticles.y = complexObject.bonus.position.y;
-				light.position.y = complexObject.bonus.position.y;
+				//light.position.y = complexObject.bonus.position.y;
 				particleEmitter.group.tick();
 				
 				if (shouldSpawn4thRing) {
