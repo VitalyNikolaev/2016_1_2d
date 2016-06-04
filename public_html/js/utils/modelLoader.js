@@ -29,9 +29,12 @@ define(function(require) {
 					objLoader.setPath( resourcePath + pkg + '/' );
 					objLoader.load( name + '.obj', function ( object ) {
 						result = object;
-						object.castShadow = true;
-						object.receiveShadow = true;
-						
+						object.traverse( function ( child ) {
+							if ( child instanceof THREE.Mesh ) {
+								child.castShadow = true;
+								child.receiveShadow = true;
+							}
+						});		
 						callback(object);
 					}, emptyFunc, emptyFunc );
 				})

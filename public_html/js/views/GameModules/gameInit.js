@@ -6,17 +6,17 @@ define(function (require) {
     var cloud = require('views/GameModules/cloud');
     
 	var createShadowLight = function(name, x, y, z) {
-		var directionalLight = new THREE.DirectionalLight( 0xffffff, 1);
+		var directionalLight = new THREE.PointLight(0xffffcc, 1, 4096, 0);
+		directionalLight.position.set(x, y, z);
 		directionalLight.castShadow = true;
 		directionalLight.shadow.camera.near    =   10;
-		directionalLight.shadow.camera.far     =   4000;
-		directionalLight.shadow.camera.right   =   1350;
-		directionalLight.shadow.camera.left    =  -1350;
-		directionalLight.shadow.camera.top     =   1350;
-		directionalLight.shadow.camera.bottom  =  -1350;
-		directionalLight.shadow.mapSize.width  = 1024;
-		directionalLight.shadow.mapSize.height = 1024;
-		directionalLight.target.position.set(0, 0, 0);
+		directionalLight.shadow.camera.far     =   8192;
+		directionalLight.shadow.camera.right   =   4096;
+		directionalLight.shadow.camera.left    =  -4096;
+		directionalLight.shadow.camera.top     =   4096;
+		directionalLight.shadow.camera.bottom  =  -4096;
+		directionalLight.shadow.mapSize.width  = 512;
+		directionalLight.shadow.mapSize.height = 512;
 		
 		gameObjects[name] = directionalLight;
 		gameObjects.scene.add(gameObjects[name]);
@@ -27,18 +27,16 @@ define(function (require) {
             gameObjects.scene = new THREE.Scene();
             gameObjects.camera = new THREE.PerspectiveCamera(55, 1, 0.1, 10000);
             gameObjects.scene.add(gameObjects.camera);
-			gameObjects.ambientLight = new THREE.AmbientLight(0x2f2f2f);
+			gameObjects.ambientLight = new THREE.AmbientLight(0x3f3f3f);
 			gameObjects.scene.add(gameObjects.ambientLight);
-            createShadowLight('light1', 0, 1800, -600);
-            //createShadowLight('light2', 0, 1800, 600);
-			//createShadowLight('light3', -600, 1800, 0);
-            //createShadowLight('light4', 600, 1800, 0);
             gameObjects.renderer = new THREE.WebGLRenderer({ antialias: true, logarithmicDepthBuffer: true, alpha: true});
 
-			// gameObjects.renderer.shadowMap.enabled = true;
-			// gameObjects.renderer.shadowMap.type = THREE.BasicShadowMap;
+			gameObjects.renderer.shadowMap.enabled = true;
+			gameObjects.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
            
-            World.init();
+            createShadowLight('light1', 0, 512, 0);			
+            
+			World.init();
             for (var i = 1; i < 5; i++) {
                 var fCloud = new cloud.init();
                 fCloud.angle = i;

@@ -18,7 +18,7 @@ define(function (require) {
             };
             this.mesh = new THREE.Object3D();
             this.mesh.position.y = 48;
-			console.log(bombermanCounter);
+			
 			if (bombermanCounter == 1) {
             this.head = gameObjects.prefabsObjects['player_body_white'].clone();
 			} else if (bombermanCounter == 2) {
