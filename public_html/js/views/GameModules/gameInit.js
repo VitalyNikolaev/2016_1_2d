@@ -28,9 +28,9 @@ define(function (require) {
 		if (sun) {
 			var timeToFullCycle = 120000; // ms. I.e. 120 seconds == 2 minutes
 			var medianHeight = 1024 * globalScale;
-			var deviationHeight = 768 * globalScale;
-			var xSemiaxis = 1024 * globalScale;
-			var zSemiaxis = 768 * globalScale;
+			var deviationHeight = 512 * globalScale;
+			var xSemiaxis = 1280 * globalScale;
+			var zSemiaxis = 1024 * globalScale;
 			
 			var anglularSpeed = 2 * Math.PI / timeToFullCycle;	// radians per ms
 			sun.position.x = xSemiaxis * Math.cos(sun.angle);
