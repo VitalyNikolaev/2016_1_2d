@@ -6,17 +6,14 @@ define(function (require) {
     var cloud = require('views/GameModules/cloud');
     
 	var createShadowLight = function(name, x, y, z) {
-		var directionalLight = new THREE.PointLight(0xffffcc, 1, 4096, 0);
+		var directionalLight = new THREE.PointLight(0xffffcc, 1.5, 960, 0.6);
 		directionalLight.position.set(x, y, z);
+
 		directionalLight.castShadow = true;
-		directionalLight.shadow.camera.near    =   10;
-		directionalLight.shadow.camera.far     =   8192;
-		directionalLight.shadow.camera.right   =   4096;
-		directionalLight.shadow.camera.left    =  -4096;
-		directionalLight.shadow.camera.top     =   4096;
-		directionalLight.shadow.camera.bottom  =  -4096;
-		directionalLight.shadow.mapSize.width  = 512;
-		directionalLight.shadow.mapSize.height = 512;
+		directionalLight.shadow.camera.near = 8;
+		directionalLight.shadow.camera.far = 1024;
+		directionalLight.shadow.mapSize.width  = 256;
+		directionalLight.shadow.mapSize.height = 256;
 		
 		gameObjects[name] = directionalLight;
 		gameObjects.scene.add(gameObjects[name]);
@@ -34,7 +31,13 @@ define(function (require) {
 			gameObjects.renderer.shadowMap.enabled = true;
 			gameObjects.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
            
-            createShadowLight('light1', 0, 512, 0);			
+			var lightHeight = 384;
+			var distanceFromCenter = 512 + 128;
+            createShadowLight('light1', 0, lightHeight, 0);			
+            createShadowLight('light2', distanceFromCenter, lightHeight, distanceFromCenter);			
+            createShadowLight('light3', distanceFromCenter, lightHeight, -distanceFromCenter);			
+            createShadowLight('light4', -distanceFromCenter, lightHeight, distanceFromCenter);			
+            createShadowLight('light5', -distanceFromCenter, lightHeight, -distanceFromCenter);			
             
 			World.init();
             for (var i = 1; i < 5; i++) {
