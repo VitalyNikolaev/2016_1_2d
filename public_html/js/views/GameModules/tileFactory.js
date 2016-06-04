@@ -104,9 +104,9 @@ define(function(require) {
 																object.scale.set(defaultBonusScale, defaultBonusScale, defaultBonusScale);
 																gameObjects.prefabsObjects['boots'] = object;
 															   
-																modelLoader.getModel('player', 'player_body_red', function(object) {
+																modelLoader.getModel('player', 'player_body', function(object) {
 																	object.scale.set(cmToUnitsScale, cmToUnitsScale, cmToUnitsScale);
-																	gameObjects.prefabsObjects['player_body'] = object;
+																	gameObjects.prefabsObjects['player_body_white'] = object;
 																   
 																	modelLoader.getModel('player', 'player_l_hand', function(object) {
 																		object.scale.set(cmToUnitsScale, cmToUnitsScale, cmToUnitsScale);
@@ -159,9 +159,24 @@ define(function(require) {
 																													modelLoader.getModel('env', 'grnd5', function(object) {
 																														object.scale.set(cmToUnitsScale, cmToUnitsScale, cmToUnitsScale);
 																														gameObjects.prefabsObjects['ground5'] = object;
-																													   
-																														callback();
-																														app.Events.trigger('ModelsReady');
+																														
+																														modelLoader.getModel('player', 'player_body_red', function(object) {
+																															object.scale.set(cmToUnitsScale, cmToUnitsScale, cmToUnitsScale);
+																															gameObjects.prefabsObjects['player_body_red'] = object;
+																														   
+																															modelLoader.getModel('player', 'player_body_green', function(object) {
+																																object.scale.set(cmToUnitsScale, cmToUnitsScale, cmToUnitsScale);
+																																gameObjects.prefabsObjects['player_body_green'] = object;
+																															   
+																																modelLoader.getModel('player', 'player_body_blue', function(object) {
+																																	object.scale.set(cmToUnitsScale, cmToUnitsScale, cmToUnitsScale);
+																																	gameObjects.prefabsObjects['player_body_blue'] = object;
+																																		   
+																																	callback();
+																																	app.Events.trigger('ModelsReady');
+																																});
+																															});
+																														});
 																													});
 																												});
 																											});

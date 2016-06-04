@@ -10,7 +10,7 @@ define(function (require) {
     var Bomb = require('views/GameModules/bomb');
     var bombRey = require('views/GameModules/bombRey');
     var THREE = require('three');
-
+	
     var View = baseView.extend({
         template: tmpl,
         pingTimer: null,
@@ -47,6 +47,7 @@ define(function (require) {
         startGame: function () {
             var self = this;
             var lastLoop = new Date;
+			Character.resetCounter();
             gameInit.addToDOM();
             function animate() {
                 self.gameStartedId = requestAnimationFrame(animate);
@@ -129,7 +130,6 @@ define(function (require) {
                 };
                 gameObjects.scene.add(gameObjects.objects[data.id].index.mesh);
             }
-
         },
         addObject: function (data) {
             if (data.object_type === 'destructible_wall') {

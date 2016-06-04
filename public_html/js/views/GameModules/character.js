@@ -5,7 +5,12 @@ define(function (require) {
     var jQuery = require('jquery');
     var ws = require('utils/ws');
 
+	var bombermanCounter = 1;
+	
     var Character = {
+		resetCounter: function() {
+			bombermanCounter = 1;
+		},
         init: function (color, position, user_id) {
             this.realDirection = {
                 x: 0,
@@ -13,9 +18,20 @@ define(function (require) {
             };
             this.mesh = new THREE.Object3D();
             this.mesh.position.y = 48;
-            this.head = gameObjects.prefabsObjects['player_body'].clone();
+			console.log(bombermanCounter);
+			if (bombermanCounter == 1) {
+            this.head = gameObjects.prefabsObjects['player_body_white'].clone();
+			} else if (bombermanCounter == 2) {
+            this.head = gameObjects.prefabsObjects['player_body_red'].clone();
+			} else if (bombermanCounter == 3) {
+            this.head = gameObjects.prefabsObjects['player_body_blue'].clone();
+			} else {
+            this.head = gameObjects.prefabsObjects['player_body_green'].clone();
+			}
+			bombermanCounter++;
             this.head.position.y = 0;
             this.mesh.add(this.head);
+			
             this.hands = {
                 left: gameObjects.prefabsObjects['player_l_hand'].clone(),
                 right: gameObjects.prefabsObjects['player_r_hand'].clone()
