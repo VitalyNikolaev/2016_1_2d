@@ -85,8 +85,6 @@ define(function (require) {
                 gameObjects.clouds[i] = fCloud;
                 gameObjects.scene.add(fCloud.particleGroup.mesh);
             }
-
-
             gameObjects.scene.add(World.mesh);
 
             jQuery(window).resize(function () {

@@ -64,10 +64,14 @@ define(function (require) {
             this.modelsReady = true;
         },
         show: function () {
+            $(".spinner").fadeIn('fast');
+            $(".preloader").fadeIn('fast');
             var self = this;
             baseView.prototype.show.call(this);
              function openSocket() {
                 if (self.modelsReady) {
+                    this.$(".spinner").fadeOut('fast');
+                    this.$(".preloader").fadeOut('fast');
                     ws.startConnection();
                     this.pingTimer = setInterval(function () {
                         ws.sendPing()
