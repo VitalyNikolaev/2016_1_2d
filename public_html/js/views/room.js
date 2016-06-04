@@ -64,9 +64,11 @@ define(function (require) {
             this.modelsReady = true;
         },
         show: function () {
-            $(".spinner").fadeIn('fast');
-            $(".preloader").fadeIn('fast');
             var self = this;
+            if (this.modelsReady == false) {
+                $(".spinner").fadeIn('fast');
+                $(".preloader").fadeIn('fast');
+            }
             baseView.prototype.show.call(this);
              function openSocket() {
                 if (self.modelsReady) {
@@ -150,7 +152,6 @@ define(function (require) {
                 return entityMap[s];
                 });
         }
-
     });
     return new View();
 

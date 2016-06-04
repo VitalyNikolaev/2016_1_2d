@@ -30,13 +30,14 @@ define(function (require) {
             },
             makeGuestAccout: function () {
                 var self = this;
+                var prevName = '';
                 function generateRandomUser() {
                     $(".spinner").fadeIn('fast');
                     $(".preloader").fadeIn('fast');
                     $.ajax({
                         url: 'http://uinames.com/api/?maxlen=10&region=england&gender=male'
                     }).done(function (data) {
-                        app.user.save({isGuest: true, login: data.name, password: self.generateRandomPassword()}, {
+                        app.user.save({isGuest: true, login: data.name + prevName, password: self.generateRandomPassword()}, {
                             success: function () {
                                 app.session.set('authed', true);
                                 app.user.fetch({
@@ -57,6 +58,9 @@ define(function (require) {
                                 });
                             },
                             error: function (err) {
+                                if (prevName == '') {
+                                    prevName = data.name;
+                                }
                                 generateRandomUser();
                             }
                         });
