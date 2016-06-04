@@ -9,7 +9,6 @@ define(function (require) {
 	var tileFactory = require('views/GameModules/tileFactory');
     var Bomb = require('views/GameModules/bomb');
     var bombRey = require('views/GameModules/bombRey');
-    var THREE = require('three');
 	var globalScale = require('utils/globalScale');
 	
     var View = baseView.extend({
