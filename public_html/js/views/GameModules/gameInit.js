@@ -65,8 +65,8 @@ define(function (require) {
             gameObjects.ambientLight = new THREE.AmbientLight(0x2f2f2f);
             gameObjects.scene.add(gameObjects.ambientLight);
             createShadowLight('light1', 0, 1800, -600);
-			// gameObjects.ambientLight = new THREE.AmbientLight(0x7f7f7f);
-			// gameObjects.scene.add(gameObjects.ambientLight);
+			gameObjects.ambientLight = new THREE.AmbientLight(0x7f7f7f);
+			gameObjects.scene.add(gameObjects.ambientLight);
             gameObjects.renderer = new THREE.WebGLRenderer({ antialias: true, logarithmicDepthBuffer: true, alpha: true});
 
 			// gameObjects.renderer.shadowMap.enabled = false;
