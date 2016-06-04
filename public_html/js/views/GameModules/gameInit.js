@@ -7,14 +7,14 @@ define(function (require) {
 	var globalScale = require('utils/globalScale');
     
 	var createShadowLight = function(name, x, y, z) {
-		var directionalLight = new THREE.PointLight(0xffffcc, 1.5, 4096 * globalScale, 0);
+		var directionalLight = new THREE.PointLight(0xffffcc, 1.5, 4096 * globalScale, 0.2);
 		directionalLight.position.set(x, y, z);
 
-		directionalLight.castShadow = true;
-		directionalLight.shadow.camera.near = 64 * globalScale;
-		directionalLight.shadow.camera.far = 4096 * globalScale;
-		directionalLight.shadow.mapSize.width  = 1024;
-		directionalLight.shadow.mapSize.height = 1024;
+		//directionalLight.castShadow = false;
+		//directionalLight.shadow.camera.near = 64 * globalScale;
+		//directionalLight.shadow.camera.far = 4096 * globalScale;
+		//directionalLight.shadow.mapSize.width  = 1024;
+		//directionalLight.shadow.mapSize.height = 1024;
 		
 		gameObjects[name] = directionalLight;
 		gameObjects.scene.add(gameObjects[name]);
@@ -46,14 +46,14 @@ define(function (require) {
             gameObjects.scene = new THREE.Scene();
             gameObjects.camera = new THREE.PerspectiveCamera(55, 1, 0.1, 10000);
             gameObjects.scene.add(gameObjects.camera);
-			gameObjects.ambientLight = new THREE.AmbientLight(0x4f4f4f);
+			gameObjects.ambientLight = new THREE.AmbientLight(0x7f7f7f);
 			gameObjects.scene.add(gameObjects.ambientLight);
             gameObjects.renderer = new THREE.WebGLRenderer({ antialias: true, logarithmicDepthBuffer: true, alpha: true});
 
-			gameObjects.renderer.shadowMap.enabled = true;
-			gameObjects.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+			gameObjects.renderer.shadowMap.enabled = false;
+			//gameObjects.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
            
-            sun = createShadowLight('sunLight', 0, 0, 0);		
+            sun = createShadowLight('sunLight', 0, 1024, 0);		
 			sun['angle'] = 0;			
             
 			World.init();

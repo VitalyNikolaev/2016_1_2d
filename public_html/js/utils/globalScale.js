@@ -1,4 +1,4 @@
 define(function(require) {
-	var scale = 1 / 16;
+	var scale = 1;
     return scale;
 });
