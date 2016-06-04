@@ -7,7 +7,7 @@ define(function (require) {
 	var globalScale = require('utils/globalScale');
     
 	var createShadowLight = function(name, x, y, z) {
-		var directionalLight = new THREE.PointLight(0xffffcc, 1.5, 4096 * globalScale, 0.6);
+		var directionalLight = new THREE.PointLight(0xffffcc, 1.5, 4096 * globalScale, 0);
 		directionalLight.position.set(x, y, z);
 
 		directionalLight.castShadow = true;

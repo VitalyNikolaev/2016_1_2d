@@ -14,7 +14,7 @@ define(function (require) {
                 depthTest: true,
                 depthWrite: false,
                 blending: THREE.AdditiveBlending,
-                scale: 400 * globalScale,
+                scale: 400,
                 maxParticleCount: 200,
             });
 			this.fireball = new SPE.Emitter({
@@ -26,6 +26,9 @@ define(function (require) {
 					value: 50 * globalScale,
 					spread: 50 * globalScale,
 				},
+				position: {
+                    radius: 10 * globalScale
+                },
 				size: {value: [120 * globalScale, 40 * globalScale, 0]},
 				wiggle: {value: 10 * globalScale},
 				color: {

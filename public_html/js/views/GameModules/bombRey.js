@@ -15,7 +15,7 @@ define(function (require) {
                 depthTest: true,
                 depthWrite: false,
                 blending: THREE.AdditiveBlending,
-                scale: 600 * globalScale,
+                scale: 600,
                 maxParticleCount: 400,
             });
             this.shockwaveGroup = new SPE.Group({
@@ -32,7 +32,7 @@ define(function (require) {
                 particleCount: 40,
                 type: SPE.distributions.SPHERE,
                 position: {
-                    radius: 1
+                    radius: 1 * globalScale
                 },
                 maxAge: {value: 1.1},
                 duration: 1,
@@ -52,6 +52,7 @@ define(function (require) {
                 this.mist = new SPE.Emitter({
                     particleCount: 90,
                     position: {
+						radius: 10 * globalScale,
                         spread: new THREE.Vector3(10, 10, 10),
                         distribution: SPE.distributions.SPHERE
                     },
