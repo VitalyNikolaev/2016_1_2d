@@ -7,8 +7,8 @@ define(function (require) {
 	var globalScale = require('utils/globalScale');
 
 	var bombermanCounter = 1;
-	
-    var Character = {
+
+        var Character = {
 		resetCounter: function() {
 			bombermanCounter = 1;
 		},
@@ -55,15 +55,7 @@ define(function (require) {
             this.feet.right.rotation.y = Math.PI / 4;
             this.mesh.add(this.feet.left);
             this.mesh.add(this.feet.right);
-            // this.textMaterial = new THREE.MeshPhongMaterial({
-            //     color: 0xdddddd
-            // });
-            // this.nickname = new THREE.TextGeometry(gameObjects.playerNicks[user_id],{
-            //     font:'bangers',
-            //     size: 40,
-            // });
-            // this.nickname.position.y = 57;
-            // this.mesh.add(this.nickname);
+            
 
             var playerCoordinates = gameObjects.getBomberManRealCoordinates(position.x, position.z); // where we need to place our character
             this.mesh.position.set(playerCoordinates.x, 48 * globalScale, playerCoordinates.z);

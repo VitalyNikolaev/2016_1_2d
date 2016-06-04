@@ -53,6 +53,11 @@ define(function(require) {
    
 	var tileFactory = {
         init: function (callback) {
+			if (gameObjects.prefabsObjects['player_body_blue']) {
+				callback();
+				app.Events.trigger('ModelsReady');
+				return
+			}
             modelLoader.getModel('undestructible_walls', 'rock1uvw64', function(object) {
                 object.scale.set(cubeScale, cubeScale, cubeScale);
                 gameObjects.prefabsObjects['indestructibleCube1'] = object;
