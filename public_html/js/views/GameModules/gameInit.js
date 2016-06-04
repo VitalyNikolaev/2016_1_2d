@@ -4,16 +4,17 @@ define(function (require) {
     var gameObjects = require('views/GameModules/gameObjects');
     var World = require('views/GameModules/worldBuilder');
     var cloud = require('views/GameModules/cloud');
+	var globalScale = require('utils/globalScale');
     
 	var createShadowLight = function(name, x, y, z) {
-		var directionalLight = new THREE.PointLight(0xffffcc, 1.5, 960, 0.6);
+		var directionalLight = new THREE.PointLight(0xffffcc, 1.5, 4096 * globalScale, 0.6);
 		directionalLight.position.set(x, y, z);
 
 		directionalLight.castShadow = true;
-		directionalLight.shadow.camera.near = 8;
-		directionalLight.shadow.camera.far = 1024;
-		directionalLight.shadow.mapSize.width  = 256;
-		directionalLight.shadow.mapSize.height = 256;
+		directionalLight.shadow.camera.near = 64 * globalScale;
+		directionalLight.shadow.camera.far = 4096 * globalScale;
+		directionalLight.shadow.mapSize.width  = 1024;
+		directionalLight.shadow.mapSize.height = 1024;
 		
 		gameObjects[name] = directionalLight;
 		gameObjects.scene.add(gameObjects[name]);
@@ -31,19 +32,19 @@ define(function (require) {
 			gameObjects.renderer.shadowMap.enabled = true;
 			gameObjects.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
            
-			var lightHeight = 384;
-			var distanceFromCenter = 512 + 128;
+			var lightHeight = 384 * globalScale;
+			var distanceFromCenter = (512 + 128) * globalScale;
             createShadowLight('light1', 0, lightHeight, 0);			
-            createShadowLight('light2', distanceFromCenter, lightHeight, distanceFromCenter);			
+			/*createShadowLight('light2', distanceFromCenter, lightHeight, distanceFromCenter);			
             createShadowLight('light3', distanceFromCenter, lightHeight, -distanceFromCenter);			
             createShadowLight('light4', -distanceFromCenter, lightHeight, distanceFromCenter);			
-            createShadowLight('light5', -distanceFromCenter, lightHeight, -distanceFromCenter);			
+            createShadowLight('light5', -distanceFromCenter, lightHeight, -distanceFromCenter);*/		
             
 			World.init();
             for (var i = 1; i < 5; i++) {
                 var fCloud = new cloud.init();
                 fCloud.angle = i;
-                var randInt = Math.floor(Math.random() * (1024 - 800 + 1) + 512);
+                var randInt = Math.floor(Math.random() * (1024 - 800 + 1) + 512) * globalScale;
                 fCloud.randInt = randInt;
                 fCloud.particleGroup.mesh.position.set(randInt * 1.4 * Math.cos(fCloud.angle), randInt / 3 , randInt * 1.4 * Math.sin(fCloud.angle));
                 gameObjects.clouds[i] = fCloud;

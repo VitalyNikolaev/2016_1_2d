@@ -2,6 +2,8 @@ define(function (require) {
     var THREE = require('three');
     var gameObjects = require('views/GameModules/gameObjects');
     var SPE = require('SPE');
+	var globalScale = require('utils/globalScale');
+	
     var bombRey = {
         init: function () {
             this.group = new SPE.Group({
@@ -13,7 +15,7 @@ define(function (require) {
                 depthTest: true,
                 depthWrite: false,
                 blending: THREE.AdditiveBlending,
-                scale: 600,
+                scale: 600 * globalScale,
                 maxParticleCount: 400,
             });
             this.shockwaveGroup = new SPE.Group({
@@ -36,9 +38,9 @@ define(function (require) {
                 duration: 1,
                 activeMultiplier: 15,
                 velocity: {
-                    value: new THREE.Vector3(50)
+                    value: new THREE.Vector3(50 * globalScale)
                 },
-                size: {value: [40, 150]},
+                size: {value: [40 * globalScale, 150 * globalScale]},
                 color: {
                     value: [
                         new THREE.Color(0.5, 0.1, 0.05),
@@ -57,10 +59,10 @@ define(function (require) {
                     duration: 1,
                     activeMultiplier: 1000,
                     velocity: {
-                        value: new THREE.Vector3(8, 3, 10),
+                        value: new THREE.Vector3(8 * globalScale, 3 * globalScale, 10 * globalScale),
                         distribution: SPE.distributions.SPHERE
                     },
-                    size: {value: 40},
+                    size: {value: 40 * globalScale},
                     color: {
                         value: new THREE.Color(0.2, 0.2, 0.2)
                     },

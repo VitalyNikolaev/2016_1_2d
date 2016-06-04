@@ -4,6 +4,7 @@ define(function (require) {
 	var modelLoader = require('utils/modelLoader');
     var jQuery = require('jquery');
     var ws = require('utils/ws');
+	var globalScale = require('utils/globalScale');
 
 	var bombermanCounter = 1;
 	
@@ -17,7 +18,7 @@ define(function (require) {
                 z: 0
             };
             this.mesh = new THREE.Object3D();
-            this.mesh.position.y = 48;
+            this.mesh.position.y = 48 * globalScale;
 			
 			if (bombermanCounter == 1) {
             this.head = gameObjects.prefabsObjects['player_body_white'].clone();
@@ -36,21 +37,21 @@ define(function (require) {
                 left: gameObjects.prefabsObjects['player_l_hand'].clone(),
                 right: gameObjects.prefabsObjects['player_r_hand'].clone()
             };
-            this.hands.left.position.x = -32;
-            this.hands.left.position.y = -8;
-            this.hands.right.position.x = 32;
-            this.hands.right.position.y = -8;
+            this.hands.left.position.x = -32 * globalScale;
+            this.hands.left.position.y = -8 * globalScale;
+            this.hands.right.position.x = 32 * globalScale;
+            this.hands.right.position.y = -8 * globalScale;
             this.mesh.add(this.hands.left);
             this.mesh.add(this.hands.right);
             this.feet = {
                 left: gameObjects.prefabsObjects['player_l_foot'].clone(),
                 right: gameObjects.prefabsObjects['player_r_foot'].clone()
             };
-            this.feet.left.position.x = -20;
-            this.feet.left.position.y = -36;
+            this.feet.left.position.x = -20 * globalScale;
+            this.feet.left.position.y = -36 * globalScale;
             this.feet.left.rotation.y = Math.PI / 4;
-            this.feet.right.position.x = 20;
-            this.feet.right.position.y = -36;
+            this.feet.right.position.x = 20 * globalScale;
+            this.feet.right.position.y = -36 * globalScale;
             this.feet.right.rotation.y = Math.PI / 4;
             this.mesh.add(this.feet.left);
             this.mesh.add(this.feet.right);
@@ -65,7 +66,7 @@ define(function (require) {
             // this.mesh.add(this.nickname);
 
             var playerCoordinates = gameObjects.getBomberManRealCoordinates(position.x, position.z); // where we need to place our character
-            this.mesh.position.set(playerCoordinates.x, 48, playerCoordinates.z);
+            this.mesh.position.set(playerCoordinates.x, 48 * globalScale, playerCoordinates.z);
 
             this.direction = new THREE.Vector3(0, 0, 0);
             this.step = 0;
@@ -103,16 +104,16 @@ define(function (require) {
             };
             this.getRealSpeed = function() {
                 var constSpeed = 2; // tiles per second
-                return constSpeed * 64 / gameObjects.fps;
+                return constSpeed * 64 * globalScale / gameObjects.fps;
             };
             this.move = function () {
                 this.mesh.position.x += this.realDirection.x * ((this.direction.z === 0) ? this.getRealSpeed() : Math.sqrt(this.getRealSpeed()));
                 this.mesh.position.z += this.realDirection.z * ((this.direction.x === 0) ? this.getRealSpeed() : Math.sqrt(this.getRealSpeed()));
                 this.step += 1 / 4;
-                this.feet.left.position.setZ(Math.sin(this.step) * 16);
-                this.feet.right.position.setZ(Math.cos(this.step + (Math.PI / 2)) * 16);
-                this.hands.left.position.setZ(Math.cos(this.step + (Math.PI / 2)) * 8);
-                this.hands.right.position.setZ(Math.sin(this.step) * 8);
+                this.feet.left.position.setZ(Math.sin(this.step) * 16 * globalScale);
+                this.feet.right.position.setZ(Math.cos(this.step + (Math.PI / 2)) * 16 * globalScale);
+                this.hands.left.position.setZ(Math.cos(this.step + (Math.PI / 2)) * 8 * globalScale);
+                this.hands.right.position.setZ(Math.sin(this.step) * 8 * globalScale);
             };
             this.setControls = function (position) {
                 var controls = {
@@ -170,7 +171,7 @@ define(function (require) {
                 });
             };
             this.setFocus = function (object, z) {
-                gameObjects.camera.position.set(object.position.x, object.position.y + 750, object.position.z - z);
+                gameObjects.camera.position.set(object.position.x, object.position.y + 750 * globalScale, object.position.z - z);
                 gameObjects.camera.lookAt(object.position);
             };
         }

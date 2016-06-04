@@ -2,6 +2,7 @@ define(function (require) {
     var THREE = require('three');
     var gameObjects = require('views/GameModules/gameObjects');
 	var tileFactory = require('views/GameModules/tileFactory');
+	var globalScale = require('utils/globalScale');
 
     var World = {
         init: function () {
@@ -41,7 +42,7 @@ define(function (require) {
                 '0005.png',
                 '0001.png',
                 '0003.png'];
-            var skyGeometry = new THREE.BoxGeometry( 5000, 5000, 5000 );
+            var skyGeometry = new THREE.BoxGeometry( 5000 * globalScale, 5000 * globalScale, 5000 * globalScale );
             var materialArray = [];
             for (var i = 0; i < 6; i++)
                 materialArray.push(new THREE.MeshBasicMaterial({

@@ -2,6 +2,8 @@ define(function (require) {
     var THREE = require('three');
     var gameObjects = require('views/GameModules/gameObjects');
     var SPE = require('SPE');
+	var globalScale = require('utils/globalScale');
+	
     var bonusParticles = {
         init: function () {
             this.group = new SPE.Group({
@@ -12,7 +14,7 @@ define(function (require) {
                 depthTest: true,
                 depthWrite: false,
                 blending: THREE.AdditiveBlending,
-                scale: 400,
+                scale: 400 * globalScale,
                 maxParticleCount: 200,
             });
 			this.fireball = new SPE.Emitter({
@@ -21,11 +23,11 @@ define(function (require) {
 				maxAge: {value: 1.25, spread: 1.1},	
 				activeMultiplier: 0.5,	// Lower it to ~50 pps
 				velocity: {
-					value: 50,
-					spread: 50,
+					value: 50 * globalScale,
+					spread: 50 * globalScale,
 				},
-				size: {value: [120, 40, 0]},
-				wiggle: {value: 10},
+				size: {value: [120 * globalScale, 40 * globalScale, 0]},
+				wiggle: {value: 10 * globalScale},
 				color: {
 					value: [
 						new THREE.Color(246 / 256, 235 / 256, 19 / 256),

@@ -3,6 +3,8 @@ define(function (require) {
     var OBJLoader = require('OBJLoader');
     var loader = new THREE.OBJLoader();
     var gameObjects = require('views/GameModules/gameObjects');
+	var globalScale = require('utils/globalScale');
+	
     var bomb = {
         init: function () {
             loader.load('../media/game/models/bomb/Bomb.obj', function (object) {
@@ -13,7 +15,7 @@ define(function (require) {
                 object.traverse(function (child) {
                     if (child instanceof THREE.Mesh) {
                         child.material = materialObj;
-                        child.scale.set(5, 5, 5)
+                        child.scale.set(5 * globalScale, 5 * globalScale, 5 * globalScale)
                     }
                 });
                 gameObjects.bombObj = object;

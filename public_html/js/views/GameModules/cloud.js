@@ -2,6 +2,8 @@ define(function (require) {
     var THREE = require('three');
     var gameObjects = require('views/GameModules/gameObjects');
     var SPE = require('SPE');
+	var globalScale = require('utils/globalScale');
+	
     var bombRey = {
         init: function () {
             this.particleGroup = new SPE.Group({
@@ -19,18 +21,18 @@ define(function (require) {
                     value: 3,
                 },
                 position: {
-                    value: new THREE.Vector3( 0, -15, -50 ),
-                    spread: new THREE.Vector3( 100, 30, 100 )
+                    value: new THREE.Vector3( 0, -15 * globalScale, -50 * globalScale),
+                    spread: new THREE.Vector3( 100 * globalScale, 30 * globalScale, 100 * globalScale )
                 },
                 velocity: {
-                    value: new THREE.Vector3( 0, 0, 50 ),
+                    value: new THREE.Vector3( 0, 0, 50 * globalScale ),
                 },
                 wiggle: {
-                    spread: 40
+                    spread: 40 * globalScale
                 },
                 size: {
-                    value: 100,
-                    spread: 400,
+                    value: 100 * globalScale,
+                    spread: 400 * globalScale,
                 },
                 opacity: {
                     value: [ 0, 1, 0 ]
