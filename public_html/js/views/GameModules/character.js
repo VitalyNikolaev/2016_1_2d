@@ -48,10 +48,6 @@ define(function (require) {
             // this.nickname.position.y = 57;
             // this.mesh.add(this.nickname);
 
-
-            this.head.scale.set(1.5,1.5,1.5);
-
-
             var playerCoordinates = gameObjects.getBomberManRealCoordinates(position.x, position.z); // where we need to place our character
             this.mesh.position.set(playerCoordinates.x, 48, playerCoordinates.z);
 

@@ -20,7 +20,6 @@ define(function (require) {
         initialize: function () {
             this.render();
             gameInit.init();
-            tileFactory.init();
             Bomb.init();
             
             this.listenTo(app.Events, "needToReloadGame", this.deallocGame);

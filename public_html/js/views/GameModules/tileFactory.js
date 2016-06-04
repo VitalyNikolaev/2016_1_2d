@@ -5,11 +5,12 @@ define(function(require) {
 	var bonusParticles = require('views/GameModules/bonusParticles');
 	
 	var undestructibleWallsCount = 3;
-    //var destructibleWallsCount = 1;
+	var groundCount = 5;
 	
 	var cubeScale = 2.5;
 	var ringScale = 1.8;
 	var defaultBonusScale = 0.01;
+	var cmToUnitsScale = 128 / 50.394; // 2.539984918839544390205183156725
 	var angleSpeedCoefficient = 0.1;
 	var fps = 60;
 	var numberOfFramesToFullyGrownBonus = fps * 0.35; // 0.35 of second
@@ -50,7 +51,7 @@ define(function(require) {
 	};
    
 	var tileFactory = {
-        init: function () {
+        init: function (callback) {
             modelLoader.getModel('undestructible_walls', 'rock1uvw64', function(object) {
                 object.scale.set(cubeScale, cubeScale, cubeScale);
                 gameObjects.prefabsObjects['indestructibleCube1'] = object;
@@ -100,30 +101,76 @@ define(function(require) {
 															gameObjects.prefabsObjects['death'] = object;
 														   
 															modelLoader.getModel('bonuses', 'boots', function(object) {
-																//object.scale.set(defaultBonusScale, defaultBonusScale, defaultBonusScale);
+																object.scale.set(defaultBonusScale, defaultBonusScale, defaultBonusScale);
 																gameObjects.prefabsObjects['boots'] = object;
 															   
-																modelLoader.getModel('player', 'player_body', function(object) {
-																	//object.scale.set(defaultBonusScale, defaultBonusScale, defaultBonusScale);
+																modelLoader.getModel('player', 'player_body_red', function(object) {
+																	object.scale.set(cmToUnitsScale, cmToUnitsScale, cmToUnitsScale);
 																	gameObjects.prefabsObjects['player_body'] = object;
 																   
 																	modelLoader.getModel('player', 'player_l_hand', function(object) {
-																		//object.scale.set(defaultBonusScale, defaultBonusScale, defaultBonusScale);
+																		object.scale.set(cmToUnitsScale, cmToUnitsScale, cmToUnitsScale);
 																		gameObjects.prefabsObjects['player_l_hand'] = object;
 																	   
 																		modelLoader.getModel('player', 'player_r_hand', function(object) {
-																			//object.scale.set(defaultBonusScale, defaultBonusScale, defaultBonusScale);
+																			object.scale.set(cmToUnitsScale, cmToUnitsScale, cmToUnitsScale);
 																			gameObjects.prefabsObjects['player_r_hand'] = object;
 																		   
 																			modelLoader.getModel('player', 'player_l_foot', function(object) {
-																				//object.scale.set(defaultBonusScale, defaultBonusScale, defaultBonusScale);
+																				object.scale.set(cmToUnitsScale, cmToUnitsScale, cmToUnitsScale);
 																				gameObjects.prefabsObjects['player_l_foot'] = object;
 																			   
 																				modelLoader.getModel('player', 'player_r_foot', function(object) {
-																					//object.scale.set(defaultBonusScale, defaultBonusScale, defaultBonusScale);
+																					object.scale.set(cmToUnitsScale, cmToUnitsScale, cmToUnitsScale);
 																					gameObjects.prefabsObjects['player_r_foot'] = object;
 																				   
-																					app.Events.trigger('ModelsReady');
+																					modelLoader.getModel('bomb', 'Bomb', function(object) {
+																						object.scale.set(cmToUnitsScale * 2, cmToUnitsScale * 2, cmToUnitsScale * 2);
+																						gameObjects.prefabsObjects['bomb'] = object;
+																					   
+																						modelLoader.getModel('env', 'border', function(object) {
+																							object.scale.set(cmToUnitsScale, cmToUnitsScale, cmToUnitsScale);
+																							gameObjects.prefabsObjects['border'] = object;
+																						   
+																							modelLoader.getModel('env', 'hills', function(object) {
+																								object.scale.set(cmToUnitsScale, cmToUnitsScale, cmToUnitsScale);
+																								gameObjects.prefabsObjects['hills'] = object;
+																																													   
+																								modelLoader.getModel('env', 'forest', function(object) {
+																									object.scale.set(cmToUnitsScale, cmToUnitsScale, cmToUnitsScale);
+																									gameObjects.prefabsObjects['forest'] = object;
+																																																   
+																									modelLoader.getModel('env', 'grnd1', function(object) {
+																										object.scale.set(cmToUnitsScale, cmToUnitsScale, cmToUnitsScale);
+																										gameObjects.prefabsObjects['ground1'] = object;
+																									   
+																										modelLoader.getModel('env', 'grnd2', function(object) {
+																											object.scale.set(cmToUnitsScale, cmToUnitsScale, cmToUnitsScale);
+																											gameObjects.prefabsObjects['ground2'] = object;
+																										   
+																											modelLoader.getModel('env', 'grnd3', function(object) {
+																												object.scale.set(cmToUnitsScale, cmToUnitsScale, cmToUnitsScale);
+																												gameObjects.prefabsObjects['ground3'] = object;
+																											   
+																												modelLoader.getModel('env', 'grnd4', function(object) {
+																													object.scale.set(cmToUnitsScale, cmToUnitsScale, cmToUnitsScale);
+																													gameObjects.prefabsObjects['ground4'] = object;
+																												   
+																													modelLoader.getModel('env', 'grnd5', function(object) {
+																														object.scale.set(cmToUnitsScale, cmToUnitsScale, cmToUnitsScale);
+																														gameObjects.prefabsObjects['ground5'] = object;
+																													   
+																														callback();
+																														app.Events.trigger('ModelsReady');
+																													});
+																												});
+																											});
+																										});
+																									});
+																								});
+																							});
+																						});
+																					});
 																				});
 																			});
 																		});
@@ -144,6 +191,25 @@ define(function(require) {
             });
         },
         
+		spawnRandomGroundAt: function(whereToAdd, i, j) {
+			var number = randomInt(groundCount);
+			var ground;
+			if (number == 0) {
+                ground = gameObjects.prefabsObjects['ground1'].clone();
+            } else if (number == 1) {
+                ground = gameObjects.prefabsObjects['ground2'].clone();
+            } else if (number == 2) {
+                ground = gameObjects.prefabsObjects['ground3'].clone();
+            } else if (number == 3) {
+                ground = gameObjects.prefabsObjects['ground4'].clone();
+            } else {
+                ground = gameObjects.prefabsObjects['ground5'].clone();
+			}
+			ground.rotation.y = Math.PI;
+			ground.position.set(i * 128 - 960,0 ,j * 128 - 960);
+			whereToAdd.add(ground);
+        },
+
 		spawnRandomIndestructibleWallAt: function(id, x, y) {
 			var number = randomInt(undestructibleWallsCount);
 			if (number == 0) {
@@ -157,6 +223,10 @@ define(function(require) {
 		
 		spawnRandomDestructibleWallAt: function(id, x, y) {
 			gameObjects.addPrefabToWorld(randomRotation(gameObjects.prefabsObjects['destructibleCube1'].clone()), id, x, y);
+        },
+		
+		spawnBombAt: function(id, x, y) {
+			gameObjects.addPrefabToWorld(randomRotation(gameObjects.prefabsObjects['bomb'].clone()), id, x, y);
         },
 		
 		spawnBonusByNameAt: function(name, id, x, y) {

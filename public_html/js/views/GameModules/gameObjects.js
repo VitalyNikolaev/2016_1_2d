@@ -94,7 +94,7 @@ define(function (require) {
             }
         },
         setBomb: function (id, x, z) {
-            var bomb = this.bombObj.clone();
+            var bomb = this.prefabsObjects['bomb'].clone();
             var coordinates = this.getRealCoordinates(x,z);
             bomb.position.set(coordinates.x, 2, coordinates.z);
             var timerId = setInterval(function () {
