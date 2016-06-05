@@ -388,9 +388,10 @@ canvas {
 
 .gameover_image {
   height: 45%;
-  margin-left: 8vw;
+  margin-left: 25%;
   margin-top: -20px; }
 
 .gameover_text {
   font-size: 30px;
-  margin-left: 9.5vw; }
+  text-align: center;
+  overflow: hidden; }
