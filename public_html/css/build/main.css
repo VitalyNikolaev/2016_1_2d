@@ -18,6 +18,9 @@ html, body {
 canvas {
   display: block; }
 
+@viewport {
+  orientation: landscape; }
+
 .wrap {
   width: 100%;
   height: 100%;

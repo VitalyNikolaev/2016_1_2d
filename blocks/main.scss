@@ -19,6 +19,9 @@ html, body {
 canvas {
   display: block;
 }
+@viewport {
+  orientation: landscape;
+}
 
 @import "wrap/wrap";
 @import "logo/logo";
