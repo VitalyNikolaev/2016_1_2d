@@ -5,15 +5,17 @@
   margin-top: 25px;
 }
 .room__profile_status {
-  width: 15vh;
-  padding: 5px;
-  margin: 25px 30px 20px 2vw;
-
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  height: 15vh;
+  padding: 10px;
 }
 .text {
   font-size: 30px;
   position: relative;
-  left: 5vw;
+  text-align: center;
+  overflow: hidden;
 }
 .room__wrapper{
   width: 20%;
@@ -53,7 +55,7 @@
   background-color: #D32F2F;
 }
 .room__profile-wrapper{
-  height: 22vh;
+  height: 19vh;
 }
 .room__players-wrapper{
   position: absolute;

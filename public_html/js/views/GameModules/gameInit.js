@@ -9,13 +9,13 @@ define(function (require) {
     var createShadowLight = function(name, x, y, z) {
         var directionalLight = new THREE.DirectionalLight( 0xffffff, 1);
         directionalLight.castShadow = true;
-        directionalLight.shadow.camera.near    =   10;
-        directionalLight.shadow.camera.far     =   4000;
-        directionalLight.shadow.camera.right   =   1350;
-        directionalLight.shadow.camera.left    =  -1350;
-        directionalLight.shadow.camera.top     =   1350;
-        directionalLight.shadow.camera.bottom  =  -1350;
-        directionalLight.shadow.mapSize.width  = 1024;
+        directionalLight.shadow.camera.near = 10;
+        directionalLight.shadow.camera.far = 4000;
+        directionalLight.shadow.camera.right = 1350;
+        directionalLight.shadow.camera.left = -1350;
+        directionalLight.shadow.camera.top = 1350;
+        directionalLight.shadow.camera.bottom = -1350;
+        directionalLight.shadow.mapSize.width = 1024;
         directionalLight.shadow.mapSize.height = 1024;
         directionalLight.target.position.set(0, 0, 0);
 
@@ -36,7 +36,7 @@ define(function (require) {
             gameObjects.renderer = new THREE.WebGLRenderer({ antialias: true, logarithmicDepthBuffer: true, alpha: true});
             
 			World.init();
-            for (var i = 1; i < 15; i++) {
+            for (var i = 1; i < 8; i++) {
                 var fCloud = new cloud.init();
                 fCloud.angle = i;
                 var randInt = Math.floor(Math.random() * (1024 - 600 + 1) + 512) * globalScale;

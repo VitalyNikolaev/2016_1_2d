@@ -9,7 +9,7 @@ define(function(require) {
                     this.trigger('invalidForm', 'Please enter valid data');
                     return "Validation error";
                 }
-                if (attrs.login.length > 8 ) {
+                if (attrs.login.length > 16 ) {
                     this.trigger('invalidForm', 'Username too big');
                     return "Validation error";
                 }
