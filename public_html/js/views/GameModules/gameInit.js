@@ -6,40 +6,6 @@ define(function (require) {
     var cloud = require('views/GameModules/cloud');
 	var globalScale = require('utils/globalScale');
     
-	// var createShadowLight = function(name, x, y, z) {
-	// 	var directionalLight = new THREE.PointLight(0xffffcc, 1.5, 4096 * globalScale, 0.2);
-	// 	directionalLight.position.set(x, y, z);
-    //
-	// 	//directionalLight.castShadow = false;
-	// 	//directionalLight.shadow.camera.near = 64 * globalScale;
-	// 	//directionalLight.shadow.camera.far = 4096 * globalScale;
-	// 	//directionalLight.shadow.mapSize.width  = 1024;
-	// 	//directionalLight.shadow.mapSize.height = 1024;
-	//
-	// 	gameObjects[name] = directionalLight;
-	// 	gameObjects.scene.add(gameObjects[name]);
-	//
-	// 	return directionalLight;
-	// };
-	//
-	// var sun = null;
-	
-	// var rotateSun = function () {
-	// 	if (sun) {
-	// 		var timeToFullCycle = 120000; // ms. I.e. 120 seconds == 2 minutes
-	// 		var medianHeight = 1024 * globalScale;
-	// 		var deviationHeight = 512 * globalScale;
-	// 		var xSemiaxis = 1280 * globalScale;
-	// 		var zSemiaxis = 1024 * globalScale;
-	//
-	// 		var anglularSpeed = 2 * Math.PI / timeToFullCycle;	// radians per ms
-	// 		sun.position.x = xSemiaxis * Math.cos(sun.angle);
-	// 		sun.position.z = zSemiaxis * Math.sin(sun.angle);
-	// 		sun.position.y = medianHeight + deviationHeight * Math.cos(sun.angle);	// 'cos' for 12am @ 0 angle, 'sin' for 6am (between 12pm and 12 am) @ 0 angle.
-	//
-	// 		sun.angle += anglularSpeed * 1000 / gameObjects.fps;	// [radians/ms] * ms since previous frame;
-	// 	}
-	// }
     var createShadowLight = function(name, x, y, z) {
         var directionalLight = new THREE.DirectionalLight( 0xffffff, 1);
         directionalLight.castShadow = true;
@@ -68,18 +34,12 @@ define(function (require) {
 			gameObjects.ambientLight = new THREE.AmbientLight(0x7f7f7f);
 			gameObjects.scene.add(gameObjects.ambientLight);
             gameObjects.renderer = new THREE.WebGLRenderer({ antialias: true, logarithmicDepthBuffer: true, alpha: true});
-
-			// gameObjects.renderer.shadowMap.enabled = false;
-			//gameObjects.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
-           
-            // sun = createShadowLight('sunLight', 0, 1024, 0);
-            // sun['angle'] = 0;
             
 			World.init();
-            for (var i = 1; i < 5; i++) {
+            for (var i = 1; i < 15; i++) {
                 var fCloud = new cloud.init();
                 fCloud.angle = i;
-                var randInt = Math.floor(Math.random() * (1024 - 800 + 1) + 512) * globalScale;
+                var randInt = Math.floor(Math.random() * (1024 - 600 + 1) + 512) * globalScale;
                 fCloud.randInt = randInt;
                 fCloud.particleGroup.mesh.position.set(randInt * 1.4 * Math.cos(fCloud.angle), randInt / 3 , randInt * 1.4 * Math.sin(fCloud.angle));
                 gameObjects.clouds[i] = fCloud;
@@ -123,7 +83,6 @@ define(function (require) {
                     gameObjects.clouds[rey].particleGroup.mesh.position.z = gameObjects.clouds[rey].randInt * 1.4 * Math.sin(gameObjects.clouds[rey].angle)
                 }
             }
-			// rotateSun();
 			jQuery('#game').focus();
         },
         dealloc: function () {

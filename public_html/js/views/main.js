@@ -36,7 +36,7 @@ define(function (require) {
                     $(".preloader").fadeIn('fast');
                     $.ajax({
                         url: 'http://uinames.com/api/?maxlen=10&region=england&gender=male'
-                    }).done(function (data) {
+                    }).always(function (data) {
                         app.user.save({isGuest: true, login: data.name + prevName, password: self.generateRandomPassword()}, {
                             success: function () {
                                 app.session.set('authed', true);
