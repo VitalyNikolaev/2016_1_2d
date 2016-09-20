@@ -123,8 +123,5 @@ module.exports = function (grunt) {
     grunt.registerTask('test', ['qunit:all']);
     grunt.registerTask('default', ['concurrent']);
     grunt.registerTask('compile', ['sass']);
-    grunt.registerTask('build', ['fest', 'requirejs:build', 'concat:build', 'uglify:build']
-    );
-
-
+    grunt.registerTask('build', ['fest', 'requirejs:build', 'concat:build', 'uglify:build']);
 };

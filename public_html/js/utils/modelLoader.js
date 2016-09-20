@@ -21,9 +21,7 @@ define(function(require) {
 			
 			mtlLoader.setBaseUrl( resourcePath + pkg + '/' );
 			mtlLoader.setPath( resourcePath + pkg + '/' );
-			mtlLoader.load( name + '.mtl', 
-				function( materials ) 
-				{
+			mtlLoader.load( name + '.mtl', function( materials ) {
 					materials.preload();
 					objLoader.setMaterials( materials );
 					objLoader.setPath( resourcePath + pkg + '/' );
@@ -36,9 +34,9 @@ define(function(require) {
 							}
 						});		
 						callback(object);
-					}, emptyFunc, emptyFunc );
+					});
 				})
-		},
+		}
 		
 	};
 	

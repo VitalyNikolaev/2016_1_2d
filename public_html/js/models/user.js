@@ -14,7 +14,6 @@ define(function(require) {
                     return "Validation error";
                 }
             }
-
         });
 
         return User;

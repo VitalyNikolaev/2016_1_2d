@@ -6,7 +6,7 @@ define(function (require) {
     var baseView = require('views/baseView');
 
     var View = baseView.extend({
-        template: tmpl,
+        template: tmpl
         
     });
     return new View();

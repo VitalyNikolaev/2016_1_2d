@@ -3,9 +3,7 @@ define(function(require) {
     var sessionSync = require('syncs/sessionSync');
     var Session = Backbone.Model.extend({
         url: '/api/session/',
-        sync: sessionSync,
-        
-
+        sync: sessionSync
     });
     return Session
 });

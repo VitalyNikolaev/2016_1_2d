@@ -132,58 +132,60 @@ define(function (require) {
             }
         },
         addObject: function (data) {
-            if (data.object_type === 'destructible_wall') {
-                tileFactory.spawnRandomDestructibleWallAt(data.id, data.x, data.y);
-                return
-            }
-            if (data.object_type === 'undestructible_wall') {
-                tileFactory.spawnRandomIndestructibleWallAt(data.id, data.x, data.y);
-                return
-            }
-            if (data.object_type === 'bonus_increase_bomb_range') {
-                tileFactory.spawnBonusByNameAt('4arrows', data.id, data.x, data.y);
-                return
-            }
-            if (data.object_type === 'bonus_decrease_bomb_spawn_delay') {
-                tileFactory.spawnBonusByNameAt('time', data.id, data.x, data.y);
-                return
-            }
-            if (data.object_type === 'bonus_increase_speed') {
-                tileFactory.spawnBonusByNameAt('boots', data.id, data.x, data.y);
-                return
-            }
-            if (data.object_type === 'bonus_increase_max_hp') {
-                tileFactory.spawnBonusByNameAt('heart', data.id, data.x, data.y);
-                return
-            }
-            if (data.object_type === 'bomb_ray') {
-                var rey = new bombRey.init();
-                var coords = gameObjects.getRealCoordinates(data.x, data.y);
-                rey.group.mesh.position.set(coords.x, 42 * globalScale, coords.z);
-                rey.shockwaveGroup.mesh.position.set(coords.x, 42 * globalScale, coords.z);
-                gameObjects.bombReys[data.id] = rey;
-                gameObjects.scene.add(rey.shockwaveGroup.mesh);
-                gameObjects.scene.add(rey.group.mesh);
-                setTimeout(function () {
-                    gameObjects.deleteBombRey(data.id);
-                }, 2100);
-                return
-            }
-            if (data.object_type === 'bonus_drop_bomb_on_death') {
-                tileFactory.spawnBonusByNameAt('death', data.id, data.x, data.y);
-                return
-            }
-            if (data.object_type === 'bonus_invulnerability') {
-                tileFactory.spawnBonusByNameAt('shield', data.id, data.x, data.y);
-                return
-            }
-            if (data.object_type === 'bonus_bombs_amount') {
-                tileFactory.spawnBonusByNameAt('onemorebomb', data.id, data.x, data.y);
-                return
-            }
-            if (data.object_type === 'bomb') {
-                gameObjects.setBomb(data.id, data.x, data.y);
-                return
+            switch (data.object_type) {
+                case 'destructible_wall': {
+                    tileFactory.spawnRandomDestructibleWallAt(data.id, data.x, data.y);
+                    break
+                }
+                case 'undestructible_wall': {
+                    tileFactory.spawnRandomIndestructibleWallAt(data.id, data.x, data.y);
+                    break
+                }
+                case 'bonus_increase_bomb_range': {
+                    tileFactory.spawnBonusByNameAt('4arrows', data.id, data.x, data.y);
+                    break
+                }
+                case 'bonus_decrease_bomb_spawn_delay': {
+                    tileFactory.spawnBonusByNameAt('time', data.id, data.x, data.y);
+                    break
+                }
+                case 'bonus_increase_speed': {
+                    tileFactory.spawnBonusByNameAt('boots', data.id, data.x, data.y);
+                    break
+                }
+                case 'bonus_increase_max_hp': {
+                    tileFactory.spawnBonusByNameAt('heart', data.id, data.x, data.y);
+                    break
+                }
+                case 'bomb_ray': {
+                    var rey = new bombRey.init();
+                    var coords = gameObjects.getRealCoordinates(data.x, data.y);
+                    rey.group.mesh.position.set(coords.x, 42 * globalScale, coords.z);
+                    rey.shockwaveGroup.mesh.position.set(coords.x, 42 * globalScale, coords.z);
+                    gameObjects.bombReys[data.id] = rey;
+                    gameObjects.scene.add(rey.shockwaveGroup.mesh);
+                    gameObjects.scene.add(rey.group.mesh);
+                    setTimeout(function () {
+                        gameObjects.deleteBombRey(data.id);
+                    }, 2100);
+                    break
+                }
+                case 'bonus_drop_bomb_on_death': {
+                    tileFactory.spawnBonusByNameAt('death', data.id, data.x, data.y);
+                    break
+                }
+                case 'bonus_invulnerability': {
+                    tileFactory.spawnBonusByNameAt('shield', data.id, data.x, data.y);
+                    break
+                }
+                case 'bonus_bombs_amount': {
+                    tileFactory.spawnBonusByNameAt('onemorebomb', data.id, data.x, data.y);
+                    break
+                }
+                case 'bomb': {
+                    gameObjects.setBomb(data.id, data.x, data.y);
+                    return
+                }
             }
         },
         destroyObject: function (data) {
