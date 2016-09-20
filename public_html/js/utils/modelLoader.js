@@ -4,21 +4,15 @@ define(function(require) {
 	var THREE = require('three');
     require('OBJLoader');
     require('MTLLoader');
-	
-    var mtlLoader = new THREE.MTLLoader();
-    var objLoader = new THREE.OBJLoader();
+
 	var resourcePath = 'media/game/models/';
-    
-	var modelLoader = {
+
 		
-		getModel: function(pkg, name, callback) {
+	function getModel (pkg, name, callback) {
+		var mtlLoader = new THREE.MTLLoader();
+		var objLoader = new THREE.OBJLoader();
 			var result;
-			var isLoaded = false;
-			var timeoutStarted = new Date().getTime();
-			var timeout = 10000; // ms
-			
-			var emptyFunc = function () {};
-			
+
 			mtlLoader.setBaseUrl( resourcePath + pkg + '/' );
 			mtlLoader.setPath( resourcePath + pkg + '/' );
 			mtlLoader.load( name + '.mtl', function( materials ) {
@@ -32,13 +26,11 @@ define(function(require) {
 								child.castShadow = true;
 								child.receiveShadow = true;
 							}
-						});		
+						});
 						callback(object);
 					});
 				})
 		}
-		
-	};
-	
-    return modelLoader;
+
+    return getModel;
 });

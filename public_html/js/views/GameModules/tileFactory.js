@@ -1,6 +1,6 @@
 define(function(require) {
 	'use strict';
-    var modelLoader = require('utils/modelLoader');
+    var getModel = require('utils/modelLoader');
 	var gameObjects = require('views/GameModules/gameObjects');
     var app = require('app');
 	var bonusParticles = require('views/GameModules/bonusParticles');
@@ -59,10 +59,10 @@ define(function(require) {
 				app.Events.trigger('ModelsReady');
 				return
 			}
-
 			var models = [];
+
 			models.push(new Promise(function (resolve, reject) {
-				modelLoader.getModel('undestructible_walls', 'rock1uvw64', function(object) {
+				getModel('undestructible_walls', 'rock1uvw64', function(object) {
 					object.scale.set(cubeScale, cubeScale, cubeScale);
 					gameObjects.prefabsObjects['indestructibleCube1'] = object;
 					resolve();
@@ -70,21 +70,21 @@ define(function(require) {
 			}));
 
 			models.push(new Promise(function (resolve, reject) {
-				modelLoader.getModel('undestructible_walls', 'rock2uvw64', function (object) {
+				getModel('undestructible_walls', 'rock2uvw64', function (object) {
 					object.scale.set(cubeScale, cubeScale, cubeScale);
 					gameObjects.prefabsObjects['indestructibleCube2'] = object;
 					resolve();
 				});
 			}));
 			models.push(new Promise(function (resolve, reject) {
-				modelLoader.getModel('undestructible_walls', 'rock3uvw64', function(object) {
+				getModel('undestructible_walls', 'rock3uvw64', function(object) {
 					object.scale.set(cubeScale, cubeScale, cubeScale);
 					gameObjects.prefabsObjects['indestructibleCube3'] = object;
 					resolve();
 				});
 			}));
 			models.push(new Promise(function (resolve, reject) {
-				modelLoader.getModel('destructible_walls', 'crate64', function (object) {
+				getModel('destructible_walls', 'crate64', function (object) {
 					object.scale.set(cubeScale, cubeScale, cubeScale);
 					gameObjects.prefabsObjects['destructibleCube1'] = object;
 					resolve();
@@ -92,14 +92,14 @@ define(function(require) {
 			}));
 
 			models.push(new Promise(function (resolve, reject) {
-				modelLoader.getModel('bonuses', 'bonusRing48', function (object) {
+				getModel('bonuses', 'bonusRing48', function (object) {
 					object.scale.set(defaultBonusScale, defaultBonusScale, defaultBonusScale);
 					gameObjects.prefabsObjects['bonusRingBig'] = object;
 					resolve();
 				});
 			}));
 			models.push(new Promise(function (resolve, reject) {
-				modelLoader.getModel('bonuses', 'bonusRing32', function (object) {
+				getModel('bonuses', 'bonusRing32', function (object) {
 					object.scale.set(defaultBonusScale, defaultBonusScale, defaultBonusScale);
 					gameObjects.prefabsObjects['bonusRingSmall'] = object;
 					resolve();
@@ -107,7 +107,7 @@ define(function(require) {
 			}));
 
 			models.push(new Promise(function (resolve, reject) {
-				modelLoader.getModel('bonuses', 'heart', function (object) {
+				getModel('bonuses', 'heart', function (object) {
 					object.scale.set(defaultBonusScale, defaultBonusScale, defaultBonusScale);
 					gameObjects.prefabsObjects['heart'] = object;
 					resolve();
@@ -115,7 +115,7 @@ define(function(require) {
 			}));
 
 			models.push(new Promise(function (resolve, reject) {
-				modelLoader.getModel('bonuses', 'shield', function (object) {
+				getModel('bonuses', 'shield', function (object) {
 					object.scale.set(defaultBonusScale, defaultBonusScale, defaultBonusScale);
 					gameObjects.prefabsObjects['shield'] = object;
 					resolve();
@@ -123,7 +123,7 @@ define(function(require) {
 			}));
 
 			models.push(new Promise(function (resolve, reject) {
-				modelLoader.getModel('bonuses', '4arrows', function (object) {
+				getModel('bonuses', '4arrows', function (object) {
 					object.scale.set(defaultBonusScale, defaultBonusScale, defaultBonusScale);
 					gameObjects.prefabsObjects['4arrows'] = object;
 					resolve();
@@ -131,7 +131,7 @@ define(function(require) {
 			}));
 
 			models.push(new Promise(function (resolve, reject) {
-				modelLoader.getModel('bonuses', 'onemorebomb', function (object) {
+				getModel('bonuses', 'onemorebomb', function (object) {
 					object.scale.set(defaultBonusScale, defaultBonusScale, defaultBonusScale);
 					gameObjects.prefabsObjects['onemorebomb'] = object;
 					resolve();
@@ -139,14 +139,14 @@ define(function(require) {
 			}));
 
 			models.push(new Promise(function (resolve, reject) {
-				modelLoader.getModel('bonuses', 'time', function (object) {
+				getModel('bonuses', 'time', function (object) {
 					object.scale.set(defaultBonusScale, defaultBonusScale, defaultBonusScale);
 					gameObjects.prefabsObjects['time'] = object;
 					resolve();
 				});
 			}));
 			models.push(new Promise(function (resolve, reject) {
-				modelLoader.getModel('bonuses', 'death', function (object) {
+				getModel('bonuses', 'death', function (object) {
 					object.scale.set(defaultBonusScale, defaultBonusScale, defaultBonusScale);
 					gameObjects.prefabsObjects['death'] = object;
 					resolve();
@@ -154,7 +154,7 @@ define(function(require) {
 			}));
 
 			models.push(new Promise(function (resolve, reject) {
-				modelLoader.getModel('bonuses', 'boots', function (object) {
+				getModel('bonuses', 'boots', function (object) {
 					object.scale.set(defaultBonusScale, defaultBonusScale, defaultBonusScale);
 					gameObjects.prefabsObjects['boots'] = object;
 					resolve();
@@ -162,7 +162,7 @@ define(function(require) {
 			}));
 
 			models.push(new Promise(function (resolve, reject) {
-				modelLoader.getModel('player', 'player_body', function (object) {
+				getModel('player', 'player_body', function (object) {
 					object.scale.set(cmToUnitsScale, cmToUnitsScale, cmToUnitsScale);
 					gameObjects.prefabsObjects['player_body_white'] = object;
 					resolve();
@@ -170,7 +170,7 @@ define(function(require) {
 			}));
 
 			models.push(new Promise(function (resolve, reject) {
-				modelLoader.getModel('player', 'player_l_hand', function (object) {
+				getModel('player', 'player_l_hand', function (object) {
 					object.scale.set(cmToUnitsScale, cmToUnitsScale, cmToUnitsScale);
 					gameObjects.prefabsObjects['player_l_hand'] = object;
 					resolve();
@@ -178,7 +178,7 @@ define(function(require) {
 			}));
 
 			models.push(new Promise(function (resolve, reject) {
-				modelLoader.getModel('player', 'player_r_hand', function (object) {
+				getModel('player', 'player_r_hand', function (object) {
 					object.scale.set(cmToUnitsScale, cmToUnitsScale, cmToUnitsScale);
 					gameObjects.prefabsObjects['player_r_hand'] = object;
 					resolve();
@@ -186,7 +186,7 @@ define(function(require) {
 			}));
 
 			models.push(new Promise(function (resolve, reject) {
-				modelLoader.getModel('player', 'player_l_foot', function (object) {
+				getModel('player', 'player_l_foot', function (object) {
 					object.scale.set(cmToUnitsScale, cmToUnitsScale, cmToUnitsScale);
 					gameObjects.prefabsObjects['player_l_foot'] = object;
 					resolve();
@@ -194,14 +194,14 @@ define(function(require) {
 			}));
 
 			models.push(new Promise(function (resolve, reject) {
-				modelLoader.getModel('player', 'player_r_foot', function (object) {
+				getModel('player', 'player_r_foot', function (object) {
 					object.scale.set(cmToUnitsScale, cmToUnitsScale, cmToUnitsScale);
 					gameObjects.prefabsObjects['player_r_foot'] = object;
 					resolve();
 				});
 			}));
 			models.push(new Promise(function (resolve, reject) {
-				modelLoader.getModel('bomb', 'Bomb', function (object) {
+				getModel('bomb', 'Bomb', function (object) {
 					object.scale.set(cmToUnitsScale * 2, cmToUnitsScale * 2, cmToUnitsScale * 2);
 					gameObjects.prefabsObjects['bomb'] = object;
 					resolve();
@@ -209,14 +209,14 @@ define(function(require) {
 			}));
 
 			models.push(new Promise(function (resolve, reject) {
-				modelLoader.getModel('env', 'border', function (object) {
+				getModel('env', 'border', function (object) {
 					object.scale.set(cmToUnitsScale, cmToUnitsScale, cmToUnitsScale);
 					gameObjects.prefabsObjects['border'] = object;
 					resolve();
 				});
 			}));
 			models.push(new Promise(function (resolve, reject) {
-				modelLoader.getModel('env', 'hills', function (object) {
+				getModel('env', 'hills', function (object) {
 					object.scale.set(cmToUnitsScale, cmToUnitsScale, cmToUnitsScale);
 					gameObjects.prefabsObjects['hills'] = object;
 					resolve();
@@ -224,7 +224,7 @@ define(function(require) {
 			}));
 
 			models.push(new Promise(function (resolve, reject) {
-				modelLoader.getModel('env', 'forest', function (object) {
+				getModel('env', 'forest', function (object) {
 					object.scale.set(cmToUnitsScale, cmToUnitsScale, cmToUnitsScale);
 					gameObjects.prefabsObjects['forest'] = object;
 					resolve();
@@ -232,7 +232,7 @@ define(function(require) {
 			}));
 
 			models.push(new Promise(function (resolve, reject) {
-				modelLoader.getModel('env', 'grnd1', function (object) {
+				getModel('env', 'grnd1', function (object) {
 					object.scale.set(cmToUnitsScale, cmToUnitsScale, cmToUnitsScale);
 					gameObjects.prefabsObjects['ground1'] = object;
 					resolve();
@@ -240,7 +240,7 @@ define(function(require) {
 			}));
 
 			models.push(new Promise(function (resolve, reject) {
-				modelLoader.getModel('env', 'grnd2', function(object) {
+				getModel('env', 'grnd2', function(object) {
 					object.scale.set(cmToUnitsScale, cmToUnitsScale, cmToUnitsScale);
 					gameObjects.prefabsObjects['ground2'] = object;
 					resolve();
@@ -248,7 +248,7 @@ define(function(require) {
 		}));
 
 			models.push(new Promise(function (resolve, reject) {
-				modelLoader.getModel('env', 'grnd3', function (object) {
+				getModel('env', 'grnd3', function (object) {
 					object.scale.set(cmToUnitsScale, cmToUnitsScale, cmToUnitsScale);
 					gameObjects.prefabsObjects['ground3'] = object;
 					resolve();
@@ -256,7 +256,7 @@ define(function(require) {
 			}));
 
 			models.push(new Promise(function (resolve, reject) {
-				modelLoader.getModel('env', 'grnd4', function (object) {
+				getModel('env', 'grnd4', function (object) {
 					object.scale.set(cmToUnitsScale, cmToUnitsScale, cmToUnitsScale);
 					gameObjects.prefabsObjects['ground4'] = object;
 					resolve();
@@ -264,7 +264,7 @@ define(function(require) {
 			}));
 
 			models.push(new Promise(function (resolve, reject) {
-				modelLoader.getModel('env', 'grnd5', function (object) {
+				getModel('env', 'grnd5', function (object) {
 					object.scale.set(cmToUnitsScale, cmToUnitsScale, cmToUnitsScale);
 					gameObjects.prefabsObjects['ground5'] = object;
 					resolve();
@@ -272,14 +272,14 @@ define(function(require) {
 			}));
 
 			models.push(new Promise(function (resolve, reject) {
-				modelLoader.getModel('player', 'player_body_red', function (object) {
+				getModel('player', 'player_body_red', function (object) {
 					object.scale.set(cmToUnitsScale, cmToUnitsScale, cmToUnitsScale);
 					gameObjects.prefabsObjects['player_body_red'] = object;
 					resolve();
 				});
 			}));
 			models.push(new Promise(function (resolve, reject) {
-				modelLoader.getModel('player', 'player_body_green', function (object) {
+				getModel('player', 'player_body_green', function (object) {
 					object.scale.set(cmToUnitsScale, cmToUnitsScale, cmToUnitsScale);
 					gameObjects.prefabsObjects['player_body_green'] = object;
 					resolve();
@@ -287,7 +287,7 @@ define(function(require) {
 			}));
 
 			models.push(new Promise(function (resolve, reject) {
-				modelLoader.getModel('player', 'player_body_blue', function (object) {
+				getModel('player', 'player_body_blue', function (object) {
 					object.scale.set(cmToUnitsScale, cmToUnitsScale, cmToUnitsScale);
 					gameObjects.prefabsObjects['player_body_blue'] = object;
 					resolve();
