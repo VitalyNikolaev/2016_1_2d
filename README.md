@@ -7,4 +7,4 @@ Install:
 
 2. grunt
 
-Working version available on bomberman.gq
+Working version available on [bomberman.gq](bomberman.gq)
