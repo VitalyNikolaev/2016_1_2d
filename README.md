@@ -7,4 +7,4 @@ Install:
 
 2. grunt
 
-Working version available on http://tekhno-bomberman.tk/#main
+Working version available on bomberman.gq
