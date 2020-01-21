@@ -7,4 +7,4 @@ Install:
 
 2. grunt
 
-Working version available on [bomber-man.tk](http://bomber-man.tk/)
+![Game](https://sun9-67.userapi.com/c630527/v630527234/39316/HpmdNKX9s6A.jpg)
